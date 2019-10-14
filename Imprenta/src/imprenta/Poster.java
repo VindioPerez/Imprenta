@@ -14,9 +14,9 @@ import java.util.Date;
  * @version 1.0
  */
 public class Poster extends Trabajo {
-    private int alto;//variable tipo integer que recoge el alton del poster
-    private int ancho;//variable tipo integer que recoge el ancho del poster
-    private int numCopias;//variable tipo integer que recoge el número de copias de los posters solicitados
+    private int alto;//variable tipo integer que recoge el alton del poster, tiene que ser >0
+    private int ancho;//variable tipo integer que recoge el ancho del poster, tiene que ser >0
+    private int numCopias;//variable tipo integer que recoge el número de copias de los posters solicitados,tiene que ser >0
 
     public Poster(){}
 

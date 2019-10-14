@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  *
  * @author Alberto
- * @version1
+ * @version 1.0
  */
 public class Maquina {
     

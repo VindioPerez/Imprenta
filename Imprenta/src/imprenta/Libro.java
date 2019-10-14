@@ -10,10 +10,11 @@ import java.util.Date;
 
 /**
  *
- * @author DAW108
+ * @author Ander
+ * @version 1.0
  */
 public class Libro extends Trabajo {
-    private int numPag;//variable tipo int que recoge el número de páginas que tiene el libro;
+    private int numPag;//variable tipo int que recoge el número de páginas que tiene el libro, el valor es >0
     private String color; //variable tipo String que recoge el color del libro
 
     public Libro(){}
