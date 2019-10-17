@@ -7,8 +7,7 @@ package imprenta;
 
 /**
  *
- * @author VindioPerez
- * @version 1.0
+ * @author DAW108
  */
 public class Imprenta {
 

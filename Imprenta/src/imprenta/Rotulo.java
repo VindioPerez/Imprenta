@@ -13,11 +13,11 @@ import java.util.Date;
  * @version 1.0
  */
 public class Rotulo extends Trabajo{
-    private String direccion; //variable de tipo String que recoge el lugar de destino del trabajo
+    private String centroComercial; //variable de tipo String que recoge el lugar de destino del trabajo
 
-    public Rotulo(String direccion, int id, Date fechaSolicitud, Date fechaRecogida, String relieve) {
+    public Rotulo(String centroComercial, int id, Date fechaSolicitud, Date fechaRecogida, String relieve) {
         super(id, fechaSolicitud, fechaRecogida, relieve);
-        this.direccion = direccion;
+        this.centroComercial= centroComercial;
     }
 
     
@@ -26,24 +26,24 @@ public class Rotulo extends Trabajo{
     public Rotulo(){}
     
     public Rotulo(Rotulo r){
-        this.direccion = r.getDireccion();
+        this.centroComercial = r.getCentroComercial();
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getCentroComercial() {
+        return centroComercial;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setCentroComercial(String centroComercial) {
+        this.centroComercial = centroComercial;
     }
 
     @Override
     public String toString() {
-        return "Rotulo{" + "direccion=" + direccion + '}';
+        return "Rotulo{" + "direccion=" + centroComercial + '}';
     }
     
     public String data(){
-        return getId() + "|" + getFechaSolicitud() + getRelieve()+ "|" + getFechaRecogida() + "|" + direccion;
+        return getId() + "|" + getFechaSolicitud() + getRelieve()+ "|" + getFechaRecogida() + "|" + centroComercial;
         
       
         

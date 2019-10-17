@@ -8,13 +8,13 @@ import java.util.Date;
 /**
  *
  * @author Alberto
- * @version 1.0
+ * @version1
  */
 public class Maquina {
     
    private long id;//identificador
    private Date fechaCompra;//fecha de compra
-   private String loc;//localización
+   private String ubicacion;//localización
    private String imprTipo;//tipo de impresión
    private String imprModo;// modo de impresión 
    private float  volTinta ;//volumen ACTUAL de tinta - Valores [0,capMax]
@@ -36,12 +36,12 @@ public class Maquina {
         this.fechaCompra = fechaCompra;
     }
 
-    public String getLoc() {
-        return loc;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
-    public void setLoc(String loc) {
-        this.loc = loc;
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public String getImprTipo() {
@@ -77,10 +77,10 @@ public class Maquina {
     }
 
     //constructor con argumentos
-    public Maquina(long id, Date fechaCompra, String loc, String imprTipo, String imprModo, float volTinta, float capMax) {
+    public Maquina(long id, Date fechaCompra, String ubicacion, String imprTipo, String imprModo, float volTinta, float capMax) {
         this.id = id;
         this.fechaCompra = fechaCompra;
-        this.loc = loc;
+        this.ubicacion = ubicacion;
         this.imprTipo = imprTipo;
         this.imprModo = imprModo;
         this.volTinta = volTinta;
@@ -95,7 +95,7 @@ public class Maquina {
     public Maquina(Maquina q) {
         this.id = q.getId();
         this.fechaCompra = q.getFechaCompra();
-        this.loc = q.getLoc();
+        this.ubicacion = q.getUbicacion();
         this.imprTipo = q.getImprTipo();
         this.imprModo = q.getImprModo();
         this.volTinta = q.getVolTinta();
@@ -103,12 +103,12 @@ public class Maquina {
     }
 
     public String data() { 
-     return id + "|" + fechaCompra + "|" + loc + "|" + imprTipo + "|" + imprModo + "|" + volTinta + "|" + capMax ;
+     return id + "|" + fechaCompra + "|" + ubicacion + "|" + imprTipo + "|" + imprModo + "|" + volTinta + "|" + capMax ;
             }
     
     @Override
     public String toString() {
-        return "Maquina{" + "id=" + id + ", fechaCompra=" + fechaCompra + ", loc=" + loc + ", imprTipo=" + imprTipo + ", imprModo=" + imprModo + ", volTinta=" + volTinta + ", capMax=" + capMax + '}';
+        return "Maquina{" + "id=" + id + ", fechaCompra=" + fechaCompra + ", loc=" + ubicacion + ", imprTipo=" + imprTipo + ", imprModo=" + imprModo + ", volTinta=" + volTinta + ", capMax=" + capMax + '}';
     }
     
     

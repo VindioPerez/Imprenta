@@ -7,18 +7,16 @@ import java.util.Date;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
- * @author Ander
- * @version 1.0
+ * @author DAW108
  */
 public class Libro extends Trabajo {
-
-    private int numPag;//variable tipo int que recoge el número de páginas que tiene el libro, el valor es >0
+    private int numPag;//variable tipo int que recoge el número de páginas que tiene el libro;
     private String color; //variable tipo String que recoge el color del libro
 
-    public Libro() {
-    }
+    public Libro(){}
 
     public Libro(int numPag, String color, int id, Date fechaSolicitud, Date fechaRecogida, String relieve) {
         super(id, fechaSolicitud, fechaRecogida, relieve);
@@ -26,11 +24,15 @@ public class Libro extends Trabajo {
         this.color = color;
     }
 
-    public Libro(Libro l) {
-        this.color = l.getColor();
-        this.numPag = l.getNumPag();
-    }
 
+
+
+
+    public Libro(Libro l){
+        this.color=l.getColor();
+        this.numPag=l.getNumPag();
+    }
+    
     public int getNumPag() {
         return numPag;
     }
@@ -52,9 +54,17 @@ public class Libro extends Trabajo {
         return "Libro{" + "numPag=" + numPag + ", color=" + color + '}';
     }
 
-    public String data() {
-
-        return getId() + "|" + getFechaSolicitud() + "|" + getRelieve() + getFechaRecogida() + "|" + color + "|" + numPag;
+        public String data(){
+            
+            return getId() + "|" + getFechaSolicitud() + "|" +getRelieve()+ getFechaRecogida() + "|" + color + "|" + numPag;
     }
+    
 
-}
+
+    
+    }
+    
+    
+    
+    
+

@@ -8,7 +8,7 @@ package imprenta;
 /**
  *
  * @author Alberto
- * @version 1.0
+ * @version1
  */
 public class Lote {
     private String nom ; // nombre del lote

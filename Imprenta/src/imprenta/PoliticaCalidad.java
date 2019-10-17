@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  *
  * @author Alberto
- * @version 1.0
+ * @version1
  */
 public class PoliticaCalidad {
     
