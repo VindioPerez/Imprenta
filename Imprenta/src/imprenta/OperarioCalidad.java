@@ -10,35 +10,31 @@ package imprenta;
  * @author VindioPerez
  * @version 1.0
  */
-public class OperarioCalidad {
+public class OperarioCalidad extends Operario {
     
-    private Operario operario;
     
     public OperarioCalidad() {
     }
 
-    public OperarioCalidad(Operario operario) {
-        this.operario = operario;
+    public OperarioCalidad(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
+        super(nombre, apellidos, nif, telefono, direccion, senior);
     }
+
+
     
     public OperarioCalidad (OperarioCalidad o) {
-        this.operario = o.getOperario();
+        super(o);
+  
     }
 
-    public Operario getOperario() {
-        return operario;
-    }
-
-    public void setOperario(Operario operario) {
-        this.operario = operario;
-    }
+    
 
     @Override
     public String toString() {
-        return "OperarioCalidad{" + "operario=" + operario + '}';
+        return super.toString();
     }
     
     public String data() {
-        return operario.data() ; 
+        return super.data(); 
     }
 }

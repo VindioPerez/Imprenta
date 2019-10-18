@@ -5,19 +5,18 @@ package imprenta;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Ander
  * @version 1.0
  */
 public class Cliente {
-    
+
     private String nombre; //variable de tipo string que recoge el nombre del cliente
     private String telefono; //variable de tipo string que recoge el número de teléfono del cliente
-    
-    
-    public Cliente(){}
+
+    public Cliente() {
+    }
 
     public Cliente(String nombre, String telefono) {
         this.nombre = nombre;
@@ -39,10 +38,8 @@ public class Cliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
-    
-    
-    public Cliente(Cliente c){
+
+    public Cliente(Cliente c) {
         this.nombre = c.getNombre();
         this.telefono = c.getTelefono();
     }
@@ -51,11 +48,10 @@ public class Cliente {
     public String toString() {
         return "Cliente{" + "nombre=" + nombre + ", telefono=" + telefono + '}';
     }
-    
-    public String data(){
-    
+
+    public String data() {
+
         return nombre + "|" + telefono;
     }
-    
-    }
-    
+
+}

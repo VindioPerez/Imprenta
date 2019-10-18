@@ -4,19 +4,21 @@
  * and open the template in the editor.
  */
 package imprenta;
+
 import java.util.Date;
+
 /**
  *
  * @author Alberto
  * @version1
  */
 public class Labor {
-    
-   private long id;//identificador
-   private OperarioMaquinas operario; // operario que hace la labor
-   private Date fecha;// fecha de realizacion de la labor
-   private String tarea;//en que consiste
-   private Maquina maquina;//maquina que lo realiza
+
+    private long id;//identificador
+    private OperarioMaquinas operario; // operario que hace la labor
+    private Date fecha;// fecha de realizacion de la labor
+    private String tarea;//en que consiste
+    private Maquina maquina;//maquina que lo realiza
 
     public long getId() {
         return id;
@@ -70,7 +72,7 @@ public class Labor {
         this.tarea = tarea;
         this.maquina = maquina;
     }
-    
+
     //constructor de copia
     public Labor(Labor l) {
         this.id = l.getId();
@@ -80,19 +82,14 @@ public class Labor {
         this.maquina = l.getMaquina();
     }
 
-     public String data() { 
-     return id + "|" + operario + "|" + fecha + "|" + tarea + "|" + maquina ;
-          
-            }
-    
+    public String data() {
+        return id + "|" + operario + "|" + fecha + "|" + tarea + "|" + maquina;
+
+    }
+
     @Override
     public String toString() {
         return "Labor{" + "id=" + id + ", operario=" + operario + ", fecha=" + fecha + ", tarea=" + tarea + ", maquina=" + maquina + '}';
     }
-    
-           
-    
-    
-    
-    
+
 }
