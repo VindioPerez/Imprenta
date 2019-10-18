@@ -11,19 +11,18 @@ package imprenta;
  * @version 1.0
  */
 public class Departamento {
-    
+
     private char letraDep;
     //Los departamentos se identifican con un carácter, valores posible: 'A', 'B' o 'C'
 
-    
     public Departamento() {
     }
 
     public Departamento(char letraDep) {
         this.letraDep = letraDep;
     }
-    
-    public Departamento (Departamento d){
+
+    public Departamento(Departamento d) {
         this.letraDep = d.getLetraDep();
     }
 
@@ -39,7 +38,7 @@ public class Departamento {
     public String toString() {
         return "Departamento{" + "letraDep=" + letraDep + '}';
     }
-    
+
     public String data() {
         return Character.toString(letraDep);
     }
