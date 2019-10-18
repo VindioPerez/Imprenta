@@ -23,7 +23,9 @@ public class Operario {
     //La direccion, se define con un String alfanumerico
     private boolean senior;
     //La categoria del empleado, solo puede o ser senior o no serlo
-
+    public long id;
+    //variable identificador 
+    
     public Operario() {
     }
 
@@ -45,6 +47,15 @@ public class Operario {
         this.senior = o.isSenior();
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    
     public String getNombre() {
         return nombre;
     }

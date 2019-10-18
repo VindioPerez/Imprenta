@@ -12,9 +12,9 @@ package imprenta;
  */
 public class Departamento {
 
-    private char letraDep;
-    //Los departamentos se identifican con un carácter, valores posible: 'A', 'B' o 'C'
-
+    private char letraDep;//Los departamentos se identifican con un carácter, valores posible: 'A', 'B' o 'C'
+    public long id;// variable identificador
+    
     public Departamento() {
     }
 
@@ -34,6 +34,15 @@ public class Departamento {
         this.letraDep = letraDep;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    
     @Override
     public String toString() {
         return "Departamento{" + "letraDep=" + letraDep + '}';

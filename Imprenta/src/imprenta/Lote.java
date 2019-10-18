@@ -15,7 +15,8 @@ public class Lote {
     private String nom; // nombre del lote
     private char depart; //nombre del departamento asignado Valores[A,B,C]
     private Maquina[] listaMaq; // array de maquinadas asignadas al lote
-
+    public long id;//variable identificador
+    
     public String getNom() {
         return nom;
     }
@@ -36,6 +37,15 @@ public class Lote {
         return listaMaq;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    
     public void setListaMaq(Maquina[] listaMaq) {
         this.listaMaq = listaMaq;
     }
