@@ -13,7 +13,7 @@ import java.util.Date;
  * @version 1.0
  */
 public class Trabajo {
-    protected int id; //variable tipo integer con el identificador del trabajo
+    protected long id; //variable tipo integer con el identificador del trabajo
     protected Date fechaSolicitud;//variable tipo Date donde se recoge la enfecha de entre del trabajo
     protected Date fechaRecogida;//variable tipo Date donde se recoge la enfecha de recogida del trabajo
     protected String relieve; //variable tipo String que indica el tipo de relieve
@@ -21,7 +21,7 @@ public class Trabajo {
 
     public Trabajo(){}
 
-    public Trabajo(int id, Date fechaSolicitud, Date fechaRecogida, String relieve) {
+    public Trabajo(long id, Date fechaSolicitud, Date fechaRecogida, String relieve) {
         this.id = id;
         this.fechaSolicitud = fechaSolicitud;
         this.fechaRecogida = fechaRecogida;
@@ -63,7 +63,7 @@ public class Trabajo {
         this.fechaSolicitud=t.fechaSolicitud;
     }
             
-    public int getId() {
+    public long getId() {
         return id;
     }
 

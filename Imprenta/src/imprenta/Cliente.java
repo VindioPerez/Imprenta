@@ -12,9 +12,11 @@ package imprenta;
  * @version 1.0
  */
 public class Cliente {
+    
     private String nombre; //variable de tipo string que recoge el nombre del cliente
     private String telefono; //variable de tipo string que recoge el número de teléfono del cliente
-
+    
+    
     public Cliente(){}
 
     public Cliente(String nombre, String telefono) {
