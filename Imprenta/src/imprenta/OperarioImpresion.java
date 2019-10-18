@@ -10,36 +10,26 @@ package imprenta;
  * @author VindioPerez
  * @version 1.0
  */
-public class OperarioImpresion {
-    private Operario operario;
-    //El unico atributo de la clase es un objeto de la superclase Operario
-
+public class OperarioImpresion extends Operario {
+    
     public OperarioImpresion() {
+        super();
     }
 
-    public OperarioImpresion(Operario operario) {
-        this.operario = operario;
+    public OperarioImpresion(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
+        super(nombre, apellidos, nif, telefono, direccion, senior);
     }
     
-    public OperarioImpresion (OperarioImpresion o) {
-        this.operario = o.getOperario();
-    }
-
-    public Operario getOperario() {
-        return operario;
-    }
-
-    public void setOperario(Operario operario) {
-        this.operario = operario;
+    public OperarioImpresion(OperarioImpresion o) {
+       super(o);
     }
 
     @Override
     public String toString() {
-        return "OperarioImpresion{" + "operario=" + operario + '}';
+        return super.toString();
     }
     
     public String data() {
-        return operario.data() ; 
+        return super.data(); 
     }
 }
-
