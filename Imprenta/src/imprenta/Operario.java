@@ -11,19 +11,19 @@ package imprenta;
  * @version 1.0
  */
 public class Operario {
-    private String nombre;
+    protected String nombre;
     //El nombre del operario, se define con un String alfabetico
-    private String apellidos;
+    protected String apellidos;
     //Los apellidos, se definen con un String alfabetico
-    private String nif;
+    protected String nif;
     //El NIF, se define con un String alfanumerico de 8 numeros y una letra
-    private String telefono;
+    protected String telefono;
     //El numero de telefono, se define con un String de 9 numeros empezado por 6, 7 o 9
-    private String direccion;
+    protected String direccion;
     //La direccion, se define con un String alfanumerico
-    private boolean senior;
+    protected boolean senior;
     //La categoria del empleado, solo puede o ser senior o no serlo
-    public long id;
+    protected long id;
     //variable identificador 
     
     public Operario() {
