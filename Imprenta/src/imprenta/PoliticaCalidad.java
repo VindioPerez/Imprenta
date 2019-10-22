@@ -15,8 +15,8 @@ public class PoliticaCalidad {
     
     private String nom ;//nombre de la política
     private Date fechaIni ; //fecha de inicio de la politica
-    private boolean firma1 ;// primera firma
-    private boolean firma2 ;// segunda firma 
+    private OperarioCalidad firma1 ;// primera firma
+    private OperarioCalidad firma2 ;// segunda firma 
 
     public String getNom() {
         return nom;
@@ -35,23 +35,25 @@ public class PoliticaCalidad {
         this.fechaIni = fechaIni;
     }
 
-    public boolean getFirma1() {
+    public OperarioCalidad getFirma1() {
         return firma1;
     }
 
-    public void setFirma1(boolean firma1) {
+    public void setFirma1(OperarioCalidad firma1) {
         this.firma1 = firma1;
     }
 
-    public boolean getFirma2() {
+    public OperarioCalidad getFirma2() {
         return firma2;
     }
 
-    public void setFirma2(boolean firma2) {
+    public void setFirma2(OperarioCalidad firma2) {
         this.firma2 = firma2;
     }
 
-    public PoliticaCalidad(String nom, Date fechaIni, boolean firma1, boolean firma2) {
+
+
+    public PoliticaCalidad(String nom, Date fechaIni, OperarioCalidad firma1, OperarioCalidad firma2) {
         this.nom = nom;
         this.fechaIni = fechaIni;
         this.firma1 = firma1;
