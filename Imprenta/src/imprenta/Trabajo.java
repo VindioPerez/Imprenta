@@ -21,8 +21,8 @@ public class Trabajo {
 
     public Trabajo(){}
 
-    public Trabajo(long id, Date fechaSolicitud, Date fechaRecogida, String relieve) {
-        this.id = id;
+    public Trabajo( Date fechaSolicitud, Date fechaRecogida, String relieve) {
+        
         this.fechaSolicitud = fechaSolicitud;
         this.fechaRecogida = fechaRecogida;
         this.relieve = relieve;

@@ -16,8 +16,8 @@ public class Rotulo extends Trabajo {
 
     private String centroComercial; //variable de tipo String que recoge el lugar de destino del trabajo
 
-    public Rotulo(String centroComercial, int id, Date fechaSolicitud, Date fechaRecogida, String relieve) {
-        super(id, fechaSolicitud, fechaRecogida, relieve);
+    public Rotulo(String centroComercial, Date fechaSolicitud, Date fechaRecogida, String relieve) {
+        super(fechaSolicitud, fechaRecogida, relieve);
         this.centroComercial = centroComercial;
     }
 

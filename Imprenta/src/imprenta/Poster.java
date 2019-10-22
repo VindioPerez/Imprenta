@@ -14,14 +14,14 @@ import java.util.Date;
  * @version 1.0
  */
 public class Poster extends Trabajo {
-    private int alto;//variable tipo integer que recoge el alton del poster
-    private int ancho;//variable tipo integer que recoge el ancho del poster
+    private double alto;//variable tipo integer que recoge el alton del poster
+    private double ancho;//variable tipo integer que recoge el ancho del poster
     private int numCopias;//variable tipo integer que recoge el número de copias de los posters solicitados
 
     public Poster(){}
 
-    public Poster(int alto, int ancho, int numCopias, int id, Date fechaSolicitud, Date fechaRecogida, String relieve) {
-        super(id, fechaSolicitud, fechaRecogida, relieve);
+    public Poster(double alto, double ancho, int numCopias, Date fechaSolicitud, Date fechaRecogida, String relieve) {
+        super(fechaSolicitud, fechaRecogida, relieve);
         this.alto = alto;
         this.ancho = ancho;
         this.numCopias = numCopias;
@@ -37,7 +37,7 @@ public class Poster extends Trabajo {
         this.numCopias=p.getNumCopias();
     }
 
-    public int getAlto() {
+    public double getAlto() {
         return alto;
     }
 
@@ -45,7 +45,7 @@ public class Poster extends Trabajo {
         this.alto = alto;
     }
 
-    public int getAncho() {
+    public double getAncho() {
         return ancho;
     }
 

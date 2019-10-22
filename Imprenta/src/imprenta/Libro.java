@@ -19,8 +19,8 @@ public class Libro extends Trabajo {
     public Libro() {
     }
 
-    public Libro(int numPag, String color, int id, Date fechaSolicitud, Date fechaRecogida, String relieve) {
-        super(id, fechaSolicitud, fechaRecogida, relieve);
+    public Libro(int numPag, String color, Date fechaSolicitud, Date fechaRecogida, String relieve) {
+        super(fechaSolicitud, fechaRecogida, relieve);
         this.numPag = numPag;
         this.color = color;
     }
