@@ -86,7 +86,6 @@ public class Modificacion {
 
     //constructor con argumentos
     public Modificacion(long id, OperarioImpresion operario, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina) {
-        this.id = id;
         this.operario = operario;
         this.fecha = fecha;
         this.desc = desc;
@@ -102,7 +101,6 @@ public class Modificacion {
     
     //constructor de copia
     public Modificacion(Modificacion m ) {
-        this.id = m.getId();
         this.operario = m.getOperario();
         this.fecha = m.getFecha();
         this.desc = m.getDesc();

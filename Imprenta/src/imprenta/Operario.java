@@ -106,11 +106,11 @@ public class Operario {
 
     @Override
     public String toString() {
-        return "Operario{" + "nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif + ", telefono=" + telefono + ", direccion=" + direccion + ", senior=" + senior + '}';
+        return "Operario{" + "nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif + ", telefono=" + telefono + ", direccion=" + direccion + ", senior=" + senior + ", id=" + id + '}';
     }
 
     public String data() {
-        return nombre + "|" + apellidos + "|" + nif + "|" + telefono + "|" + direccion + "|" + senior;
+        return id + "|" + nombre + "|" + apellidos + "|" + nif + "|" + telefono + "|" + direccion + "|" + senior;
     }
     
 }

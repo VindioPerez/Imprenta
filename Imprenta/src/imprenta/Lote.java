@@ -69,13 +69,15 @@ public class Lote {
     }
 
     public String data() {
-        return nom + "|" + depart + "|" + listaMaq;
+        return id + "|" + nom + "|" + depart + "|" + listaMaq;
 
     }
 
     @Override
     public String toString() {
-        return "Lote{" + "nom=" + nom + ", depart=" + depart + ", listaMaq=" + listaMaq + '}';
+        return "Lote{" + "nom=" + nom + ", depart=" + depart + ", listaMaq=" + listaMaq + ", id=" + id + '}';
     }
+
+    
 
 }

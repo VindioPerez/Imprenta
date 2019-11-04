@@ -42,13 +42,14 @@ public class Departamento {
         this.id = id;
     }
 
-    
     @Override
     public String toString() {
-        return "Departamento{" + "letraDep=" + letraDep + '}';
+        return "Departamento{" + "letraDep=" + letraDep + ", id=" + id + '}';
     }
 
+    
+
     public String data() {
-        return Character.toString(letraDep);
+        return  id + "|" + Character.toString(letraDep);
     }
 }

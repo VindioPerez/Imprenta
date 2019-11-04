@@ -78,7 +78,6 @@ public class Maquina {
 
     //constructor con argumentos
     public Maquina(long id, Date fechaCompra, String ubicacion, String imprTipo, String imprModo, float volTinta, float capMax) {
-        this.id = id;
         this.fechaCompra = fechaCompra;
         this.ubicacion = ubicacion;
         this.imprTipo = imprTipo;
@@ -93,7 +92,6 @@ public class Maquina {
     
      //Constructor de copia
     public Maquina(Maquina q) {
-        this.id = q.getId();
         this.fechaCompra = q.getFechaCompra();
         this.ubicacion = q.getUbicacion();
         this.imprTipo = q.getImprTipo();

@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class PoliticaCalidad {
     
-    
+    private long id;
     private String nom ;//nombre de la política
     private Date fechaIni ; //fecha de inicio de la politica
     private OperarioCalidad firma1 ;// primera firma
@@ -21,8 +21,15 @@ public class PoliticaCalidad {
     public String getNom() {
         return nom;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
      
-    
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -73,7 +80,7 @@ public class PoliticaCalidad {
     }
     
     public String data() { 
-     return nom + "|" + fechaIni + "|" + firma1 +"|" + firma2 ;
+     return id + "|" + nom + "|" + fechaIni + "|" + firma1 +"|" + firma2 ;
             }
     
     @Override
