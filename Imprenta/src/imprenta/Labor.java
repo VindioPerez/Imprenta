@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Labor {
 
-    private long id;//identificador
+    protected long id;//identificador
     private OperarioMaquinas operario; // operario que hace la labor
     private Date fecha;// fecha de realizacion de la labor
     private String tarea;//en que consiste

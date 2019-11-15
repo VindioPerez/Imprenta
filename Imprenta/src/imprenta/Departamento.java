@@ -5,6 +5,8 @@
  */
 package imprenta;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author VindioPerez
@@ -13,7 +15,8 @@ package imprenta;
 public class Departamento {
 
     private char letraDep;//Los departamentos se identifican con un carácter, valores posible: 'A', 'B' o 'C'
-    public long id;// variable identificador
+    protected long id;// variable identificador
+    private ArrayList<Operario> operarios;
     
     public Departamento() {
     }
@@ -52,4 +55,14 @@ public class Departamento {
     public String data() {
         return  id + "|" + Character.toString(letraDep);
     }
+
+    public ArrayList<Operario> getOperarios() {
+        return operarios;
+    }
+
+    public void setOperarios(ArrayList<Operario> operarios) {
+        this.operarios = operarios;
+    }
+    
+    
 }

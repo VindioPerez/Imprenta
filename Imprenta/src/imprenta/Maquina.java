@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class Maquina {
     
-   private long id;//identificador
+   protected long id;//identificador
    private Date fechaCompra;//fecha de compra
    private String ubicacion;//localización
    private String imprTipo;//tipo de impresión
@@ -20,6 +20,7 @@ public class Maquina {
    private float  volTinta ;//volumen ACTUAL de tinta - Valores [0,capMax]
    private float capMax;//capacidad máxima de tinta - Valor unico nº
 
+   
     public long getId() {
         return id;
     }

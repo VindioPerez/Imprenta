@@ -18,7 +18,9 @@ public class Trabajo {
     protected Date fechaSolicitud;//variable tipo Date donde se recoge la enfecha de entre del trabajo
     protected Date fechaRecogida;//variable tipo Date donde se recoge la enfecha de recogida del trabajo
     protected String relieve; //variable tipo String que indica el tipo de relieve
-
+    private Cliente cliente;
+    private long idMaquina;
+    
     public Trabajo() {
     }
 
@@ -63,9 +65,11 @@ public class Trabajo {
         return id;
     }
 
+    /*
     public void setId(int id) {
         this.id = id;
     }
+    */
 
     @Override
     public String toString() {
@@ -76,5 +80,29 @@ public class Trabajo {
         return id + "|" + fechaSolicitud + "|" + fechaRecogida;
 
     }
+    
+    public Cliente getClienteById(){
+    
+        return null;
+    }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public long getIdMaquina() {
+        return idMaquina;
+    }
+
+ 
+    public void setIdMaquina(long idMaquina) {
+        this.idMaquina = idMaquina;
+    }
+  
+    
 }
+

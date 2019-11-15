@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class Modificacion {
     
-   private long id;// idenitficador 
+   protected long id;// idenitficador 
    private OperarioImpresion  operario; //operario que realiza la modificación
    private Date  fecha; //fecha de realización
    private String desc; //descripción del cambio

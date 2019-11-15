@@ -5,6 +5,8 @@
  */
 package imprenta;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alberto
@@ -14,9 +16,10 @@ public class Lote {
 
     private String nom; // nombre del lote
     private char depart; //nombre del departamento asignado Valores[A,B,C]
-    private Maquina[] listaMaq; // array de maquinadas asignadas al lote
-    public long id;//variable identificador
-    
+    private ArrayList<Maquina> maquinas; // array de maquinadas asignadas al lote
+    protected long id;//variable identificador
+    private Departamento departamento;
+
     public String getNom() {
         return nom;
     }
@@ -33,28 +36,29 @@ public class Lote {
         this.depart = depart;
     }
 
-    public Maquina[] getListaMaq() {
-        return listaMaq;
-    }
-
     public long getId() {
         return id;
     }
 
+    /*
     public void setId(long id) {
         this.id = id;
     }
+    */
 
-    
-    public void setListaMaq(Maquina[] listaMaq) {
-        this.listaMaq = listaMaq;
+    public ArrayList<Maquina> getMaquinas() {
+        return maquinas;
+    }
+
+    public void setMaquinas(ArrayList<Maquina> maquinas) {
+        this.maquinas = maquinas;
     }
 
     //constructor con argumentos
-    public Lote(String nom, char depart, Maquina[] listaMaq) {
+    public Lote(String nom, char depart, ArrayList<Maquina> maquinas) {
         this.nom = nom;
         this.depart = depart;
-        this.listaMaq = listaMaq;
+        this.maquinas = maquinas;
     }
 
     //constructor por defecto
@@ -65,19 +69,26 @@ public class Lote {
     public Lote(Lote l) {
         this.nom = l.getNom();
         this.depart = l.getDepart();
-        this.listaMaq = l.listaMaq;
+        this.maquinas = l.maquinas;
     }
 
     public String data() {
-        return id + "|" + nom + "|" + depart + "|" + listaMaq;
+        return id + "|" + nom + "|" + depart + "|" + maquinas;
 
     }
 
     @Override
     public String toString() {
-        return "Lote{" + "nom=" + nom + ", depart=" + depart + ", listaMaq=" + listaMaq + ", id=" + id + '}';
+        return "Lote{" + "nom=" + nom + ", depart=" + depart + ", listaMaq=" + maquinas + ", id=" + id + '}';
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
     
-
 }

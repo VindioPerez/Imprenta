@@ -5,6 +5,8 @@
  */
 package imprenta;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author VindioPerez
@@ -25,6 +27,7 @@ public class Operario {
     //La categoria del empleado, solo puede o ser senior o no serlo
     protected long id;
     //variable identificador 
+    protected ArrayList<Departamento> departamentos;
     
     public Operario() {
     }
@@ -112,5 +115,14 @@ public class Operario {
     public String data() {
         return id + "|" + nombre + "|" + apellidos + "|" + nif + "|" + telefono + "|" + direccion + "|" + senior;
     }
+
+    public ArrayList<Departamento> getDepartamentos() {
+        return departamentos;
+    }
+
+    public void setDepartamentos(ArrayList<Departamento> departamentos) {
+        this.departamentos = departamentos;
+    }
+    
     
 }

@@ -14,7 +14,7 @@ public class Cliente {
 
     private String nombre; //variable de tipo string que recoge el nombre del cliente
     private String telefono; //variable de tipo string que recoge el número de teléfono del cliente
-    public long id;//variable identificador
+    protected long id;//variable identificador
     
     public Cliente() {
     }
