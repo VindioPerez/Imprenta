@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package imprenta;
-
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -19,7 +19,8 @@ public class Labor {
     private Date fecha;// fecha de realizacion de la labor
     private String tarea;//en que consiste
     private Maquina maquina;//maquina que lo realiza
-
+    private ArrayList<OperarioMaquinas> operariosM;
+    
     public long getId() {
         return id;
     }

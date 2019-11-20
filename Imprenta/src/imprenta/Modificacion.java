@@ -5,6 +5,7 @@
  */
 package imprenta;
 import java.util.Date;
+import java.util.ArrayList;
 /**
  *
  * @author Alberto
@@ -13,12 +14,14 @@ import java.util.Date;
 public class Modificacion {
     
    protected long id;// idenitficador 
-   private OperarioImpresion  operario; //operario que realiza la modificación
+   private ArrayList<Operario>  operarios; //operarios que realizan la modificación
    private Date  fecha; //fecha de realización
    private String desc; //descripción del cambio
    private boolean aprob;//aprobacion del cliente
    private Date fechaAprob;//fecha limite aprobación del cliente
-
+   private long idCliente;
+   private long idTrabajo;
+   
     public String getDesc() {
         return desc;
     }

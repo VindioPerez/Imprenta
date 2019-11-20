@@ -15,9 +15,10 @@ public class PoliticaCalidad {
     protected long id;
     private String nom ;//nombre de la política
     private Date fechaIni ; //fecha de inicio de la politica
-    private OperarioCalidad firma1 ;// primera firma
-    private OperarioCalidad firma2 ;// segunda firma 
-
+    private long idOCalidad1  ;// primera firma
+    private long idOCalidad2  ;// segunda firma 
+    private Lote lote;
+    
     public String getNom() {
         return nom;
     }

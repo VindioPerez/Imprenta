@@ -20,6 +20,7 @@ public class Trabajo {
     protected String relieve; //variable tipo String que indica el tipo de relieve
     private Cliente cliente;
     private long idMaquina;
+    private long idOperario;
     
     public Trabajo() {
     }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package imprenta;
-
+import java.util.ArrayList;
 /**
  *
  * @author VindioPerez
@@ -12,6 +12,8 @@ package imprenta;
  */
 public class OperarioImpresion extends Operario {
     
+    ArrayList<Maquina> maquinas;
+    ArrayList<Modificacion> modificaciones;
     public OperarioImpresion() {
         super();
     }

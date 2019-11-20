@@ -4,14 +4,16 @@
  * and open the template in the editor.
  */
 package imprenta;
-
+import java.util.ArrayList;
 /**
  *
  * @author VindioPerez
  * @version 1.0
  */
 public class OperarioMaquinas extends Operario{
-
+    
+    private ArrayList<Labor> labores;
+    
     public OperarioMaquinas() {
         super();
     }
@@ -32,4 +34,6 @@ public class OperarioMaquinas extends Operario{
     public String data() {
         return super.data() ; 
     }
+    
 }
+  
