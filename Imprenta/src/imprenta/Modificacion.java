@@ -55,13 +55,7 @@ public class Modificacion {
         this.id = id;
     }
 
-    public OperarioImpresion getOperario() {
-        return operario;
-    }
 
-    public void setOperario(OperarioImpresion operario) {
-        this.operario = operario;
-    }
 
     public Date getFecha() {
         return fecha;
@@ -88,8 +82,8 @@ public class Modificacion {
     }
 
     //constructor con argumentos
-    public Modificacion(long id, OperarioImpresion operario, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina) {
-        this.operario = operario;
+    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina) {
+        this.operarios = new ArrayList<Operario>();
         this.fecha = fecha;
         this.desc = desc;
         this.aprob = aprob;
@@ -97,6 +91,10 @@ public class Modificacion {
         this.maquina = maquina;
     }
 
+    public ArrayList<Operario> getListaOperarios(){
+    
+        return 
+    }
   
     //constructor por defecto
     public Modificacion() {
@@ -104,7 +102,7 @@ public class Modificacion {
     
     //constructor de copia
     public Modificacion(Modificacion m ) {
-        this.operario = m.getOperario();
+        this.operarios = 
         this.fecha = m.getFecha();
         this.desc = m.getDesc();
         this.aprob = m.getAprob();
