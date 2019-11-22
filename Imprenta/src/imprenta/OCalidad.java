@@ -27,6 +27,11 @@ public class OCalidad extends Operario {
   
     }
 
+    public OCalidad (Operario o){
+        super(o);
+    }
+    
+            
     
 
     @Override
@@ -36,5 +41,12 @@ public class OCalidad extends Operario {
     
     public String data() {
         return super.data(); 
+    }
+    
+    public static OCalidad nuevoOCalidad(){
+    
+        OCalidad OC = new OCalidad(Operario.nuevoOperario());
+    
+        return OC;
     }
 }

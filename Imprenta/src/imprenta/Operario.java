@@ -51,7 +51,7 @@ public class Operario {
         this.senior = o.isSenior();
     }
     
-    public Operario nuevoOperario(){
+    public static Operario nuevoOperario(){
         Operario o = new Operario();
         Scanner in = new Scanner (System.in);
         char c;

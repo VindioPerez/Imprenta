@@ -25,6 +25,11 @@ public class OMaquinas extends Operario{
     public OMaquinas (OMaquinas o) {
        super(o);
     }
+    
+    public OMaquinas (Operario o){
+        super(o);
+        
+    }
 
     @Override
     public String toString() {
@@ -34,6 +39,11 @@ public class OMaquinas extends Operario{
     public String data() {
         return super.data() ; 
     }
-    
+ 
+    public static OMaquinas nuevoOMaquinas(){
+        OMaquinas OM = new OMaquinas(Operario.nuevoOperario());
+        return OM;
+        
+    }
 }
   

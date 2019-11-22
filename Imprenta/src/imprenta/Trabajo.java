@@ -20,8 +20,8 @@ public class Trabajo {
     protected Date fechaRecogida;//variable tipo Date donde se recoge la enfecha de recogida del trabajo
     protected String relieve; //variable tipo String que indica el tipo de relieve
     private Cliente cliente;
-    private long idMaquina;
-    private long idOperario;
+    protected long idMaquina;
+    protected long idOperario;
 
     public Trabajo() {
     }
@@ -103,10 +103,11 @@ public class Trabajo {
         this.idMaquina = idMaquina;
     }
 
-    /*
+    
     public Trabajo getTrabajoById(long idTrabajo) {
     
         Trabajo t = new Trabajo();
+        ListaTrabajo 
         if(t.id == idTrabajo){
             t =
         }else{
@@ -116,7 +117,7 @@ public class Trabajo {
     return t ;
     
             }
-    */
+ 
         public Trabajo nuevoTrabajo(){
         Trabajo t = new Trabajo();
         Scanner in = new Scanner (System.in);

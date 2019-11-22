@@ -24,6 +24,10 @@ public class OImpresion extends Operario {
        super(o);
     }
 
+    public OImpresion(Operario o) {
+       super(o);
+    }
+    
     @Override
     public String toString() {
         return super.toString();
@@ -34,5 +38,11 @@ public class OImpresion extends Operario {
     
     public String data() {
         return super.data(); 
+    }
+    
+    public static OImpresion nuevoOImpresion(){
+        OImpresion OI = new OImpresion(Operario.nuevoOperario());
+        
+        return OI;
     }
 }
