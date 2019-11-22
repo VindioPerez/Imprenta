@@ -1,6 +1,7 @@
 package imprenta;
 
 import java.util.Date;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,6 +29,29 @@ public class Libro extends Trabajo {
     public Libro(Libro l) {
         this.color = l.getColor();
         this.numPag = l.getNumPag();
+    }
+    
+    public Libro(Trabajo t) {
+        super(t);
+    }
+    
+    public static Libro nuevoLibro(){
+        Libro l = new Libro(Trabajo.nuevoTrabajo());
+        Scanner in = new Scanner (System.in);
+        char c;
+        do {
+           System.out.println("Introduzca el número de páginas");
+           int num = in.nextInt();
+           l.setNumPag(num);
+           System.out.println("Introduzca el color");
+           String col = in.nextLine();
+           l.setColor(col);
+           System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+           System.out.println("Número de páginas: "+num);
+           System.out.println("Color: "+col);
+           c=in.next().charAt(0);
+        } while (c != 's');
+        return l;
     }
 
     public int getNumPag() {

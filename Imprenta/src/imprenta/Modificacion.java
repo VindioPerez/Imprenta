@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Modificacion {
     
    protected long id;// idenitficador 
-   private ArrayList<Operario>  operarios; //operarios que realizan la modificación
+   private ArrayList<OImpresion>  operarios; //operarios que realizan la modificación
    private Date  fecha; //fecha de realización
    private String desc; //descripción del cambio
    private boolean aprob;//aprobacion del cliente
@@ -83,7 +83,7 @@ public class Modificacion {
 
     //constructor con argumentos
     public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina) {
-        this.operarios = new ArrayList<Operario>();
+        this.operarios = new ArrayList<OImpresion>();
         this.fecha = fecha;
         this.desc = desc;
         this.aprob = aprob;
@@ -102,7 +102,7 @@ public class Modificacion {
     
     //constructor de copia
     public Modificacion(Modificacion m ) {
-        this.operarios = 
+        this.operarios = new ArrayList<OImpresion>();
         this.fecha = m.getFecha();
         this.desc = m.getDesc();
         this.aprob = m.getAprob();
@@ -111,13 +111,13 @@ public class Modificacion {
     }
     
     public String data() { 
-     return id + "|" + operario + "|" + fecha + "|" + desc + "|" + aprob + "|" + fechaAprob + "|" + maquina ; 
+     return id + "|" + operarios + "|" + fecha + "|" + desc + "|" + aprob + "|" + fechaAprob + "|" + maquina ; 
             }
     
 
     @Override
     public String toString() {
-        return "Modificacion{" + "id=" + id + ", operario=" + operario + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", maquina=" + maquina + '}';
+        return "Modificacion{" + "id=" + id + ", operario=" + operarios + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", maquina=" + maquina + '}';
     }
 
    
