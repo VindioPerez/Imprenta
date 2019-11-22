@@ -10,7 +10,7 @@ import java.util.Date;
  * @author Alberto
  * @version1
  */
-public class PoliticaCalidad {
+public class Politica {
     
     protected long id;
     private String nom ;//nombre de la política
@@ -43,50 +43,33 @@ public class PoliticaCalidad {
         this.fechaIni = fechaIni;
     }
 
-    public OperarioCalidad getFirma1() {
-        return firma1;
-    }
-
-    public void setFirma1(OperarioCalidad firma1) {
-        this.firma1 = firma1;
-    }
-
-    public OperarioCalidad getFirma2() {
-        return firma2;
-    }
-
-    public void setFirma2(OperarioCalidad firma2) {
-        this.firma2 = firma2;
-    }
 
 
 
-    public PoliticaCalidad(String nom, Date fechaIni, OperarioCalidad firma1, OperarioCalidad firma2) {
+
+    public Politica(String nom, Date fechaIni, OperarioCalidad firma1, OperarioCalidad firma2) {
         this.nom = nom;
         this.fechaIni = fechaIni;
-        this.firma1 = firma1;
-        this.firma2 = firma2;
     }
 
     //constructor por defecto
-    public PoliticaCalidad() {
+    public Politica() {
     }
     //constructor de copia
-    public PoliticaCalidad(PoliticaCalidad p) {
+    public Politica(Politica p) {
         this.nom = p.getNom();
         this.fechaIni = p.getFechaIni();
-        this.firma1 = p.getFirma1();
-        this.firma2 = p.getFirma2();    
+
             
     }
     
     public String data() { 
-     return id + "|" + nom + "|" + fechaIni + "|" + firma1 +"|" + firma2 ;
+     return id + "|" + nom + "|" + fechaIni;
             }
     
     @Override
     public String toString() {
-        return "PoliticaCalidad{" + "nom=" + nom + ", fechaIni=" + fechaIni + ", firma1=" + firma1 + ", firma2=" + firma2 + '}';
+        return "PoliticaCalidad{" + "nom=" + nom + ", fechaIni=" + fechaIni  + '}';
     }
 }
 
