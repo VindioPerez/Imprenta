@@ -10,19 +10,19 @@ package imprenta;
  * @author VindioPerez
  * @version 1.0
  */
-public class OperarioCalidad extends Operario {
+public class OCalidad extends Operario {
     
     
-    public OperarioCalidad() {
+    public OCalidad() {
     }
 
-    public OperarioCalidad(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
+    public OCalidad(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
         super(nombre, apellidos, nif, telefono, direccion, senior);
     }
 
 
     
-    public OperarioCalidad (OperarioCalidad o) {
+    public OCalidad (OCalidad o) {
         super(o);
   
     }

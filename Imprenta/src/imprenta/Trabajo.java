@@ -6,6 +6,7 @@
 package imprenta;
 
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -21,7 +22,7 @@ public class Trabajo {
     private Cliente cliente;
     private long idMaquina;
     private long idOperario;
-    
+
     public Trabajo() {
     }
 
@@ -70,8 +71,7 @@ public class Trabajo {
     public void setId(int id) {
         this.id = id;
     }
-    */
-
+     */
     @Override
     public String toString() {
         return "Trabajo{" + "id=" + id + ", fechaSolicitud=" + fechaSolicitud + ", fechaRecogida=" + fechaRecogida + '}';
@@ -81,9 +81,9 @@ public class Trabajo {
         return id + "|" + fechaSolicitud + "|" + fechaRecogida;
 
     }
-    
-    public Cliente getClienteById(){
-    
+
+    public Cliente getClienteById() {
+
         return null;
     }
 
@@ -99,11 +99,67 @@ public class Trabajo {
         return idMaquina;
     }
 
- 
     public void setIdMaquina(long idMaquina) {
         this.idMaquina = idMaquina;
     }
-  
-    
-}
 
+    /*
+    public Trabajo getTrabajoById(long idTrabajo) {
+    
+        Trabajo t = new Trabajo();
+        if(t.id == idTrabajo){
+            t =
+        }else{
+            t = null;
+        }
+
+    return t ;
+    
+            }
+    */
+        public Trabajo nuevoTrabajo(){
+        Trabajo t = new Trabajo();
+        Scanner in = new Scanner (System.in);
+        char c;
+        do {
+           System.out.println("Introduzca el nombre");
+           String nom = in.nextLine();
+           o.setNombre(nom);
+           System.out.println("Introduzca los apellidos");
+           String ape = in.nextLine();
+           o.setNombre(ape);
+           System.out.println("Introduzca el NIF");
+           String nnif = in.nextLine();
+           o.setNombre(nnif);
+           System.out.println("Introduzca el teléfono");
+           String tel = in.nextLine();
+           o.setNombre(tel);
+           System.out.println("Introduzca la dirección");
+           String dir = in.nextLine();
+           o.setNombre(dir);
+           char r;
+           do{
+           System.out.println("¿El operario es senior? (s/n)");
+           System.out.println("Por favor, introduzca un carácter válido");
+           r=in.next().charAt(0);
+           } while (r!='s' || r!='n');
+           if (r == 's'){
+               o.setSenior(true);
+           } else {
+               o.setSenior(false);
+           }
+           System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+           System.out.println("Nombre: "+nom);
+           System.out.println("Apellidos: "+ape);
+           System.out.println("NIF: "+nnif);
+           System.out.println("Teléfono: "+tel);
+           System.out.println("Dirección: "+dir);
+           if (r == 's'){
+               System.out.println("Senior: si");
+           } else {System.out.println("Senior: no");}
+           c=in.next().charAt(0);
+
+        } while (c != 's');
+        return o;
+    }
+}

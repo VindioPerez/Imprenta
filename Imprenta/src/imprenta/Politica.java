@@ -47,7 +47,7 @@ public class Politica {
 
 
 
-    public Politica(String nom, Date fechaIni, OperarioCalidad firma1, OperarioCalidad firma2) {
+    public Politica(String nom, Date fechaIni, OCalidad firma1, OCalidad firma2) {
         this.nom = nom;
         this.fechaIni = fechaIni;
     }

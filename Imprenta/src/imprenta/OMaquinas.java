@@ -10,19 +10,19 @@ import java.util.ArrayList;
  * @author VindioPerez
  * @version 1.0
  */
-public class OperarioImpresion extends Operario {
+public class OMaquinas extends Operario{
     
-    ArrayList<Maquina> maquinas;
-    ArrayList<Modificacion> modificaciones;
-    public OperarioImpresion() {
+    private ArrayList<Labor> labores;
+    
+    public OMaquinas() {
         super();
     }
 
-    public OperarioImpresion(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
+    public OMaquinas(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
         super(nombre, apellidos, nif, telefono, direccion, senior);
     }
     
-    public OperarioImpresion(OperarioImpresion o) {
+    public OMaquinas (OMaquinas o) {
        super(o);
     }
 
@@ -32,6 +32,8 @@ public class OperarioImpresion extends Operario {
     }
     
     public String data() {
-        return super.data(); 
+        return super.data() ; 
     }
+    
 }
+  

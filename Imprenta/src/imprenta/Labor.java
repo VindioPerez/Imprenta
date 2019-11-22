@@ -15,11 +15,11 @@ import java.util.Date;
 public class Labor {
 
     protected long id;//identificador
-    private OperarioMaquinas operario; // operario que hace la labor
+    private OMaquinas operario; // operario que hace la labor
     private Date fecha;// fecha de realizacion de la labor
     private String tarea;//en que consiste
     private Maquina maquina;//maquina que lo realiza
-    private ArrayList<OperarioMaquinas> operariosM;
+    private ArrayList<OMaquinas> operariosM;
     
     public long getId() {
         return id;
@@ -29,11 +29,11 @@ public class Labor {
         this.id = id;
     }
 
-    public OperarioMaquinas getOperario() {
+    public OMaquinas getOperario() {
         return operario;
     }
 
-    public void setOperario(OperarioMaquinas operario) {
+    public void setOperario(OMaquinas operario) {
         this.operario = operario;
     }
 
@@ -66,7 +66,7 @@ public class Labor {
     }
 
     //constructor con argumentos
-    public Labor(long id, OperarioMaquinas operario, Date fecha, String tarea, Maquina maquina) {
+    public Labor(long id, OMaquinas operario, Date fecha, String tarea, Maquina maquina) {
         this.id = id;
         this.operario = operario;
         this.fecha = fecha;
