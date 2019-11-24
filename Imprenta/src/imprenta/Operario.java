@@ -75,23 +75,22 @@ public class Operario {
             System.out.println("¿Quiere introducir un departamento? (s/n)");
             char p;
             p = in.next().charAt(0);
-            do {
+            while (p != 's' && p != 'n') {
                 System.out.println("Por favor, introduzca un caracter válido");
                 p = in.next().charAt(0);
-            } while (p != 's' && p != 'n');
-            do {
+            } 
+            while (p == 's') {
                 o.departamentos.add(Departamento.nuevoDepartamento());
                 System.out.println("¿Quiere introducir otro departamento? (s/n)");
                 p = in.next().charAt(0);
-            } while (p == 's');
+            }
             System.out.println("¿El operario es senior? (s/n)");
             char r;
             r = in.next().charAt(0);
-            do {
+            while (r != 's' || r != 'n') {
                 System.out.println("Por favor, introduzca un carácter válido");
                 System.out.println("¿El operario es senior? (s/n)");
-                r = in.next().charAt(0);
-            } while (r != 's' || r != 'n');
+                r = in.next().charAt(0);}
             if (r == 's') {
                 o.setSenior(true);
             } else {
