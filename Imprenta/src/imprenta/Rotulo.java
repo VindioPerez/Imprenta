@@ -5,7 +5,9 @@
  */
 package imprenta;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -27,6 +29,25 @@ public class Rotulo extends Trabajo {
     public Rotulo(Rotulo r) {
         this.centroComercial = r.getCentroComercial();
     }
+    
+    public Rotulo(Trabajo t) {
+        super(t);
+    }
+    
+    public static Rotulo nuevoRotulo() {
+        Rotulo r = new Rotulo(Trabajo.nuevoTrabajo());
+        Scanner in = new Scanner(System.in);
+        char c;
+        do {
+            System.out.println("Introduzca el centro comercial");
+            String cen = in.nextLine();
+            r.setCentroComercial(cen);
+            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+            System.out.println("Centro comercial: " + cen);
+            c = in.next().charAt(0);
+        } while (c != 's');
+        return r;
+    }
 
     public String getCentroComercial() {
         return centroComercial;
@@ -44,6 +65,19 @@ public class Rotulo extends Trabajo {
     public String data() {
         return getId() + "|" + getFechaSolicitud() + getRelieve() + "|" + getFechaRecogida() + "|" + centroComercial;
 
+    }
+    
+    public Rotulo getRotuloById(long id) {
+        /*Este método recorrerá un ArrayList con todos los rotulos buscando aquel con el id que le introduzcamos, y devolverá ese rotulo si es que existe o 
+        nulo si es que no existe*/
+        Rotulo l = new Rotulo();
+        return l;
+    }
+
+    public ArrayList<Rotulo> getAllRotulo() {
+        /*Este método devolverá un arrayList con todos los rotulos existentes*/
+        ArrayList<Rotulo> o = new ArrayList<>();
+        return o;
     }
 
 }

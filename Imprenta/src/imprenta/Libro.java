@@ -1,5 +1,6 @@
 package imprenta;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -30,26 +31,26 @@ public class Libro extends Trabajo {
         this.color = l.getColor();
         this.numPag = l.getNumPag();
     }
-    
+
     public Libro(Trabajo t) {
         super(t);
     }
-    
-    public static Libro nuevoLibro(){
+
+    public static Libro nuevoLibro() {
         Libro l = new Libro(Trabajo.nuevoTrabajo());
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
         char c;
         do {
-           System.out.println("Introduzca el número de páginas");
-           int num = in.nextInt();
-           l.setNumPag(num);
-           System.out.println("Introduzca el color");
-           String col = in.nextLine();
-           l.setColor(col);
-           System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
-           System.out.println("Número de páginas: "+num);
-           System.out.println("Color: "+col);
-           c=in.next().charAt(0);
+            System.out.println("Introduzca el número de páginas");
+            int num = in.nextInt();
+            l.setNumPag(num);
+            System.out.println("Introduzca el color");
+            String col = in.nextLine();
+            l.setColor(col);
+            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+            System.out.println("Número de páginas: " + num);
+            System.out.println("Color: " + col);
+            c = in.next().charAt(0);
         } while (c != 's');
         return l;
     }
@@ -78,6 +79,19 @@ public class Libro extends Trabajo {
     public String data() {
 
         return getId() + "|" + getFechaSolicitud() + "|" + getRelieve() + getFechaRecogida() + "|" + color + "|" + numPag;
+    }
+    
+    public Libro getLibroById(long id) {
+        /*Este método recorrerá un ArrayList con todos los libros buscando aquel con el id que le introduzcamos, y devolverá ese libro si es que existe o 
+        nulo si es que no existe*/
+        Libro l = new Libro();
+        return l;
+    }
+
+    public ArrayList<Libro> getAllLibro() {
+        /*Este método devolverá un arrayList con todos los libros existentes*/
+        ArrayList<Libro> o = new ArrayList<>();
+        return o;
     }
 
 }
