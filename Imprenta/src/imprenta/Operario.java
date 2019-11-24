@@ -14,6 +14,7 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class Operario {
+
     protected String nombre;
     //El nombre del operario, se define con un String alfabetico
     protected String apellidos;
@@ -29,7 +30,7 @@ public class Operario {
     protected long id;
     //variable identificador 
     protected ArrayList<Departamento> departamentos;
-    
+
     public Operario() {
     }
 
@@ -41,8 +42,8 @@ public class Operario {
         this.direccion = direccion;
         this.senior = senior;
     }
-    
-    public Operario (Operario o) {
+
+    public Operario(Operario o) {
         this.nombre = o.getNombre();
         this.apellidos = o.getApellidos();
         this.nif = o.getNif();
@@ -50,48 +51,64 @@ public class Operario {
         this.direccion = o.getDireccion();
         this.senior = o.isSenior();
     }
-    
-    public static Operario nuevoOperario(){
+
+    public static Operario nuevoOperario() {
         Operario o = new Operario();
-        Scanner in = new Scanner (System.in);
+        Scanner in = new Scanner(System.in);
         char c;
         do {
-           System.out.println("Introduzca el nombre");
-           String nom = in.nextLine();
-           o.setNombre(nom);
-           System.out.println("Introduzca los apellidos");
-           String ape = in.nextLine();
-           o.setNombre(ape);
-           System.out.println("Introduzca el NIF");
-           String nnif = in.nextLine();
-           o.setNombre(nnif);
-           System.out.println("Introduzca el teléfono");
-           String tel = in.nextLine();
-           o.setNombre(tel);
-           System.out.println("Introduzca la dirección");
-           String dir = in.nextLine();
-           o.setNombre(dir);
-           char r;
-           do{
-           System.out.println("¿El operario es senior? (s/n)");
-           System.out.println("Por favor, introduzca un carácter válido");
-           r=in.next().charAt(0);
-           } while (r!='s' || r!='n');
-           if (r == 's'){
-               o.setSenior(true);
-           } else {
-               o.setSenior(false);
-           }
-           System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
-           System.out.println("Nombre: "+nom);
-           System.out.println("Apellidos: "+ape);
-           System.out.println("NIF: "+nnif);
-           System.out.println("Teléfono: "+tel);
-           System.out.println("Dirección: "+dir);
-           if (r == 's'){
-               System.out.println("Senior: si");
-           } else {System.out.println("Senior: no");}
-           c=in.next().charAt(0);
+            System.out.println("Introduzca el nombre");
+            String nom = in.nextLine();
+            o.setNombre(nom);
+            System.out.println("Introduzca los apellidos");
+            String ape = in.nextLine();
+            o.setNombre(ape);
+            System.out.println("Introduzca el NIF");
+            String nnif = in.nextLine();
+            o.setNombre(nnif);
+            System.out.println("Introduzca el teléfono");
+            String tel = in.nextLine();
+            o.setNombre(tel);
+            System.out.println("Introduzca la dirección");
+            String dir = in.nextLine();
+            o.setNombre(dir);
+            System.out.println("¿Quiere introducir un departamento? (s/n)");
+            char p;
+            p = in.next().charAt(0);
+            do {
+                System.out.println("Por favor, introduzca un caracter válido");
+                p = in.next().charAt(0);
+            } while (p != 's' && p != 'n');
+            do {
+                o.departamentos.add(Departamento.nuevoDepartamento());
+                System.out.println("¿Quiere introducir otro departamento? (s/n)");
+                p = in.next().charAt(0);
+            } while (p == 's');
+            System.out.println("¿El operario es senior? (s/n)");
+            char r;
+            r = in.next().charAt(0);
+            do {
+                System.out.println("Por favor, introduzca un carácter válido");
+                System.out.println("¿El operario es senior? (s/n)");
+                r = in.next().charAt(0);
+            } while (r != 's' || r != 'n');
+            if (r == 's') {
+                o.setSenior(true);
+            } else {
+                o.setSenior(false);
+            }
+            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+            System.out.println("Nombre: " + nom);
+            System.out.println("Apellidos: " + ape);
+            System.out.println("NIF: " + nnif);
+            System.out.println("Teléfono: " + tel);
+            System.out.println("Dirección: " + dir);
+            if (r == 's') {
+                System.out.println("Senior: si");
+            } else {
+                System.out.println("Senior: no");
+            }
+            c = in.next().charAt(0);
 
         } while (c != 's');
         return o;
@@ -105,7 +122,6 @@ public class Operario {
         this.id = id;
     }
 
-    
     public String getNombre() {
         return nombre;
     }
@@ -170,6 +186,18 @@ public class Operario {
     public void setDepartamentos(ArrayList<Departamento> departamentos) {
         this.departamentos = departamentos;
     }
-    
-    
+
+    public Operario getOperarioById(long id) {
+        /*Este método recorrerá un ArrayList con todos los operarios buscando aquel con el id que le introduzcamos, y devolverá ese operario si es que existe o 
+        nulo si es que no existe*/
+        Operario o = new Operario();
+        return o;
+    }
+
+    public ArrayList<Operario> getAllOperario() {
+        /*Este método devolverá un arrayList con todos los operarios existentes*/
+        ArrayList<Operario> o = new ArrayList<>();
+        return o;
+    }
+
 }
