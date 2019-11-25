@@ -7,6 +7,7 @@ package imprenta;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  *
@@ -73,7 +74,10 @@ public class Departamento {
             char l = 0;
             l = in.next().charAt(l);
             dep.setLetraDep(l);
-
+            
+            ArrayList<Operario> os = new ArrayList();
+            dep.setOperarios(os);
+            
             System.out.println("Quiere Introducir un nuevo Operario? s/n ");
             d = in.next().charAt(0);
             
@@ -91,7 +95,7 @@ public class Departamento {
 
             c = in.next().charAt(0);
 
-        } while (c != 'v' || c != 'V');
+        } while (c != 'v' && c != 'V');
         return dep;
     }
 

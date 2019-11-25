@@ -72,6 +72,8 @@ public class Operario {
             System.out.println("Introduzca la dirección");
             String dir = in.nextLine();
             o.setNombre(dir);
+            ArrayList<Departamento> os = new ArrayList();
+            o.setDepartamentos(os);
             System.out.println("¿Quiere introducir un departamento? (s/n)");
             char p;
             p = in.next().charAt(0);
@@ -87,7 +89,7 @@ public class Operario {
             System.out.println("¿El operario es senior? (s/n)");
             char r;
             r = in.next().charAt(0);
-            while (r != 's' || r != 'n') {
+            while (r != 's' && r != 'n') {
                 System.out.println("Por favor, introduzca un carácter válido");
                 System.out.println("¿El operario es senior? (s/n)");
                 r = in.next().charAt(0);}
