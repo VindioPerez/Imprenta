@@ -61,7 +61,7 @@ public class Maquina {
             System.out.println("Fecha de compra: " + fecha);
             c = in.next().charAt(0);
 
-        } while (c != 's');
+        } while (c != 's' && c !='S');
         
     
        
