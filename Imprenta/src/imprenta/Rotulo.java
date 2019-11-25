@@ -5,6 +5,7 @@
  */
 package imprenta;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -34,7 +35,7 @@ public class Rotulo extends Trabajo {
         super(t);
     }
     
-    public static Rotulo nuevoRotulo() {
+    public static Rotulo nuevoRotulo() throws ParseException{
         Rotulo r = new Rotulo(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
         char c;

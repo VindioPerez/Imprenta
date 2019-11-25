@@ -1,5 +1,6 @@
 package imprenta;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -40,7 +41,7 @@ public class Poster extends Trabajo {
         super(t);
     }
 
-    public static Poster nuevoPoster() {
+    public static Poster nuevoPoster() throws ParseException{
         Poster p = new Poster(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
         char c;

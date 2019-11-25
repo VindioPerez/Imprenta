@@ -1,5 +1,6 @@
 package imprenta;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -36,7 +37,7 @@ public class Libro extends Trabajo {
         super(t);
     }
 
-    public static Libro nuevoLibro() {
+    public static Libro nuevoLibro() throws ParseException{
         Libro l = new Libro(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
         char c;
