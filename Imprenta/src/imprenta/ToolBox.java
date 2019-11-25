@@ -35,16 +35,16 @@ public class ToolBox {
         char r;
         Scanner in = new Scanner(System.in);
         r = in.next().charAt(0);
-        do{
-            if(r == 's' || r == 'S'){
-                check = true;
-            }else if(r == 'n' || r == 'N'){
-                check = false;
-            }
-        }while(r !='s'&& r!= 'S' && r!='N' && r !='n');
+        while(r !='s'&& r!= 'S' && r!='N' && r !='n'){
+            System.out.println("Por favor, introduzca un carácter válido (s/n)");
+            r = in.next().charAt(0);
+        }
+        if((r == 's') || (r == 'S')){
+            check = true;
+            }else if((r == 'n') || (r == 'N')){
+            check = false;
         
-        
-        
+        }
         return check;
         
     }
