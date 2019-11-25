@@ -75,16 +75,12 @@ public class Operario {
             ArrayList<Departamento> os = new ArrayList();
             o.setDepartamentos(os);
             System.out.println("¿Quiere introducir un departamento? (s/n)");
-            char p;
-            p = in.next().charAt(0);
-            while (p != 's' && p != 'n') {
-                System.out.println("Por favor, introduzca un caracter válido");
-                p = in.next().charAt(0);
-            } 
-            while (p == 's') {
+            boolean p;
+            p = ToolBox.leerBoolean();
+            while (p = true) {
                 o.departamentos.add(Departamento.nuevoDepartamento());
                 System.out.println("¿Quiere introducir otro departamento? (s/n)");
-                p = in.next().charAt(0);
+                p = ToolBox.leerBoolean();
             }
             System.out.println("¿El operario es senior? (s/n)");
             boolean r;
@@ -94,7 +90,7 @@ public class Operario {
             } else {
                 o.setSenior(false);
             }
-            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+            System.out.println("¿Son correctos estos datos? (s/n)");
             System.out.println("Nombre: " + nom);
             System.out.println("Apellidos: " + ape);
             System.out.println("NIF: " + nnif);

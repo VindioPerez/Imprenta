@@ -43,7 +43,7 @@ public class Rotulo extends Trabajo {
             System.out.println("Introduzca el centro comercial");
             String cen = in.nextLine();
             r.setCentroComercial(cen);
-            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+            System.out.println("¿Son correctos estos datos? (s/n)");
             System.out.println("Centro comercial: " + cen);
             c = ToolBox.leerBoolean();
         } while (c = false);

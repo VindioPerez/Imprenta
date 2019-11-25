@@ -63,7 +63,7 @@ public class Politica {
             System.out.println("Introduzca el lote");
             Lote l = Lote.nuevoLote();
             p.setLote(l);
-            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+            System.out.println("¿Son correctos estos datos? (s/n)");
             System.out.println("Nombre: " + nom);
             System.out.println("Fecha de inicio: " + fin);
             System.out.println("Id del primer operario: " + id1);

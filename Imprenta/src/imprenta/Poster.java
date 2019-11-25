@@ -55,7 +55,7 @@ public class Poster extends Trabajo {
             System.out.println("Introduzca el número de copias");
             int num = in.nextInt();
             p.setNumCopias(num);
-            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+            System.out.println("¿Son correctos estos datos? (s/n)");
             System.out.println("Alto (cm): " + alt);
             System.out.println("Ancho (cm): " + anc);
             System.out.println("Número de copias: " + num);

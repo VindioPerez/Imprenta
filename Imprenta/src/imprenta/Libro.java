@@ -48,7 +48,7 @@ public class Libro extends Trabajo {
             System.out.println("Introduzca el color");
             String col = in.nextLine();
             l.setColor(col);
-            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+            System.out.println("¿Son correctos estos datos? (s/n)");
             System.out.println("Número de páginas: " + num);
             System.out.println("Color: " + col);
             c = ToolBox.leerBoolean();
