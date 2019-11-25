@@ -81,7 +81,7 @@ public class Cliente {
             System.out.println("Son correctos los siguiente datos?");
             d = sc.nextLine().charAt(0);
             
-        }while(d == 's');
+        }while(d != 's');
     
         return c;
     
