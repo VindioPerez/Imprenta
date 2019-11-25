@@ -76,32 +76,23 @@ public class Departamento {
 
             System.out.println("Quiere Introducir un nuevo Operario? s/n ");
             d = in.next().charAt(0);
-            ArrayList<Operario> operarios = new ArrayList<>();
-            while (d == 's') {
-                          
             
-            Operario o = Operario.nuevoOperario();
-            operarios.add(o);
-            
-                System.out.println("Quiere Introducir otro Operario? s/n ");
 
+            while (d == 's') {
+                dep.operarios.add(Operario.nuevoOperario());
+
+                System.out.println("Quiere Introducir otro Operario? s/n ");
                 d = in.next().charAt(0);
             }
 
-            do {
+            System.out.println("¿Son correctos estos datos? (introduzca una v si lo son)");
+            System.out.println("letraDep: " + l);
+            
 
-                System.out.println("¿Son correctos estos datos? (introduzca una v si lo son)");
-                System.out.println("letraDep: " + l);
-                System.out.println("Operarios: " );
+            c = in.next().charAt(0);
 
-                c = in.next().charAt(0);
-
-            } while (c != 'v' || c != 'V');
-            return dep;
-        }
-    
-
+        } while (c != 'v' || c != 'V');
+        return dep;
     }
-    
 
-
+}

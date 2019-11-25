@@ -5,7 +5,9 @@
  */
 package imprenta;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -15,10 +17,44 @@ import java.util.ArrayList;
 public class Lote {
 
     private String nom; // nombre del lote
-    private char depart; //nombre del departamento asignado Valores[A,B,C]
     private ArrayList<Maquina> maquinas; // array de maquinadas asignadas al lote
     protected long id;//variable identificador
     private Departamento departamento;
+
+    public static Lote nuevoLote() throws ParseException {
+        Lote l = new Lote();
+
+        Scanner in = new Scanner(System.in);
+        char c;
+        char d;
+        do {
+            System.out.println("Introduzca el departamento");
+           new Departamento dep =  Departamento.nuevoDepartamento(); // por modificar llamada
+             
+            System.out.println("Introduzca el nombre del lote");
+            String nom = in.nextLine();
+            l.setNom(nom);
+            
+            
+            System.out.println("Quiere Introducir una nueva Maquina? s/n ");
+            d = in.next().charAt(0);
+
+            while (d == 's') {
+                l.maquinas.add(Maquina.nuevoMaquina());
+
+                System.out.println("Quiere Introducir otra Maquina? s/n ");
+                d = in.next().charAt(0);
+            }
+
+            System.out.println("¿Son correctos estos datos? (introduzca una v si lo son)");
+            System.out.println("Nombre Lote: " +nom );
+
+            c = in.next().charAt(0);
+
+        } while (c != 'v' || c != 'V');
+
+        return l;
+    }
 
     public String getNom() {
         return nom;
@@ -28,13 +64,7 @@ public class Lote {
         this.nom = nom;
     }
 
-    public char getDepart() {
-        return depart;
-    }
-
-    public void setDepart(char depart) {
-        this.depart = depart;
-    }
+   
 
     public long getId() {
         return id;
@@ -44,8 +74,7 @@ public class Lote {
     public void setId(long id) {
         this.id = id;
     }
-    */
-
+     */
     public ArrayList<Maquina> getMaquinas() {
         return maquinas;
     }
@@ -55,9 +84,8 @@ public class Lote {
     }
 
     //constructor con argumentos
-    public Lote(String nom, char depart, ArrayList<Maquina> maquinas) {
+    public Lote(String nom, ArrayList<Maquina> maquinas) {
         this.nom = nom;
-        this.depart = depart;
         this.maquinas = maquinas;
     }
 
@@ -68,18 +96,17 @@ public class Lote {
     //constructor de copia
     public Lote(Lote l) {
         this.nom = l.getNom();
-        this.depart = l.getDepart();
         this.maquinas = l.maquinas;
     }
 
     public String data() {
-        return id + "|" + nom + "|" + depart + "|" + maquinas;
+        return id + "|" + nom +  "|" + maquinas;
 
     }
 
     @Override
     public String toString() {
-        return "Lote{" + "nom=" + nom + ", depart=" + depart + ", listaMaq=" + maquinas + ", id=" + id + '}';
+        return "Lote{" + "nom=" + nom +  ", listaMaq=" + maquinas + ", id=" + id + '}';
     }
 
     public Departamento getDepartamento() {
@@ -90,5 +117,4 @@ public class Lote {
         this.departamento = departamento;
     }
 
-    
 }

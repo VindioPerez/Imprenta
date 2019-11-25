@@ -5,6 +5,10 @@
  */
 package imprenta;
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.text.ParseException;
+
 /**
  *
  * @author Alberto
@@ -21,6 +25,48 @@ public class Maquina {
    private float capMax;//capacidad máxima de tinta - Valor unico nº
 
    
+   
+   
+   public static Maquina nuevoMaquina() throws ParseException{
+    Maquina m = new Maquina();   
+           
+    Scanner in = new Scanner(System.in);
+        char c;
+        do {
+            System.out.println("Introduzca la ubicación");
+            String ubi = in.nextLine();
+            m.setUbicacion(ubi);
+            System.out.println("Introduzca el tipo de impresión");
+            String tipo = in.nextLine();
+            m.setImprTipo(tipo);
+            System.out.println("Introduzca el modo de impresión");
+            String modo = in.nextLine();
+            m.setImprModo(modo);
+            System.out.println("Introduzca el volumen de tinta");
+            float dirf = in.nextFloat();
+            m.setVolTinta(dirf);
+            System.out.println("Introduzca la capacidad máxima de la máquina");
+            float capf = in.nextFloat();
+            m.setCapMax(capf);
+            System.out.println("Introduzca la fecha de inicio");
+            Date fecha = ToolBox.introducirFecha();
+            m.setFechaCompra(fecha);
+            
+            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
+            System.out.println("Ubicación: " + ubi);
+            System.out.println("Tipo de Impresión: " + tipo);
+            System.out.println("Modo de Impresión: " + modo);
+            System.out.println("Volumend de Tinta: " + dirf);
+            System.out.println("Capacidad Máxima de Tinta: " + capf);
+            System.out.println("Fecha de compra: " + fecha);
+            c = in.next().charAt(0);
+
+        } while (c != 's');
+        
+    
+       
+     return m;  
+   }
     public long getId() {
         return id;
     }

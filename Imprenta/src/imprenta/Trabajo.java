@@ -118,7 +118,7 @@ public class Trabajo {
     
             }
  
-        public Trabajo nuevoTrabajo(){
+        public static Trabajo nuevoTrabajo(){
         Trabajo t = new Trabajo();
         Scanner in = new Scanner (System.in);
         char c;

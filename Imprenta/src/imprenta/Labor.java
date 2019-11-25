@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package imprenta;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -15,11 +17,54 @@ import java.util.Date;
 public class Labor {
 
     protected long id;//identificador
-    private OMaquinas operario; // operario que hace la labor
+    
     private Date fecha;// fecha de realizacion de la labor
     private String tarea;//en que consiste
     private Maquina maquina;//maquina que lo realiza
-    private ArrayList<OMaquinas> operariosM;
+    private ArrayList<OMaquinas> operariosM; // operarios que hacen la labor
+    
+    
+    
+    public static Labor nuevoLabor() throws ParseException{
+      Labor lab= new Labor();  
+    
+     Scanner in = new Scanner(System.in);
+        char c;
+        char d;
+        do {
+            System.out.println("Introduzca el departamento");
+           
+             
+            System.out.println("Introduzca la tarea");
+            String tarea = in.nextLine();
+            lab.setTarea(tarea);
+            System.out.println("Introduzca la fecha de realizacion");
+            Date fecha = ToolBox.introducirFecha();
+            lab.setFecha(fecha);
+            new Departamento dep =  Departamento.nuevoDepartamento();// por modificar llamada
+            
+            System.out.println("Quiere Introducir un nuevo Operario de Maquinas? s/n ");
+            d = in.next().charAt(0);
+            
+
+            while (d == 's') {
+                lab.operariosM.add(OMaquinas.nuevoOMaquinas());
+
+                System.out.println("Quiere Introducir otro Operario? s/n ");
+                d = in.next().charAt(0);
+            }
+
+            System.out.println("¿Son correctos estos datos? (introduzca una v si lo son)");
+            System.out.println("Tarea: " +tarea );
+            System.out.println("Fecha de realización: " + fecha);
+
+            c = in.next().charAt(0);
+
+        } while (c != 'v' || c != 'V');
+        return lab;
+    }
+    
+    
     
     public long getId() {
         return id;
@@ -29,13 +74,9 @@ public class Labor {
         this.id = id;
     }
 
-    public OMaquinas getOperario() {
-        return operario;
-    }
+   
 
-    public void setOperario(OMaquinas operario) {
-        this.operario = operario;
-    }
+    
 
     public Date getFecha() {
         return fecha;
@@ -66,9 +107,9 @@ public class Labor {
     }
 
     //constructor con argumentos
-    public Labor(long id, OMaquinas operario, Date fecha, String tarea, Maquina maquina) {
+    public Labor(long id,  Date fecha, String tarea, Maquina maquina) {
         this.id = id;
-        this.operario = operario;
+      
         this.fecha = fecha;
         this.tarea = tarea;
         this.maquina = maquina;
@@ -77,20 +118,20 @@ public class Labor {
     //constructor de copia
     public Labor(Labor l) {
         this.id = l.getId();
-        this.operario = l.getOperario();
+        
         this.fecha = l.getFecha();
         this.tarea = l.getTarea();
         this.maquina = l.getMaquina();
     }
 
     public String data() {
-        return id + "|" + operario + "|" + fecha + "|" + tarea + "|" + maquina;
+        return id +  "|" + fecha + "|" + tarea + "|" + maquina;
 
     }
 
     @Override
     public String toString() {
-        return "Labor{" + "id=" + id + ", operario=" + operario + ", fecha=" + fecha + ", tarea=" + tarea + ", maquina=" + maquina + '}';
+        return "Labor{" + "id=" + id +  ", fecha=" + fecha + ", tarea=" + tarea + ", maquina=" + maquina + '}';
     }
 
 }
