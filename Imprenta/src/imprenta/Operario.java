@@ -55,7 +55,7 @@ public class Operario {
     public static Operario nuevoOperario() {
         Operario o = new Operario();
         Scanner in = new Scanner(System.in);
-        char c;
+        boolean c;
         do {
             System.out.println("Introduzca el nombre");
             String nom = in.nextLine();
@@ -87,13 +87,9 @@ public class Operario {
                 p = in.next().charAt(0);
             }
             System.out.println("¿El operario es senior? (s/n)");
-            char r;
-            r = in.next().charAt(0);
-            while (r != 's' && r != 'n') {
-                System.out.println("Por favor, introduzca un carácter válido");
-                System.out.println("¿El operario es senior? (s/n)");
-                r = in.next().charAt(0);}
-            if (r == 's') {
+            boolean r;
+            r = ToolBox.leerBoolean();
+            if (r = true) {
                 o.setSenior(true);
             } else {
                 o.setSenior(false);
@@ -104,23 +100,15 @@ public class Operario {
             System.out.println("NIF: " + nnif);
             System.out.println("Teléfono: " + tel);
             System.out.println("Dirección: " + dir);
-            if (r == 's') {
+            if (r = true) {
                 System.out.println("Senior: si");
             } else {
                 System.out.println("Senior: no");
             }
-            c = in.next().charAt(0);
+            c = ToolBox.leerBoolean();
 
-        } while (c != 's');
+        } while (c = false);
         return o;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -170,6 +158,10 @@ public class Operario {
     public void setSenior(boolean senior) {
         this.senior = senior;
     }
+
+    public long getId() {
+        return id;
+    }    
 
     @Override
     public String toString() {

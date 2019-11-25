@@ -46,7 +46,7 @@ public class Politica {
     public static Politica nuevaPolitica() throws ParseException {
         Politica p = new Politica();
         Scanner in = new Scanner(System.in);
-        char c;
+        boolean c;
         do {
             System.out.println("Introduzca el nombre");
             String nom = in.nextLine();
@@ -69,8 +69,8 @@ public class Politica {
             System.out.println("Id del primer operario: " + id1);
             System.out.println("Id del segundo operario: " + id2);
             System.out.println("Lote: " + l.toString());
-            c = in.next().charAt(0);
-        } while (c != 's');
+            c = ToolBox.leerBoolean();
+        } while (c = false);
         return p;
     }
 

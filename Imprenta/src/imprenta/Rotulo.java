@@ -38,15 +38,15 @@ public class Rotulo extends Trabajo {
     public static Rotulo nuevoRotulo() throws ParseException{
         Rotulo r = new Rotulo(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
-        char c;
+        boolean c;
         do {
             System.out.println("Introduzca el centro comercial");
             String cen = in.nextLine();
             r.setCentroComercial(cen);
             System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
             System.out.println("Centro comercial: " + cen);
-            c = in.next().charAt(0);
-        } while (c != 's');
+            c = ToolBox.leerBoolean();
+        } while (c = false);
         return r;
     }
 

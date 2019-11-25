@@ -40,7 +40,7 @@ public class Libro extends Trabajo {
     public static Libro nuevoLibro() throws ParseException{
         Libro l = new Libro(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
-        char c;
+        boolean c;
         do {
             System.out.println("Introduzca el número de páginas");
             int num = in.nextInt();
@@ -51,8 +51,8 @@ public class Libro extends Trabajo {
             System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
             System.out.println("Número de páginas: " + num);
             System.out.println("Color: " + col);
-            c = in.next().charAt(0);
-        } while (c != 's');
+            c = ToolBox.leerBoolean();
+        } while (c = false);
         return l;
     }
 

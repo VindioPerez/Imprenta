@@ -44,7 +44,7 @@ public class Poster extends Trabajo {
     public static Poster nuevoPoster() throws ParseException{
         Poster p = new Poster(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
-        char c;
+        boolean c;
         do {
             System.out.println("Introduzca el alto en cm");
             double alt = in.nextDouble();
@@ -59,8 +59,8 @@ public class Poster extends Trabajo {
             System.out.println("Alto (cm): " + alt);
             System.out.println("Ancho (cm): " + anc);
             System.out.println("Número de copias: " + num);
-            c = in.next().charAt(0);
-        } while (c != 's');
+            c = ToolBox.leerBoolean();
+        } while (c = false);
         return p;
     }
 
