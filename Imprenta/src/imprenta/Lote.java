@@ -117,4 +117,17 @@ public class Lote {
         this.departamento = departamento;
     }
 
+    public Lote getLoteById(long id) {
+        /*Este método recorrerá un ArrayList con todos los Lotes buscando aquel con el id que le introduzcamos, y devolverá ese Lote si es que existe o 
+        nulo si es que no existe*/
+        Lote lot = new Lote();
+        return lot;
+    }
+
+    public ArrayList<Lote> getAllLote() {
+        /*Este método devolverá un arrayList con todos los operarios existentes*/
+        ArrayList<Lote> lot = new ArrayList<>();
+        return lot;
+    }
+    
 }
