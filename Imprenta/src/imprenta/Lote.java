@@ -29,8 +29,8 @@ public class Lote {
         char d;
         do {
             System.out.println("Introduzca el departamento");
-           new Departamento dep =  Departamento.nuevoDepartamento(); // por modificar llamada
-             
+           Departamento dep =  Departamento.nuevoDepartamento();
+            l.setDepartamento(dep);
             System.out.println("Introduzca el nombre del lote");
             String nom = in.nextLine();
             l.setNom(nom);

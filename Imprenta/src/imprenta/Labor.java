@@ -41,8 +41,8 @@ public class Labor {
             System.out.println("Introduzca la fecha de realizacion");
             Date fecha = ToolBox.introducirFecha();
             lab.setFecha(fecha);
-            new Departamento dep =  Departamento.nuevoDepartamento();// por modificar llamada
-            
+            Maquina maq =  Maquina.nuevoMaquina();
+            lab.setMaquina(maq);
             System.out.println("Quiere Introducir un nuevo Operario de Maquinas? s/n ");
             d = in.next().charAt(0);
             
