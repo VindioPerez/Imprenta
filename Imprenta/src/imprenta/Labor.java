@@ -48,8 +48,9 @@ public class Labor {
             
 
             while (d == 's') {
+                ArrayList<OMaquinas> ops = new ArrayList();
                 lab.operariosM.add(OMaquinas.nuevoOMaquinas());
-
+                lab.setOperariosM(ops);
                 System.out.println("Quiere Introducir otro Operario? s/n ");
                 d = in.next().charAt(0);
             }
@@ -100,6 +101,14 @@ public class Labor {
 
     public void setMaquina(Maquina maquina) {
         this.maquina = maquina;
+    }
+
+    public ArrayList<OMaquinas> getOperariosM() {
+        return operariosM;
+    }
+
+    public void setOperariosM(ArrayList<OMaquinas> operariosM) {
+        this.operariosM = operariosM;
     }
 
     //constructor por defecto
