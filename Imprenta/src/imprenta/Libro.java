@@ -78,6 +78,7 @@ public class Libro extends Trabajo {
         return "Libro{" + "numPag=" + numPag + ", color=" + color + '}';
     }
 
+    @Override
     public String data() {
 
         return getId() + "|" + getFechaSolicitud() + "|" + getRelieve() + getFechaRecogida() + "|" + color + "|" + numPag;

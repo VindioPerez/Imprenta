@@ -63,6 +63,7 @@ public class Rotulo extends Trabajo {
         return "Rotulo{" + "direccion=" + centroComercial + '}';
     }
 
+    @Override
     public String data() {
         return getId() + "|" + getFechaSolicitud() + getRelieve() + "|" + getFechaRecogida() + "|" + centroComercial;
 
