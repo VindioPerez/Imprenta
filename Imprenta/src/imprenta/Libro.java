@@ -13,6 +13,7 @@ import java.util.Scanner;
 /**
  *
  * @author DAW108
+ * @version 1.1
  */
 public class Libro extends Trabajo {
 

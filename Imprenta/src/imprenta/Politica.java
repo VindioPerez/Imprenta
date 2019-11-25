@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  *
  * @author Alberto
- * @version1
+ * @version 1.1
  */
 public class Politica {
 
