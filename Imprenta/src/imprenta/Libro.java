@@ -52,7 +52,7 @@ public class Libro extends Trabajo {
             System.out.println("Número de páginas: " + num);
             System.out.println("Color: " + col);
             c = ToolBox.leerBoolean();
-        } while (c = false);
+        } while (!c);
         return l;
     }
 

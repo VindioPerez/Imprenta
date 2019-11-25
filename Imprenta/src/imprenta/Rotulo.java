@@ -46,7 +46,7 @@ public class Rotulo extends Trabajo {
             System.out.println("¿Son correctos estos datos? (s/n)");
             System.out.println("Centro comercial: " + cen);
             c = ToolBox.leerBoolean();
-        } while (c = false);
+        } while (!c);
         return r;
     }
 

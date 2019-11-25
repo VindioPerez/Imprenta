@@ -60,7 +60,7 @@ public class Poster extends Trabajo {
             System.out.println("Ancho (cm): " + anc);
             System.out.println("Número de copias: " + num);
             c = ToolBox.leerBoolean();
-        } while (c = false);
+        } while (!c);
         return p;
     }
 

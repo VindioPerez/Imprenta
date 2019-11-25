@@ -70,7 +70,7 @@ public class Politica {
             System.out.println("Id del segundo operario: " + id2);
             System.out.println("Lote: " + l.toString());
             c = ToolBox.leerBoolean();
-        } while (c = false);
+        } while (!c);
         return p;
     }
 

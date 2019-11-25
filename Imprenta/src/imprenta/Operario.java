@@ -77,7 +77,7 @@ public class Operario {
             System.out.println("¿Quiere introducir un departamento? (s/n)");
             boolean p;
             p = ToolBox.leerBoolean();
-            while (p = true) {
+            while (p) {
                 o.departamentos.add(Departamento.nuevoDepartamento());
                 System.out.println("¿Quiere introducir otro departamento? (s/n)");
                 p = ToolBox.leerBoolean();
@@ -85,7 +85,7 @@ public class Operario {
             System.out.println("¿El operario es senior? (s/n)");
             boolean r;
             r = ToolBox.leerBoolean();
-            if (r = true) {
+            if (r) {
                 o.setSenior(true);
             } else {
                 o.setSenior(false);
@@ -96,14 +96,14 @@ public class Operario {
             System.out.println("NIF: " + nnif);
             System.out.println("Teléfono: " + tel);
             System.out.println("Dirección: " + dir);
-            if (r = true) {
+            if (r) {
                 System.out.println("Senior: si");
             } else {
                 System.out.println("Senior: no");
             }
             c = ToolBox.leerBoolean();
 
-        } while (c = false);
+        } while (!c);
         return o;
     }
 
