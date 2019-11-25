@@ -140,7 +140,7 @@ public class Modificacion {
         return "Modificacion{" + "id=" + id + ", operario=" + operarios + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", maquina=" + maquina + '}';
     }
 
-    public Modificacion nuevaModificacion() throws ParseException {
+    public static Modificacion nuevaModificacion() throws ParseException {
         Modificacion m = new Modificacion();
         Scanner in = new Scanner(System.in);
         ArrayList<OImpresion> operarios = new ArrayList<OImpresion>();
