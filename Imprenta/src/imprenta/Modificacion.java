@@ -4,24 +4,28 @@
  * and open the template in the editor.
  */
 package imprenta;
+
+import java.text.ParseException;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author Alberto
  * @version1
  */
 public class Modificacion {
-    
-   protected long id;// idenitficador 
-   private ArrayList<OImpresion>  operarios; //operarios que realizan la modificación
-   private Date  fecha; //fecha de realización
-   private String desc; //descripción del cambio
-   private boolean aprob;//aprobacion del cliente
-   private Date fechaAprob;//fecha limite aprobación del cliente
-   private long idCliente;
-   private long idTrabajo;
-   
+
+    protected long id;// idenitficador 
+    private ArrayList<OImpresion> operarios; //operarios que realizan la modificación
+    private Date fecha; //fecha de realización
+    private String desc; //descripción del cambio
+    private boolean aprob;//aprobacion del cliente
+    private Date fechaAprob;//fecha limite aprobación del cliente
+    private long idCliente;
+    private long idTrabajo;
+
     public String getDesc() {
         return desc;
     }
@@ -54,8 +58,6 @@ public class Modificacion {
     public void setId(long id) {
         this.id = id;
     }
-
-
 
     public Date getFecha() {
         return fecha;
@@ -91,17 +93,36 @@ public class Modificacion {
         this.maquina = maquina;
     }
 
-    public ArrayList<Operario> getListaOperarios(){
-    
-        return 
+    public ArrayList<OImpresion> getOperarios() {
+        return operarios;
     }
-  
+
+    public void setOperarios(ArrayList<OImpresion> operarios) {
+        this.operarios = operarios;
+    }
+
+    public long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public long getIdTrabajo() {
+        return idTrabajo;
+    }
+
+    public void setIdTrabajo(long idTrabajo) {
+        this.idTrabajo = idTrabajo;
+    }
+
     //constructor por defecto
     public Modificacion() {
     }
-    
+
     //constructor de copia
-    public Modificacion(Modificacion m ) {
+    public Modificacion(Modificacion m) {
         this.operarios = new ArrayList<OImpresion>();
         this.fecha = m.getFecha();
         this.desc = m.getDesc();
@@ -109,19 +130,53 @@ public class Modificacion {
         this.fechaAprob = m.getFechaAprob();
         this.maquina = m.getMaquina();
     }
-    
-    public String data() { 
-     return id + "|" + operarios + "|" + fecha + "|" + desc + "|" + aprob + "|" + fechaAprob + "|" + maquina ; 
-            }
-    
+
+    public String data() {
+        return id + "|" + operarios + "|" + fecha + "|" + desc + "|" + aprob + "|" + fechaAprob + "|" + maquina;
+    }
 
     @Override
     public String toString() {
         return "Modificacion{" + "id=" + id + ", operario=" + operarios + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", maquina=" + maquina + '}';
     }
 
-   
-    
-           
-    
+    public Modificacion nuevaModificacion() throws ParseException {
+        Modificacion m = new Modificacion();
+        Scanner in = new Scanner(System.in);
+        ArrayList<OImpresion> operarios = new ArrayList<OImpresion>();
+
+        char c;
+        boolean cliente = false;
+        boolean operario = false;
+        do {
+            char p;
+            p = in.next().charAt(0);
+            while (p != 's' && p != 'n') {
+                System.out.println("Por favor, introduzca un caracter válido");
+                p = in.next().charAt(0);
+            }
+            while (p == 's') {
+                o.departamentos.add(Departamento.nuevoDepartamento());
+                System.out.println("¿Quiere introducir otro departamento? (s/n)");
+                p = in.next().charAt(0);
+            }
+
+            System.out.println("introduzca la fecha de solicitud");
+            ToolBox.introducirFecha();
+            System.out.println("introduzca la descripción del cambio:");
+            System.out.println("¿El cliente ha aprobado el cambio?");
+            cliente = ToolBox.leerBoolean();
+            if (!ToolBox.leerBoolean()) {
+                System.out.println("Cambio no aceptado");
+            } else {
+                System.out.println("Cambio aceptado");
+            }
+            System.out.println("Los operarios de impresión han aprobado el cambio?");
+            operario = ToolBox.leerBoolean();
+            System.out.println("introduzca la fecha de realización");
+
+        } while (!cliente && !operario);
+        return m;
+    }
+
 }

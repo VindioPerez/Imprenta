@@ -1,5 +1,7 @@
 package imprenta;
 
+import java.util.Scanner;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -63,6 +65,27 @@ public class Cliente {
     public String data() {
 
         return id + "|" + nombre + "|" + telefono;
+    }
+    
+    public static Cliente nuevoCliente(){
+        Cliente c = new Cliente();
+        Scanner sc = new Scanner(System.in);
+        char d; 
+        do{
+            System.out.println("Introduzca su nombre:");
+            String nombre = sc.nextLine();
+            c.setNombre(nombre);
+            System.out.println("Introduzca su número de teléfono");
+            String tlfn = sc.nextLine();
+            c.setTelefono(tlfn);
+            System.out.println("Son correctos los siguiente datos?");
+            
+            
+        }while(d == 's');
+    
+        return c;
+    
+    
     }
 
 }

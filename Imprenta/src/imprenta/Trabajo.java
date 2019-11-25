@@ -5,6 +5,7 @@
  */
 package imprenta;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -19,9 +20,9 @@ public class Trabajo {
     protected Date fechaSolicitud;//variable tipo Date donde se recoge la enfecha de entre del trabajo
     protected Date fechaRecogida;//variable tipo Date donde se recoge la enfecha de recogida del trabajo
     protected String relieve; //variable tipo String que indica el tipo de relieve
-    private Cliente cliente;
-    protected long idMaquina;
-    protected long idOperario;
+    private Cliente cliente;//Instancia del Cliente que solicita el trabajo
+    protected long idMaquina;//variable tipo long con el id de la máquina que realiza el trabajo
+    protected long idOperario;//variable tipo long con el id del operario que se encarga del trabajo
 
     public Trabajo() {
     }
@@ -107,60 +108,48 @@ public class Trabajo {
     public Trabajo getTrabajoById(long idTrabajo) {
     
         Trabajo t = new Trabajo();
-        ListaTrabajo 
-        if(t.id == idTrabajo){
-            t =
-        }else{
-            t = null;
-        }
+        /*
+        Este método se encarga de recorrer un arraylist con los trabajos, si el 
+        id de parametro coincide con el del trabajo se devuelve ese trabajo sino
+        se devuelve null
+        */
 
-    return t ;
+        return t ;
     
             }
  
-        public static Trabajo nuevoTrabajo(){
+        public static Trabajo nuevoTrabajo() throws ParseException{
         Trabajo t = new Trabajo();
         Scanner in = new Scanner (System.in);
         char c;
         do {
-           System.out.println("Introduzca el nombre");
-           String nom = in.nextLine();
-           o.setNombre(nom);
-           System.out.println("Introduzca los apellidos");
-           String ape = in.nextLine();
-           o.setNombre(ape);
-           System.out.println("Introduzca el NIF");
-           String nnif = in.nextLine();
-           o.setNombre(nnif);
-           System.out.println("Introduzca el teléfono");
-           String tel = in.nextLine();
-           o.setNombre(tel);
-           System.out.println("Introduzca la dirección");
-           String dir = in.nextLine();
-           o.setNombre(dir);
-           char r;
-           do{
-           System.out.println("¿El operario es senior? (s/n)");
-           System.out.println("Por favor, introduzca un carácter válido");
-           r=in.next().charAt(0);
-           } while (r!='s' || r!='n');
-           if (r == 's'){
-               o.setSenior(true);
-           } else {
-               o.setSenior(false);
-           }
+           System.out.println("Introduzca la fecha de solicitud del trabajo");
+           Date fechaSol = ToolBox.introducirFecha();
+           System.out.println("Introduzca la fecha de recogida");
+           Date fechaRec = ToolBox.introducirFecha();
+           System.out.println("Introduzca el relieve en el que desea su trabajo");
+           String relieve = in.nextLine();
+           t.setRelieve(relieve);
+           System.out.println("Introduzca un cliente");
+           Cliente cli = Cliente.nuevoCliente();
+           System.out.println("Introduzca el id de la maquina:");
+           long idmaq = Maquina.nuevoMaquina().getId();
+           System.out.println("Introduzca el id del operario");
+           long idope = OImpresion.nuevoOImpresion().getId();
            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
-           System.out.println("Nombre: "+nom);
-           System.out.println("Apellidos: "+ape);
-           System.out.println("NIF: "+nnif);
-           System.out.println("Teléfono: "+tel);
-           System.out.println("Dirección: "+dir);
-           if (r == 's'){
+           System.out.println("Fecha Solicitud " + fechaSol);
+           System.out.println("Fecha Recogida: " + fechaRec);
+           System.out.println("Cliente: " + cli.getNombre());
+           System.out.println("id maquina: " + idmaq);
+           System.out.println("id operario: " + idope);
+           c = in.nextLine().charAt(0);
+           if (c == 's') {
                System.out.println("Senior: si");
-           } else {System.out.println("Senior: no");}
-           c=in.next().charAt(0);
-
-        } while (c != 's');
-        return o;
+           } else {
+               System.out.println("Senior: no");
+           }
+           c = in.next().charAt(0);
+        }while(c!='s');
+        return t;
     }
 }

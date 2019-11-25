@@ -30,4 +30,22 @@ public class ToolBox {
         return fecha;
     }
     
+    public static boolean leerBoolean(){
+        boolean check = false;
+        char r;
+        Scanner in = new Scanner(System.in);
+        r = in.next().charAt(0);
+        do{
+            if(r == 's' || r == 'S'){
+                check = true;
+            }else if(r == 'n' || r == 'N'){
+                check = false;
+            }
+        }while(r !='s'&& r!= 'S' && r!='N' && r !='n');
+        
+        
+        
+        return check;
+        
+    }
 }
