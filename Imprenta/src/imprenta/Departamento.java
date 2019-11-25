@@ -67,7 +67,7 @@ public class Departamento {
     public static Departamento nuevoDepartamento() {
         Departamento dep = new Departamento();
         Scanner in = new Scanner(System.in);
-        char c;
+        Boolean c;
         char d;
         do {
             System.out.println("Introduzca la letra del departamento");
@@ -89,13 +89,12 @@ public class Departamento {
                 d = in.next().charAt(0);
             }
 
-            System.out.println("¿Son correctos estos datos? (introduzca una v si lo son)");
+            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
             System.out.println("letraDep: " + l);
             
 
-            c = in.next().charAt(0);
-
-        } while (c != 'v' && c != 'V');
+            c = ToolBox.leerBoolean();
+        } while (c= false);
         return dep;
     }
 

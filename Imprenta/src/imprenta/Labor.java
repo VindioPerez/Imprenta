@@ -29,7 +29,7 @@ public class Labor {
       Labor lab= new Labor();  
     
      Scanner in = new Scanner(System.in);
-        char c;
+        Boolean c;
         char d;
         do {
             
@@ -49,20 +49,20 @@ public class Labor {
             
 
             while (d == 's') {
-                ArrayList<OMaquinas> ops = new ArrayList();
+                ArrayList<OMaquinas> ops = new ArrayList<OMaquinas>();
                 lab.operariosM.add(OMaquinas.nuevoOMaquinas());
                 lab.setOperariosM(ops);
                 System.out.println("Quiere Introducir otro Operario? s/n ");
                 d = in.next().charAt(0);
             }
 
-            System.out.println("¿Son correctos estos datos? (introduzca una v si lo son)");
+            System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
             System.out.println("Tarea: " +tarea );
             System.out.println("Fecha de realización: " + fecha);
 
-            c = in.next().charAt(0);
+            c = ToolBox.leerBoolean();
 
-        } while (c != 'v' && c != 'V');
+        } while (c =false);
         return lab;
     }
     

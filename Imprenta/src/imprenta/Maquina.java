@@ -31,7 +31,7 @@ public class Maquina {
     Maquina m = new Maquina();   
            
     Scanner in = new Scanner(System.in);
-        char c;
+        Boolean c;
         do {
             System.out.println("Introduzca la ubicación");
             String ubi = in.nextLine();
@@ -59,9 +59,9 @@ public class Maquina {
             System.out.println("Volumend de Tinta: " + dirf);
             System.out.println("Capacidad Máxima de Tinta: " + capf);
             System.out.println("Fecha de compra: " + fecha);
-            c = in.next().charAt(0);
+            c = ToolBox.leerBoolean();
 
-        } while (c != 's' && c !='S');
+        } while (c= false);
         
     
        

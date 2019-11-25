@@ -25,7 +25,7 @@ public class Lote {
         Lote l = new Lote();
 
         Scanner in = new Scanner(System.in);
-        char c;
+        Boolean c;
         char d;
         do {
             System.out.println("Introduzca el departamento");
@@ -49,9 +49,9 @@ public class Lote {
             System.out.println("¿Son correctos estos datos? (introduzca una v si lo son)");
             System.out.println("Nombre Lote: " +nom );
 
-            c = in.next().charAt(0);
+            c = ToolBox.leerBoolean();
 
-        } while (c != 'v' && c != 'V');
+        } while (c=false);
 
         return l;
     }
