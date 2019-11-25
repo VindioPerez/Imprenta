@@ -79,7 +79,7 @@ public class Cliente {
             String tlfn = sc.nextLine();
             c.setTelefono(tlfn);
             System.out.println("Son correctos los siguiente datos?");
-            
+            d = sc.nextLine().charAt(0);
             
         }while(d == 's');
     

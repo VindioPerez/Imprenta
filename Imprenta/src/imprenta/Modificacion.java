@@ -149,17 +149,7 @@ public class Modificacion {
         boolean cliente = false;
         boolean operario = false;
         do {
-            char p;
-            p = in.next().charAt(0);
-            while (p != 's' && p != 'n') {
-                System.out.println("Por favor, introduzca un caracter válido");
-                p = in.next().charAt(0);
-            }
-            while (p == 's') {
-                o.departamentos.add(Departamento.nuevoDepartamento());
-                System.out.println("¿Quiere introducir otro departamento? (s/n)");
-                p = in.next().charAt(0);
-            }
+
 
             System.out.println("introduzca la fecha de solicitud");
             ToolBox.introducirFecha();
