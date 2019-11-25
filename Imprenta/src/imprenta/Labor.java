@@ -32,7 +32,7 @@ public class Labor {
         char c;
         char d;
         do {
-            System.out.println("Introduzca el departamento");
+            
            
              
             System.out.println("Introduzca la tarea");
@@ -41,6 +41,7 @@ public class Labor {
             System.out.println("Introduzca la fecha de realizacion");
             Date fecha = ToolBox.introducirFecha();
             lab.setFecha(fecha);
+            System.out.println("Introduzca los datos de la Máquina asignada");
             Maquina maq =  Maquina.nuevoMaquina();
             lab.setMaquina(maq);
             System.out.println("Quiere Introducir un nuevo Operario de Maquinas? s/n ");
@@ -61,7 +62,7 @@ public class Labor {
 
             c = in.next().charAt(0);
 
-        } while (c != 'v' || c != 'V');
+        } while (c != 'v' && c != 'V');
         return lab;
     }
     

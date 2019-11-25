@@ -51,7 +51,7 @@ public class Lote {
 
             c = in.next().charAt(0);
 
-        } while (c != 'v' || c != 'V');
+        } while (c != 'v' && c != 'V');
 
         return l;
     }
