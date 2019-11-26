@@ -23,11 +23,15 @@ public class Modificacion {
     private String desc; //descripción del cambio
     private boolean aprob;//aprobacion del cliente
     private Date fechaAprob;//fecha limite aprobación del cliente
-    private long idCliente;
-    private long idTrabajo;
+    private long idCliente;//variable con el id de cliente que solicita la modificación
+    private long idTrabajo;// variable con el id del trabajo a modificar
 
     public String getDesc() {
         return desc;
+    }
+
+    public boolean isAprob() {
+        return aprob;
     }
 
     public void setDesc(String desc) {
@@ -145,28 +149,66 @@ public class Modificacion {
         Scanner in = new Scanner(System.in);
         ArrayList<OImpresion> operarios = new ArrayList<OImpresion>();
 
-        char c;
-        boolean cliente = false;
-        boolean operario = false;
+        boolean salir;
+        boolean cliente;
+        boolean operario;
         do {
 
-
-            System.out.println("introduzca la fecha de solicitud");
-            ToolBox.introducirFecha();
+            System.out.println("introduzca la fecha de Realización:");
+            Date fechaRea = ToolBox.introducirFecha();
             System.out.println("introduzca la descripción del cambio:");
+            String cambio = in.nextLine();
+            m.setDesc(cambio);
+            boolean confirmarOperario;
+            do {
+
+                System.out.println("Quierés añadir un Operario de impresión?");
+                confirmarOperario = ToolBox.leerBoolean();
+                if (confirmarOperario) {
+                    operarios.add(OImpresion.nuevoOImpresion());
+                }
+
+            } while (!confirmarOperario);
+
             System.out.println("¿El cliente ha aprobado el cambio?");
             cliente = ToolBox.leerBoolean();
-            if (!ToolBox.leerBoolean()) {
+            if (!cliente) {
                 System.out.println("Cambio no aceptado");
             } else {
                 System.out.println("Cambio aceptado");
             }
             System.out.println("Los operarios de impresión han aprobado el cambio?");
             operario = ToolBox.leerBoolean();
-            System.out.println("introduzca la fecha de realización");
+            if (!operario) {
+                System.out.println("Cambio no aceptado");
+            } else {
+                System.out.println("Cambio aceptado");
+            }
+            System.out.println("introduzca la fecha de aprobación del cliente:");
+            Date fechaApr = ToolBox.introducirFecha();
 
-        } while (!cliente && !operario);
+            System.out.println("Son correctos los cambios?(s/n)");
+            System.out.println("Fecha Realización " + fechaRea);
+            System.out.println("Fecha Aprobación: " + fechaApr);
+            System.out.println("Solicitud aprobada por el cliente" + cliente);
+            System.out.println("Solicitud aprobada por los operarios" + operario);
+            System.out.println("Descripción: " + cambio);
+
+            salir = ToolBox.leerBoolean();
+
+        } while (!salir);
         return m;
     }
 
+        public Modificacion getModificacionById(long idModificacion) {
+
+        Modificacion t = new Modificacion();
+        /*
+        Este método se encarga de recorrer un arraylist con las modificaciones, si el 
+        id de parametro coincide con el del modificacion se devuelve esa modificacion sino
+        se devuelve null
+         */
+
+        return t;
+        }
 }

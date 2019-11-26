@@ -10,14 +10,14 @@ import java.util.Scanner;
 /**
  *
  * @author Ander
- * @version 1.0
+ * @version 1.1
  */
 public class Cliente {
 
     private String nombre; //variable de tipo string que recoge el nombre del cliente
     private String telefono; //variable de tipo string que recoge el número de teléfono del cliente
     protected long id;//variable identificador
-    
+
     public Cliente() {
     }
 
@@ -60,32 +60,41 @@ public class Cliente {
         return "Cliente{" + "nombre=" + nombre + ", telefono=" + telefono + ", id=" + id + '}';
     }
 
-    
-    
     public String data() {
 
         return id + "|" + nombre + "|" + telefono;
     }
-    
-    public static Cliente nuevoCliente(){
+
+    public static Cliente nuevoCliente() {
         Cliente c = new Cliente();
         Scanner sc = new Scanner(System.in);
-        char d; 
-        do{
+        boolean salir;
+        do {
             System.out.println("Introduzca su nombre:");
             String nombre = sc.nextLine();
             c.setNombre(nombre);
             System.out.println("Introduzca su número de teléfono");
             String tlfn = sc.nextLine();
             c.setTelefono(tlfn);
-            System.out.println("Son correctos los siguiente datos?");
-            d = sc.nextLine().charAt(0);
-            
-        }while(d != 's');
-    
+            System.out.println("Son correctos los siguiente datos?(s/n)");
+            salir = ToolBox.leerBoolean();
+        } while (salir);
+
         return c;
-    
-    
+
     }
 
+    
+        public Cliente getClienteById(long idCliente) {
+
+        Cliente c = new Cliente();
+        /*
+        Este método se encarga de recorrer un arraylist con los cliente, si el 
+        id de parametro coincide con el del cliente se devuelve ese cliente sino
+        se devuelve null
+         */
+
+        return c;
+
+        }
 }
