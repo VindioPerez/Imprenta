@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package imprenta;
-
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
