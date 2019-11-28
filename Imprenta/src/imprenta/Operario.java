@@ -73,7 +73,6 @@ public class Operario {
             String dir = in.nextLine();
             o.setNombre(dir);
             ArrayList<Departamento> os = new ArrayList();
-            o.setDepartamentos(os);
             System.out.println("¿Quiere introducir un departamento? (s/n)");
             boolean p;
             p = ToolBox.leerBoolean();
@@ -82,6 +81,7 @@ public class Operario {
                 System.out.println("¿Quiere introducir otro departamento? (s/n)");
                 p = ToolBox.leerBoolean();
             }
+            o.setDepartamentos(os);
             System.out.println("¿El operario es senior? (s/n)");
             boolean r;
             r = ToolBox.leerBoolean();
