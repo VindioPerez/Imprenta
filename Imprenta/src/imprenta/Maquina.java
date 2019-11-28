@@ -23,6 +23,7 @@ public class Maquina {
    private String imprModo;// modo de impresión 
    private float  volTinta ;//volumen ACTUAL de tinta - Valores [0,capMax]
    private float capMax;//capacidad máxima de tinta - Valor unico nº
+   private boolean disponible=true;
 
    
    
@@ -123,6 +124,14 @@ public class Maquina {
         this.capMax = capMax;
     }
 
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
     //constructor con argumentos
     public Maquina(long id, Date fechaCompra, String ubicacion, String imprTipo, String imprModo, float volTinta, float capMax) {
         this.fechaCompra = fechaCompra;
@@ -154,6 +163,9 @@ public class Maquina {
     @Override
     public String toString() {
         return "Maquina{" + "id=" + id + ", fechaCompra=" + fechaCompra + ", loc=" + ubicacion + ", imprTipo=" + imprTipo + ", imprModo=" + imprModo + ", volTinta=" + volTinta + ", capMax=" + capMax + '}';
+    }
+    public static void noDisponible(Maquina m){
+        m.setDisponible(false);
     }
     
     

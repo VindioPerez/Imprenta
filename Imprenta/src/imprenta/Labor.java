@@ -29,8 +29,8 @@ public class Labor {
       Labor lab= new Labor();  
     
      Scanner in = new Scanner(System.in);
-        Boolean c;
-        char d;
+        boolean c;
+        boolean d;
         do {
             
            
@@ -45,15 +45,15 @@ public class Labor {
             Maquina maq =  Maquina.nuevoMaquina();
             lab.setMaquina(maq);
             System.out.println("Quiere Introducir un nuevo Operario de Maquinas? s/n ");
-            d = in.next().charAt(0);
+            d = ToolBox.leerBoolean();
             
 
-            while (d == 's') {
+            while (d) {
                 ArrayList<OMaquinas> ops = new ArrayList<OMaquinas>();
                 lab.operariosM.add(OMaquinas.nuevoOMaquinas());
                 lab.setOperariosM(ops);
                 System.out.println("Quiere Introducir otro Operario? s/n ");
-                d = in.next().charAt(0);
+                d = ToolBox.leerBoolean();
             }
 
             System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
@@ -62,8 +62,10 @@ public class Labor {
 
             c = ToolBox.leerBoolean();
 
-        } while (c =false);
+        } while (!c);
+        Maquina.noDisponible(lab.getMaquina());
         return lab;
+        
     }
     
     
