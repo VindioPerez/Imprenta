@@ -49,5 +49,14 @@ private ArrayList<Prueba> pruebas;
         return regla;
     }
 
+    @Override
+    public String toString() {
+        return "ReglaCalidad{" + "pruebas=" + pruebas + '}';
+    }
+    
+    public String data() {
+        return pruebas.toString();
+    }
+
 
 }

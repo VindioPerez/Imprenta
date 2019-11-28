@@ -143,6 +143,17 @@ public class Prueba {
     public void setObs(String obs) {
         this.obs = obs;
     }
+
+    @Override
+    public String toString() {
+        return "Prueba{" + "id=" + id + ", fechaR=" + fechaR + ", operarioC=" + operarioC + ", desc=" + desc + ", res=" + res + ", obs=" + obs + ", maquina=" + maquina + '}';
+    }
+    
+    public String data() {
+        return id + "|" + fechaR + "|" + operarioC + "|" + desc + "|" + res + "|" + obs + "|" + maquina;
+    }
+    
+    
     
     
     
