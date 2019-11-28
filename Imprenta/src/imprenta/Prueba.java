@@ -15,13 +15,13 @@ import java.util.Scanner;
 public class Prueba {
  
     
-    protected long id;
-    private Date fechaR;
-    private OCalidad operarioC;
-    private String desc;
-    private String res;
-    private String obs;
-    private Maquina maquina;
+    protected long id; //id de la máquina de tipo long
+    private Date fechaR;// tipo date fecha de realización
+    private OCalidad operarioC;// Operario de calidad que sigue la prueba
+    private String desc;//descripción de la prueba
+    private String res;// resultados obtenidos
+    private String obs;//observaciones
+    private Maquina maquina;//máquina que realiza la prueba
     
     // Constructor por defecto
     public Prueba() {

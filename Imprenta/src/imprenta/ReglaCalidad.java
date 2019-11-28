@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ReglaCalidad {
   
     
-private ArrayList<Prueba> pruebas;  
+private ArrayList<Prueba> pruebas; //ArrayList que contiene las pruebas de 0 a n 
 
     public ArrayList<Prueba> getPruebas() {
         return pruebas;
