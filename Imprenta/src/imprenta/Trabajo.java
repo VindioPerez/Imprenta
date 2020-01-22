@@ -68,6 +68,15 @@ public class Trabajo {
         return id;
     }
 
+    public long getIdOperario() {
+        return idOperario;
+    }
+
+    public void setIdOperario(long idOperario) {
+        this.idOperario = idOperario;
+    }
+
+       
     /*
     public void setId(int id) {
         this.id = id;
