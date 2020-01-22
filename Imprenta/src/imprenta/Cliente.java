@@ -127,4 +127,22 @@ public class Cliente {
             }
             return t;
         }
+        
+        public static Cliente registrarCliente(){
+            Cliente c = new Cliente();
+            Scanner sc = new Scanner(System.in);
+            boolean salir;
+            do {
+                System.out.println("Introduzca su nombre:");
+                String nombre = sc.nextLine();
+                c.setNombre(nombre);
+                System.out.println("Introduzca su número de teléfono");
+                String tlfn = sc.nextLine();
+                c.setTelefono(tlfn);
+                System.out.println("Son correctos los siguiente datos?(s/n)");
+                salir = ToolBox.leerBoolean();
+            } while (salir);
+            c.setId(Imprenta.clientes.size()+1);
+            return c;
+        }
 }
