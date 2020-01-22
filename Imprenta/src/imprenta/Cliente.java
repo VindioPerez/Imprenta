@@ -99,30 +99,31 @@ public class Cliente {
 
         }
         
-        public static Poster encargo (Cliente c) throws ParseException {
-        Poster r;
-        Scanner in = new Scanner(System.in);
-        boolean check;
-        do{
-            r = new Poster(Trabajo.encargo(c));
-            System.out.println("Introduzca el alto en cm");
-            double alt = in.nextDouble();
-            r.setAlto(alt);
-            System.out.println("Introduzca el ancho en cm");
-            double anc = in.nextDouble();
-            r.setAncho(anc);
-            System.out.println("Introduzca el número de copias");
-            int num = in.nextInt();
-            r.setNumCopias(num);
-            System.out.println("¿Son correctos estos datos? (s/n)");
-            System.out.println("Fecha Recogida: " + r.getFechaRecogida());
-            System.out.println("Relieve: " + r.getRelieve());
-            System.out.println("Alto (cm): " + alt);
-            System.out.println("Ancho (cm): " + anc);
-            System.out.println("Número de copias: " + num);
-            check = ToolBox.leerBoolean();
-        } while (!check);            
-        
-        return r;
-    }
+        public Trabajo solicitarTrabajo() throws ParseException {
+            Trabajo t = new Trabajo();
+            Scanner in = new Scanner(System.in);
+            System.out.println("¿Qué tipo de trabajo desea solicitar? (poster=P, libro=L, rótulo=R)");
+            char opcion = in.next().charAt(0);
+            while(opcion!='p'&&opcion!='P'&&opcion!='r'&&opcion!='R'&&opcion!='l'&&opcion!='L'){
+                System.out.println("Por favor, introduzca una opcion válida");
+                opcion = in.next().charAt(0);
+            }
+            switch (opcion){
+                case 'p':
+                case 'P':
+                    Poster.encargo(this);
+                    break;
+                case 'l':
+                case 'L':
+                    Libro.encargo(this);
+                    break;
+                case 'r':
+                case 'R':
+                    Rotulo.encargo(this);
+                    break;
+                default:
+                    break;
+            }
+            return t;
+        }
 }
