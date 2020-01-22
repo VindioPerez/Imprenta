@@ -147,4 +147,23 @@ public class Trabajo {
         } while (!salir);
         return t;
     }
+    
+    public static Trabajo encargo (Cliente c) throws ParseException{
+        Trabajo t = new Trabajo();
+        Scanner in = new Scanner(System.in);
+        boolean salir;
+            System.out.println("Introduzca la fecha de recogida");
+            Date fechaRec = ToolBox.introducirFecha();
+            t.setFechaRecogida(fechaRec);
+            System.out.println("Introduzca el relieve en el que desea su trabajo");
+            String relieve = in.nextLine();
+            t.setRelieve(relieve);
+            t.setCliente(c);
+
+            System.out.println("¿Son correctos estos datos? (s/n)");
+            System.out.println("Fecha Recogida: " + fechaRec);
+            System.out.println("Relieve: " + relieve);
+        return t;
+    }
+    
 }

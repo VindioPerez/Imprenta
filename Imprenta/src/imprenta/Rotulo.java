@@ -81,5 +81,24 @@ public class Rotulo extends Trabajo {
         ArrayList<Rotulo> o = new ArrayList<>();
         return o;
     }
+    
+    public static Rotulo encargo (Cliente c) throws ParseException {
+        Rotulo r;
+        Scanner in = new Scanner(System.in);
+        boolean check;
+        do{
+            r = new Rotulo(Trabajo.encargo(c));
+            System.out.println("Introduzca el centro comercial");
+            String cen = in.nextLine();
+            r.setCentroComercial(cen);
+            System.out.println("¿Son correctos estos datos? (s/n)");
+            System.out.println("Fecha Recogida: " + r.getFechaRecogida());
+            System.out.println("Relieve: " + r.getRelieve());
+            System.out.println("Centro comercial: " + cen);
+            check = ToolBox.leerBoolean();
+        } while (!check);            
+        
+        return r;
+    }
 
 }

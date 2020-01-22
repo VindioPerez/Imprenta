@@ -97,4 +97,27 @@ public class Libro extends Trabajo {
         return o;
     }
 
+    public static Libro encargo (Cliente c) throws ParseException {
+        Libro r;
+        Scanner in = new Scanner(System.in);
+        boolean check;
+        do{
+            r = new Libro(Trabajo.encargo(c));
+            System.out.println("Introduzca el número de páginas");
+            int num = in.nextInt();
+            r.setNumPag(num);
+            System.out.println("Introduzca el color");
+            String col = in.nextLine();
+            r.setColor(col);
+            System.out.println("¿Son correctos estos datos? (s/n)");
+            System.out.println("Fecha Recogida: " + r.getFechaRecogida());
+            System.out.println("Relieve: " + r.getRelieve());
+           System.out.println("Número de páginas: " + num);
+            System.out.println("Color: " + col);
+            check = ToolBox.leerBoolean();
+        } while (!check);            
+        
+        return r;
+    }
+    
 }

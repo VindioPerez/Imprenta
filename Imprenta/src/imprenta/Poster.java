@@ -110,5 +110,32 @@ public class Poster extends Trabajo {
         ArrayList<Poster> o = new ArrayList<>();
         return o;
     }
+    
+    public static Poster encargo (Cliente c) throws ParseException {
+        Poster r;
+        Scanner in = new Scanner(System.in);
+        boolean check;
+        do{
+            r = new Poster(Trabajo.encargo(c));
+            System.out.println("Introduzca el alto en cm");
+            double alt = in.nextDouble();
+            r.setAlto(alt);
+            System.out.println("Introduzca el ancho en cm");
+            double anc = in.nextDouble();
+            r.setAncho(anc);
+            System.out.println("Introduzca el número de copias");
+            int num = in.nextInt();
+            r.setNumCopias(num);
+            System.out.println("¿Son correctos estos datos? (s/n)");
+            System.out.println("Fecha Recogida: " + r.getFechaRecogida());
+            System.out.println("Relieve: " + r.getRelieve());
+            System.out.println("Alto (cm): " + alt);
+            System.out.println("Ancho (cm): " + anc);
+            System.out.println("Número de copias: " + num);
+            check = ToolBox.leerBoolean();
+        } while (!check);            
+        
+        return r;
+    }
 
 }
