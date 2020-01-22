@@ -189,4 +189,8 @@ public class Operario {
         return o;
     }
 
+    public Trabajo confirmar(Trabajo t){
+        t.setIdOperario(this.getId());
+        return t;
+    }
 }

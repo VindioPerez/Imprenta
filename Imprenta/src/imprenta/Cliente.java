@@ -99,8 +99,8 @@ public class Cliente {
 
         }
         
-        public Trabajo solicitarTrabajo() throws ParseException {
-            Trabajo t = new Trabajo();
+        public Trabajo crearTrabajo() throws ParseException {
+            Trabajo t;
             Scanner in = new Scanner(System.in);
             System.out.println("¿Qué tipo de trabajo desea solicitar? (poster=P, libro=L, rótulo=R)");
             char opcion = in.next().charAt(0);
@@ -111,17 +111,18 @@ public class Cliente {
             switch (opcion){
                 case 'p':
                 case 'P':
-                    Poster.encargo(this);
+                    t = Poster.encargo(this);
                     break;
                 case 'l':
                 case 'L':
-                    Libro.encargo(this);
+                    t = Libro.encargo(this);
                     break;
                 case 'r':
                 case 'R':
-                    Rotulo.encargo(this);
+                    t = Rotulo.encargo(this);
                     break;
                 default:
+                    t = Trabajo.encargo(this);
                     break;
             }
             return t;

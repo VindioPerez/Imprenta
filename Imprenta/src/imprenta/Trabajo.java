@@ -174,5 +174,9 @@ public class Trabajo {
             System.out.println("Relieve: " + relieve);
         return t;
     }
-    
+     public static Trabajo solicitarTrabajo (Cliente c, Operario o) throws ParseException{
+         Trabajo t = c.crearTrabajo();
+         o.confirmar(t);
+         return t;
+     }
 }
