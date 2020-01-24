@@ -18,6 +18,11 @@ public class OCalidad extends Operario {
     public OCalidad(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
         super(nombre, apellidos, nif, telefono, direccion, senior);
     }
+    
+    public OCalidad(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior, long id) {
+        super(nombre, apellidos, nif, telefono, direccion, senior);
+        this.id = id;
+    }
 
     public OCalidad(OCalidad o) {
         super(o);
