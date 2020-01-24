@@ -26,6 +26,11 @@ public class Departamento {
     public Departamento(char letraDep) {
         this.letraDep = letraDep;
     }
+    
+    public Departamento(char letraDep, long id) {
+        this.letraDep = letraDep;
+        this.id = id;
+    }
 
     public Departamento(Departamento d) {
         this.letraDep = d.getLetraDep();
