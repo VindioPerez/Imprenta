@@ -41,10 +41,15 @@ public class Imprenta {
                     switch (opcionC){
                         case 'r':
                         case 'R':
-                            Cliente c = Cliente.registrarCliente();
+                            Cliente nuevoCliente = Cliente.registrarCliente();
+                            BDatos.clientes.add(nuevoCliente);
                             break;
                         case 'e':
                         case 'E':
+                            System.out.println("Introduzca su id de cliente");
+                            long idCliente = in.nextLong();
+                            Cliente clienteActual = Cliente.getClienteById(idCliente);
+                            clienteActual.crearTrabajo();
                             break;
                         default:
                             break;

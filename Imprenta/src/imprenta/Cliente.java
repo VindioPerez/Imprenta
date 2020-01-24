@@ -92,17 +92,11 @@ public class Cliente {
     }
 
     
-        public Cliente getClienteById(long idCliente) {
-
-        Cliente c = new Cliente();
-        /*
-        Este método se encarga de recorrer un arraylist con los cliente, si el 
-        id de parametro coincide con el del cliente se devuelve ese cliente sino
-        se devuelve null
-         */
-
-        return c;
-
+        public static Cliente getClienteById(long idCliente) {
+            for (Cliente c : BDatos.clientes){
+                if (c.getId()==idCliente) return c;
+            }
+            return null;
         }
         
         public Trabajo crearTrabajo() throws ParseException {
