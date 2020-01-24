@@ -26,6 +26,12 @@ public class Cliente {
         this.nombre = nombre;
         this.telefono = telefono;
     }
+    
+    public Cliente(String nombre, String telefono, long id) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -142,7 +148,7 @@ public class Cliente {
                 System.out.println("Son correctos los siguiente datos?(s/n)");
                 salir = ToolBox.leerBoolean();
             } while (salir);
-            c.setId(Imprenta.clientes.size()+1);
+            c.setId(BDatos.clientes.size()+1);
             return c;
         }
 }
