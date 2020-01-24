@@ -41,7 +41,6 @@ public class Imprenta {
                         case 'r':
                         case 'R':
                             Cliente c = Cliente.registrarCliente();
-                            clientes.add(c);
                             break;
                         case 'e':
                         case 'E':
