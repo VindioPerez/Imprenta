@@ -19,6 +19,11 @@ public class OImpresion extends Operario {
     public OImpresion(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
         super(nombre, apellidos, nif, telefono, direccion, senior);
     }
+    
+    public OImpresion(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior, long id) {
+        super(nombre, apellidos, nif, telefono, direccion, senior);
+        this.id = id;
+    }
 
     public OImpresion(OImpresion o) {
         super(o);

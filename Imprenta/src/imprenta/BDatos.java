@@ -48,9 +48,9 @@ public class BDatos {
         OCalidad oc1 = new OCalidad("Luisa", "Martinez Perez", "20304050T", "634235904", "aqui", true, 1);
         OCalidad oc2 = new OCalidad("Pedro", "Lopez Aguado", "23223981Q", "654352254", "alli", false, 2);
         OCalidad oc3 = new OCalidad("Javier", "Martinez Perez", "70754635M", "694785124", "aca", false, 3);
-        OImpresion oi1 = new OImpresion("Luis", "Garcia Martin", "44378261T", "69853147", "aculla", true);
-        OImpresion oi2 = new OImpresion("Ana", "Garcia Mellado", "48976645R", "698778542", "calle melancolia", true);
-        OImpresion oi3 = new OImpresion("Maria", "Perez Gonzalez", "41414141Y", "788542316", "io k se xD", true);
+        OImpresion oi1 = new OImpresion("Luis", "Garcia Martin", "44378261T", "69853147", "aculla", true, 4);
+        OImpresion oi2 = new OImpresion("Ana", "Garcia Mellado", "48976645R", "698778542", "calle melancolia", true, 5);
+        OImpresion oi3 = new OImpresion("Maria", "Perez Gonzalez", "41414141Y", "788542316", "io k se xD", true, 6);
         OMaquinas om1 = new OMaquinas("David", "Cavada Bustamante", "12345678A", "666666666", "mi casa", true, 7);
         OMaquinas om2 = new OMaquinas("Myriam", "Lopez Marin", "87654321Z", "600600600", "elm street", true, 8);
         OMaquinas om3 = new OMaquinas("Simon", "Vazquez Herrera", "45776321B", "637785129", "callejon diagon", true, 9);
