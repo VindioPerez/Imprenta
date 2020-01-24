@@ -23,6 +23,11 @@ public class OMaquinas extends Operario {
     public OMaquinas(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
         super(nombre, apellidos, nif, telefono, direccion, senior);
     }
+    
+    public OMaquinas(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior, long id) {
+        super(nombre, apellidos, nif, telefono, direccion, senior);
+        this.id = id;
+    }
 
     public OMaquinas(OMaquinas o) {
         super(o);
