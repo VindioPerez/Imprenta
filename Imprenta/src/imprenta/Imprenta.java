@@ -15,8 +15,6 @@ import java.util.Scanner;
  * @version 1.1
  */
 public class Imprenta {
-    public static ArrayList<Cliente> clientes = new ArrayList<>();
-    public static ArrayList<Trabajo> trabajos = new ArrayList<>();
     /**
      * @param args the command line arguments
      */
