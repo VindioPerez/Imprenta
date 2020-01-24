@@ -20,6 +20,7 @@ public class Imprenta {
      */
     public static void main(String[] args) throws ParseException {
         // TODO code application logic here
+        BDatos.inicializar();
         while(true){
             System.out.println("¿Qué tipo de usuario eres?");
             System.out.println("Si eres un cliente, introduce una C");
