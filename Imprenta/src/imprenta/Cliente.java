@@ -128,7 +128,7 @@ public class Cliente {
             return t;
         }
         
-        public static Cliente registrarCliente(){
+        public static Cliente registrarCliente() throws NumeroInvalidoException{
             Cliente c = new Cliente();
             Scanner sc = new Scanner(System.in);
             boolean salir;
@@ -142,7 +142,10 @@ public class Cliente {
                 System.out.println("Son correctos los siguiente datos?(s/n)");
                 salir = ToolBox.leerBoolean();
             } while (salir);
+            if(!c.getTelefono().matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d")){
+                    throw new NumeroInvalidoException ("El formato de numero introducido no es correcto");
+                } else {
             c.setId(BDatos.clientes.size()+1);
-            return c;
+            return c;}
         }
 }
