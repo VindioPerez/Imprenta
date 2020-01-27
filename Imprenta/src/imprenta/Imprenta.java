@@ -41,9 +41,13 @@ public class Imprenta {
                     switch (opcionC){
                         case 'r':
                         case 'R':
-                            Cliente nuevoCliente = Cliente.registrarCliente();
-                            BDatos.clientes.add(nuevoCliente);
-                            break;
+                            try {
+                                Cliente nuevoCliente = Cliente.registrarCliente();
+                                BDatos.clientes.add(nuevoCliente);}
+                            catch (NumeroInvalidoException numeroinvalido){
+                                System.out.println("\"El formato de numero introducido no es correcto\"");}
+                            finally {
+                                break;}
                         case 'e':
                         case 'E':
                             System.out.println("Introduzca su id de cliente");
