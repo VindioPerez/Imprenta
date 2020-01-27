@@ -177,7 +177,7 @@ public class Cliente {
         
         
         
-         public void aceptarModificacion(Modificacion m){
+         public boolean aceptarModificacion(Modificacion m){
              
             System.out.println("Esta es su modificación"+ m.toString());
             System.out.println("Quiére aceptar la modificación?");
@@ -189,7 +189,7 @@ public class Cliente {
                 m.setFechaAprob(fechaA);
                 m.setId(this.id);
             }
-     
+            return aceptar;
      }
         
 }
