@@ -119,13 +119,25 @@ public class Poster extends Trabajo {
             r = new Poster(Trabajo.encargo(c));
             System.out.println("Introduzca el alto en cm");
             double alt = in.nextDouble();
+            while (alt<10){
+                System.out.println("Por favor, introduzca un valor válido");
+                alt = in.nextDouble();
+            }
             r.setAlto(alt);
             System.out.println("Introduzca el ancho en cm");
             double anc = in.nextDouble();
+            while (anc<10){
+                System.out.println("Por favor, introduzca un valor válido");
+                anc = in.nextDouble();
+            }
             r.setAncho(anc);
             System.out.println("Introduzca el número de copias");
             int num = in.nextInt();
             r.setNumCopias(num);
+            while (num<1){
+                System.out.println("Por favor, introduzca un valor válido");
+                num = in.nextInt();
+            }
             System.out.println("¿Son correctos estos datos? (s/n)");
             System.out.println("Fecha Recogida: " + r.getFechaRecogida());
             System.out.println("Relieve: " + r.getRelieve());

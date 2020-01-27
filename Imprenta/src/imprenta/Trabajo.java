@@ -6,6 +6,8 @@
 package imprenta;
 
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -159,6 +161,10 @@ public class Trabajo {
         Scanner in = new Scanner(System.in);
         System.out.println("Introduzca la fecha de recogida");
         Date fechaRec = ToolBox.introducirFecha();
+        while (fechaRec.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.now())){
+            System.out.println("Por favor, introduzca una fecha válida");
+            fechaRec = ToolBox.introducirFecha();
+        }
         t.setFechaRecogida(fechaRec);
         System.out.println("Introduzca el relieve en el que desea su trabajo");
         String relieve = in.nextLine();

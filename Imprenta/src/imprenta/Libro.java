@@ -105,6 +105,10 @@ public class Libro extends Trabajo {
             r = new Libro(Trabajo.encargo(c));
             System.out.println("Introduzca el número de páginas");
             int num = in.nextInt();
+            while (num<1){
+                System.out.println("Por favor, introduzca un valor válido");
+                num = in.nextInt();
+            }
             r.setNumPag(num);
             System.out.println("Introduzca el color");
             String col = in.nextLine();
