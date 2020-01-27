@@ -100,7 +100,7 @@ public class Cliente {
             return null;
         }
         
-        public Trabajo crearTrabajo() throws ParseException {
+        public Trabajo crearTrabajo(){
             Trabajo t;
             Scanner in = new Scanner(System.in);
             System.out.println("¿Qué tipo de trabajo desea solicitar? (poster=P, libro=L, rótulo=R)");
@@ -153,29 +153,14 @@ public class Cliente {
         }
         
         
-        public  Modificacion solicitarModificación(Trabajo t) throws ParseException{
-            Modificacion m = new Modificacion();
-            Scanner sc = new Scanner (System.in);
-            System.out.println("introduce los datos a modificar:");
-            System.out.println("introduce la fecha de realización");
-            Date fechaRea = ToolBox.introducirFecha();
-            System.out.println("introduzca una descripción de la modificación");
-            String descripcion = sc.nextLine();
-            System.out.println("Su modificación es la siguiente" + descripcion);
-            System.out.println("Es correcta su modificación?");
+        
+        
+        
+         public boolean aceptarModificacion(){
+            System.out.println("Es correcta la modificación?");
             boolean aceptar = ToolBox.leerBoolean();
-            if (aceptar){
-                m.setFecha(fechaRea);
-                m.setDesc(descripcion);
-                m.setAprob(aceptar);
-                System.out.println("Introduzca la fecha de hoy para aprobar el trabajo:");
-                Date fechaApro = ToolBox.introducirFecha();
-                m.setFechaAprob(fechaApro);
-                m.setIdTrabajo(t.getId());//id del trabajo
-                m.setIdCliente(this.id);//id del cliente
-            }
-            
-            return m;
-        }
+         return aceptar;
+     
+     }
         
 }
