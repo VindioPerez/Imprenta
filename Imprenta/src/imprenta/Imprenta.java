@@ -56,6 +56,11 @@ public class Imprenta {
                             System.out.println("Introduzca su id de cliente");
                             long idCliente = in.nextLong();
                             Cliente clienteActual = Cliente.getClienteById(idCliente);
+                            while (clienteActual==null){
+                                System.out.println("Por favor, introduzca un id válido");
+                                idCliente = in.nextLong();
+                                clienteActual = Cliente.getClienteById(idCliente);
+                            }
 
                             Trabajo t = clienteActual.crearTrabajo();
 
