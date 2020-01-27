@@ -23,36 +23,57 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String telefono) {
+    public Cliente(String nombre, String telefono) throws ClienteException{
+        if (!ClienteException.comprobarTelefono(telefono)){
+            throw new ClienteException("El telefono no es valido");
+        } else if(!ClienteException.comprobarNombre(nombre)){
+            throw new ClienteException("El nombre no es valido");
+        } else {
         this.nombre = nombre;
-        this.telefono = telefono;
+        this.telefono = telefono;}
     }
     
-    public Cliente(String nombre, String telefono, long id) {
+    public Cliente(String nombre, String telefono, long id) throws ClienteException{
+        if (!ClienteException.comprobarTelefono(telefono)){
+            throw new ClienteException("El telefono no es valido");
+        } else if(!ClienteException.comprobarNombre(nombre)){
+            throw new ClienteException("El nombre no es valido");
+        } else {
         this.nombre = nombre;
         this.telefono = telefono;
-        this.id = id;
+        this.id = id;}
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String nombre) throws ClienteException{
+        if (!ClienteException.comprobarNombre(nombre)){
+            throw new ClienteException("El nombre no es valido");
+        } else {
+        this.nombre = nombre;}
     }
 
     public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelefono(String telefono) throws ClienteException{
+        if (!ClienteException.comprobarTelefono(telefono)){
+            throw new ClienteException("El telefono no es valido");
+        } else {
+        this.telefono = telefono;}
     }
 
-    public Cliente(Cliente c) {
+    public Cliente(Cliente c) throws ClienteException{
+        if (!ClienteException.comprobarTelefono(telefono)){
+            throw new ClienteException("El telefono no es valido");
+        } else if(!ClienteException.comprobarNombre(nombre)){
+            throw new ClienteException("El nombre no es valido");
+        } else {
         this.nombre = c.getNombre();
-        this.telefono = c.getTelefono();
+        this.telefono = c.getTelefono();}
     }
 
     public long getId() {
@@ -143,10 +164,10 @@ public class Cliente {
                 System.out.println("Son correctos los siguiente datos?(s/n)");
                 salir = ToolBox.leerBoolean();
             } while (salir);
-            if(c.getNombre().isEmpty()){
-                throw new ClienteException ("El nombre no puede estar vacío");
-            } else if(!c.getTelefono().matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d")){
-                throw new ClienteException ("El formato de telefono no es válido");
+            if (!ClienteException.comprobarTelefono(c.getTelefono())){
+                throw new ClienteException("El telefono no es valido");
+            } else if(!ClienteException.comprobarNombre(c.getNombre())){
+                throw new ClienteException("El nombre no es valido");
             } else {
             c.setId(BDatos.clientes.size()+1);
             return c;}
