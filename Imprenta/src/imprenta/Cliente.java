@@ -143,9 +143,11 @@ public class Cliente {
                 System.out.println("Son correctos los siguiente datos?(s/n)");
                 salir = ToolBox.leerBoolean();
             } while (salir);
-            if(!c.getTelefono().matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d")){
-                    throw new ClienteException ();
-                } else {
+            if(c.getNombre().isEmpty()){
+                throw new ClienteException ("El nombre no puede estar vacío");
+            } else if(!c.getTelefono().matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d")){
+                throw new ClienteException ("El formato de telefono no es válido");
+            } else {
             c.setId(BDatos.clientes.size()+1);
             return c;}
         }
