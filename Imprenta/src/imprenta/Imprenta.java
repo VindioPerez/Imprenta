@@ -45,7 +45,7 @@ public class Imprenta {
                                 Cliente nuevoCliente = Cliente.registrarCliente();
                                 BDatos.clientes.add(nuevoCliente);}
                             catch (NumeroInvalidoException numeroinvalido){
-                                System.out.println("\"El formato de numero introducido no es correcto\"");}
+                                System.out.println("El formato de numero introducido no es válido");}
                             finally {
                                 break;}
                         case 'e':
