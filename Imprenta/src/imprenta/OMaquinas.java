@@ -6,6 +6,7 @@
 package imprenta;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -23,7 +24,7 @@ public class OMaquinas extends Operario {
     public OMaquinas(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
         super(nombre, apellidos, nif, telefono, direccion, senior);
     }
-    
+
     public OMaquinas(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior, long id) {
         super(nombre, apellidos, nif, telefono, direccion, senior);
         this.id = id;
@@ -58,16 +59,45 @@ public class OMaquinas extends Operario {
         ArrayList<Labor> listaLabores = new ArrayList<>();
         /*
         Devuelve la lista con todas las labores
-        */
+         */
         return listaLabores;
     }
 
-        public OMaquinas getOperarioMaquinasById(long id) {
+    public OMaquinas getOperarioMaquinasById(long id) {
         /*Este método recorrerá un ArrayList con todos los operarios buscando aquel con el id que le introduzcamos, y devolverá ese operario si es que existe o 
         nulo si es que no existe*/
         OMaquinas om = new OMaquinas();
         return om;
     }
-    
-    
+
+    public boolean rellenarMaquina(long idMaquina) {
+        Scanner sc = new Scanner(System.in);
+        boolean rellenada;
+        Maquina m = Maquina.getMaquinaById(idMaquina);
+        m.setDisponible(false);
+        System.out.println("La máquina" + m.getId());
+        System.out.println("Localizada en:" + m.getUbicacion());
+        System.out.println("Tiene un volumen de tinta:" + m.getVolTinta());
+        System.out.println("Su volúmen máximo de tinta es:" + m.getCapMax());
+        System.out.println("Desea rellenar la máquina?");
+        boolean decision = ToolBox.leerBoolean();
+        if (m.getVolTinta() < 0.0 && m.getVolTinta() < m.getCapMax()) {
+            if (decision) {
+                System.out.println("Por favor introduzca el volumen de tinta a rellenar");
+                float vol = sc.nextFloat();
+                m.setVolTinta(vol);
+                rellenada = true;
+            } else {
+                System.out.println("La máquina se va a quedar igual");
+                rellenada = false;
+
+            }
+        } else {
+            System.out.println("El volumen de la máquina no es correcto");
+            rellenada = false;
+        }
+
+        return rellenada;
+    }
+
 }

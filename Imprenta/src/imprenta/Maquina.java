@@ -169,7 +169,16 @@ public class Maquina {
     }
     
     
-
+    public static Maquina getMaquinaById(long idMaquina) {
+            
+            Maquina temp = null;
+            for (Maquina m : BDatos.maquinas){
+                if (m.getId()==idMaquina){
+                temp = m;
+                }
+            }
+            return temp;
+            }
     
     
     
