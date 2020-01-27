@@ -5,7 +5,7 @@
  */
 package imprenta;
 
-import java.text.ParseException;
+
 import java.util.Date;
 import java.util.Scanner;
 
@@ -53,18 +53,16 @@ public class OImpresion extends Operario {
         return OI;
     }
 
-    public OImpresion getOperarioImpresionById(long id) {
+    public static OImpresion getOperarioImpresionById(long id) {
         /*Este método recorrerá un ArrayList con todos los operarios buscando aquel con el id que le introduzcamos, y devolverá ese operario si es que existe o 
         nulo si es que no existe*/
         OImpresion oi = new OImpresion();
         return oi;
     }
 
-    public static boolean realizarModificacion(Trabajo t, OImpresion I) throws TrabajoException {
+    public Modificacion realizarModificacion(Trabajo t) throws TrabajoException {
 
         Scanner sc = new Scanner(System.in);
-        boolean modificado = false;
-
         Modificacion m = new Modificacion();
         m.setId(BDatos.modificaciones.size() + 1);
         System.out.println("Introduzca la fecha de realización de la modificación:");
@@ -75,9 +73,12 @@ public class OImpresion extends Operario {
         m.setDesc(descr);
         boolean aprobado = false;
         m.setAprob(aprobado);
-        m.setOperarios(I);
+        m.setOperarioI(this);
+        
+        System.out.println("La modificación queda asi:" +m.toString());
+        
+        return m;
 
-        return modificado;
     }
 
     public Modificacion solicitarModificación(Trabajo t) {
@@ -105,4 +106,5 @@ public class OImpresion extends Operario {
         return m;
 
     }
+
 }
