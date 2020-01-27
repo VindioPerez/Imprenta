@@ -135,7 +135,7 @@ public class Imprenta {
                             long idUsuarioMq = in.nextLong();
                             OMaquinas omq = OMaquinas.getOperarioMaquinasById(idUsuarioMq);
                             System.out.println("Bienvenido" + omq.getNombre());
-                             System.out.println("Introduzca el id de la maquina a rellenar:");
+                            System.out.println("Introduzca el id de la labor a realizar:");
                             long idLabor = in.nextLong();
                             Labor l = Labor.getLaborById(idLabor);
                             System.out.println("La labor a realizar es :" + l);
