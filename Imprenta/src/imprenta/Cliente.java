@@ -156,10 +156,18 @@ public class Cliente {
         
         
         
-         public boolean aceptarModificacion(){
-            System.out.println("Es correcta la modificación?");
+         public void aceptarModificacion(Modificacion m){
+             
+            System.out.println("Esta es su modificación"+ m.toString());
+            System.out.println("Quiére aceptar la modificación?");
             boolean aceptar = ToolBox.leerBoolean();
-         return aceptar;
+            if(aceptar){
+                m.setAprob(aceptar);
+                System.out.println("Introduzca la fecha de aprobación:");
+                Date fechaA = ToolBox.introducirFecha();
+                m.setFechaAprob(fechaA);
+                m.setId(this.id);
+            }
      
      }
         
