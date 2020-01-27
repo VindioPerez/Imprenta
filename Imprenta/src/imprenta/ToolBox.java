@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /*
@@ -19,13 +21,20 @@ import java.util.Date;
 public class ToolBox {
     
 
-    public static Date introducirFecha() throws ParseException{
+    public static Date introducirFecha(){
     
         System.out.println("Introduzca la fecha en format dd/mm/aaaa");
         Scanner sc = new Scanner(System.in);
+        
         String fechaTexto = sc.nextLine();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        Date fecha = df.parse(fechaTexto);
+        Date fecha = null;
+        try {
+            fecha = df.parse(fechaTexto);
+        } catch (ParseException ex) {
+            System.out.println("La fecha es incorrecta...\n"
+                    + "Introduzca la fecha en formato dd/mm/aaaa");
+        }
         
         return fecha;
     }
