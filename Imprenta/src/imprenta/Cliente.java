@@ -115,11 +115,16 @@ public class Cliente {
 
     
         public static Cliente getClienteById(long idCliente) {
+            
+            Cliente temp = null;
             for (Cliente c : BDatos.clientes){
-                if (c.getId()==idCliente) return c;
+                if (c.getId()==idCliente){
+                temp = c;
+                }
             }
-            return null;
-        }
+            return temp;
+            }
+        
         
         public Trabajo crearTrabajo(){
             Trabajo t;
