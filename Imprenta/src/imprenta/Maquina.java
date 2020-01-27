@@ -28,7 +28,7 @@ public class Maquina {
    
    
    
-   public static Maquina nuevoMaquina() throws ParseException{
+   public static Maquina nuevoMaquina(){
     Maquina m = new Maquina();   
            
     Scanner in = new Scanner(System.in);

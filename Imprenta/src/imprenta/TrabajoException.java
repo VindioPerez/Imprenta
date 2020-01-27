@@ -18,6 +18,25 @@ public class TrabajoException extends RuntimeException{
         super(message);
     }
     
+    public static boolean comprobarRelieve(String relieve){
+        return !relieve.isEmpty();
     
     
+    }
+    
+    public static boolean comprobarId(long id){
+        boolean positivo;
+        positivo = id > 0;
+        return positivo;
+    }
+    
+    public static boolean comprobarClienteVacion(Cliente c){
+        boolean vacio;
+        if(c.equals(null)){
+            vacio = false;
+        }else{
+            vacio = true;
+        }
+        return vacio;
+    }
 }
