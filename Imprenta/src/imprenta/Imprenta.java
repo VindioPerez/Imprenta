@@ -56,7 +56,7 @@ public class Imprenta {
                             System.out.println("Introduzca su id de cliente");
                             long idCliente = in.nextLong();
                             Cliente clienteActual = Cliente.getClienteById(idCliente);
-                            while (clienteActual==null){
+                            while (clienteActual == null) {
                                 System.out.println("Por favor, introduzca un id válido");
                                 idCliente = in.nextLong();
                                 clienteActual = Cliente.getClienteById(idCliente);
@@ -122,25 +122,38 @@ public class Imprenta {
                 case 'q':
                 case 'Q':
                     break;
-                    
+
                 case 'm':
                 case 'M':
-                        System.out.println("Para rellenar una máquina pulse R:");
-                        char opcionM = in.next().charAt(0);
-                        switch(opcionM){
-                            case 'r':
-                            case 'R':
-                                System.out.println("Introduzca su Id de usuario:");
-                                long idUsuarioM = in.nextLong();
-                                OMaquinas om = OMaquinas.getOperarioMaquinasById(idUsuarioM);
-                                System.out.println("Bienvenido"+om.getNombre());
-                                System.out.println("Introduzca el id de la maquina a rellenar:");
-                                long idMaquina = in.nextLong();
-                                Maquina m = Maquina.getMaquinaById(idMaquina);
-                                System.out.println("La maquina a rellenar es:"+m);
-                                om.rellenarMaquina(idMaquina);
-                        }
-                                
+                    System.out.println("Para rellenar una máquina pulse R:");
+                    System.out.println("Si quierer realizar una labor, pulse L");
+                    char opcionM = in.next().charAt(0);
+                    switch (opcionM) {
+                        case 'l':
+                        case 'L':
+                            System.out.println("Introduzca su Id de usuario:");
+                            long idUsuarioMq = in.nextLong();
+                            OMaquinas omq = OMaquinas.getOperarioMaquinasById(idUsuarioMq);
+                            System.out.println("Bienvenido" + omq.getNombre());
+                             System.out.println("Introduzca el id de la maquina a rellenar:");
+                            long idLabor = in.nextLong();
+                            Labor l = Labor.getLaborById(idLabor);
+                            System.out.println("La labor a realizar es :" + l);
+                            Labor.realizarLabor(l);
+                            break;
+                        case 'r':
+                        case 'R':
+                            System.out.println("Introduzca su Id de usuario:");
+                            long idUsuarioM = in.nextLong();
+                            OMaquinas om = OMaquinas.getOperarioMaquinasById(idUsuarioM);
+                            System.out.println("Bienvenido" + om.getNombre());
+                            System.out.println("Introduzca el id de la maquina a rellenar:");
+                            long idMaquina = in.nextLong();
+                            Maquina m = Maquina.getMaquinaById(idMaquina);
+                            System.out.println("La maquina a rellenar es:" + m);
+                            om.rellenarMaquina(idMaquina);
+                    }
+
                     break;
 
                 default:
