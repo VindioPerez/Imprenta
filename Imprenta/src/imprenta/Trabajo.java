@@ -179,11 +179,21 @@ public class Trabajo {
          return t;
      }
      
+     
+     public boolean aceptarModificacion(){
+     
+         System.out.println("Es correcta la modificación?");
+         boolean aceptar = ToolBox.leerBoolean();
+         return aceptar;
+     
+     }
+     
      protected static void modificarTrabajo(Modificacion m){
          
          Trabajo t = m.getTrabajo();
          Scanner sc = new Scanner(System.in);
          System.out.println("Usted ha solicitado una modificación:");
+         do{
          if(t instanceof Libro ){
              System.out.println("Introduzca la nueva cantidad de páginas que quieres:");
              
@@ -223,6 +233,7 @@ public class Trabajo {
              
          
          }
+         }while(!t.aceptarModificacion());
         
         
       
