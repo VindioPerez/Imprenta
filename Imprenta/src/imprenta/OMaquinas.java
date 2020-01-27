@@ -63,7 +63,7 @@ public class OMaquinas extends Operario {
         return listaLabores;
     }
 
-    public OMaquinas getOperarioMaquinasById(long id) {
+    public static OMaquinas getOperarioMaquinasById(long id) {
         /*Este método recorrerá un ArrayList con todos los operarios buscando aquel con el id que le introduzcamos, y devolverá ese operario si es que existe o 
         nulo si es que no existe*/
         OMaquinas om = new OMaquinas();
@@ -96,7 +96,9 @@ public class OMaquinas extends Operario {
             System.out.println("El volumen de la máquina no es correcto");
             rellenada = false;
         }
-
+        
+        System.out.println("El resultado de la máquina es:"+m.toString());
+        
         return rellenada;
     }
 

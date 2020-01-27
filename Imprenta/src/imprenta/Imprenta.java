@@ -122,6 +122,26 @@ public class Imprenta {
                 case 'q':
                 case 'Q':
                     break;
+                    
+                case 'm':
+                case 'M':
+                        System.out.println("Para rellenar una máquina pulse R:");
+                        char opcionM = in.next().charAt(0);
+                        switch(opcionM){
+                            case 'r':
+                            case 'R':
+                                System.out.println("Introduzca su Id de usuario:");
+                                long idUsuarioM = in.nextLong();
+                                OMaquinas om = OMaquinas.getOperarioMaquinasById(idUsuarioM);
+                                System.out.println("Bienvenido"+om.getNombre());
+                                System.out.println("Introduzca el id de la maquina a rellenar:");
+                                long idMaquina = in.nextLong();
+                                Maquina m = Maquina.getMaquinaById(idMaquina);
+                                System.out.println("La maquina a rellenar es:"+m);
+                                om.rellenarMaquina(idMaquina);
+                        }
+                                
+                    break;
 
                 default:
                     break;
