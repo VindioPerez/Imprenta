@@ -247,4 +247,15 @@ public class Labor {
         } else { throw new LaborException("no ha dado una respuesta válida");}
         
     }
+    
+     public static Labor getLaborById(long idLabor) {
+            
+            Labor temp = null;
+            for (Labor l : BDatos.labores){
+                if (l.getId()==idLabor){
+                temp = l;
+                }
+            }
+            return temp;
+            }
     }
