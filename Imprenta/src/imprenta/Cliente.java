@@ -143,7 +143,7 @@ public class Cliente {
                 salir = ToolBox.leerBoolean();
             } while (salir);
             if(!c.getTelefono().matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d")){
-                    throw new NumeroInvalidoException ("El formato de numero introducido no es correcto");
+                    throw new NumeroInvalidoException ();
                 } else {
             c.setId(BDatos.clientes.size()+1);
             return c;}
