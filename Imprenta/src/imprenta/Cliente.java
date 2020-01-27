@@ -129,7 +129,7 @@ public class Cliente {
             return t;
         }
         
-        public static Cliente registrarCliente() throws NumeroInvalidoException{
+        public static Cliente registrarCliente() throws ClienteException{
             Cliente c = new Cliente();
             Scanner sc = new Scanner(System.in);
             boolean salir;
@@ -144,7 +144,7 @@ public class Cliente {
                 salir = ToolBox.leerBoolean();
             } while (salir);
             if(!c.getTelefono().matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d")){
-                    throw new NumeroInvalidoException ();
+                    throw new ClienteException ();
                 } else {
             c.setId(BDatos.clientes.size()+1);
             return c;}
