@@ -160,7 +160,6 @@ public class Trabajo {
     public static Trabajo encargo (Cliente c) throws ParseException{
         Trabajo t = new Trabajo();
         Scanner in = new Scanner(System.in);
-        boolean salir;
             System.out.println("Introduzca la fecha de recogida");
             Date fechaRec = ToolBox.introducirFecha();
             t.setFechaRecogida(fechaRec);
@@ -178,5 +177,56 @@ public class Trabajo {
          Trabajo t = c.crearTrabajo();
          o.confirmar(t);
          return t;
+     }
+     
+     protected static void modificarTrabajo(Modificacion m){
+         
+         Trabajo t = m.getTrabajo();
+         Scanner sc = new Scanner(System.in);
+         System.out.println("Usted ha solicitado una modificación:");
+         if(t instanceof Libro ){
+             System.out.println("Introduzca la nueva cantidad de páginas que quieres:");
+             
+             int pag = sc.nextInt();
+             
+             ((Libro) t).setNumPag(pag);
+             System.out.println("Introduzca un nuevo color para cambiar:");
+             String color = sc.nextLine();
+             ((Libro) t).setColor(color);
+             System.out.println("Su trabajo ha quedado así:");
+             ((Libro) t).toString();
+             
+             
+         
+         }if(t instanceof Poster){
+             System.out.println("Introduzca el nuevo ancho del Poster:");
+             double ancho = sc.nextDouble();
+             ((Poster)t).setAncho(ancho);
+             System.out.println("Introduzca el nuevo alto del Poster");
+             double alto = sc.nextDouble();
+             ((Poster)t).setAlto(alto);
+             System.out.println("Introduzca el nuevo número de copias:");
+             int copia = sc.nextInt();
+             ((Poster)t).setNumCopias(copia);
+             System.out.println("Su trabajo ha quedado asi:");
+             ((Poster)t).toString();
+             
+             
+             
+         }if(t instanceof Rotulo){
+             System.out.println("Introduzca la nueva dirección donde enviar el rótulo:");
+             String direccion = sc.nextLine();
+             ((Rotulo)t).setCentroComercial(direccion);
+             System.out.println("Su trabajo ha quedado asi:");
+             ((Rotulo)t).toString();
+         
+             
+         
+         }
+        
+        
+      
+     
+     
      }
 }

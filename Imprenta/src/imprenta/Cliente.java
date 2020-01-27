@@ -1,6 +1,7 @@
 package imprenta;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Scanner;
 
 /*
@@ -148,4 +149,31 @@ public class Cliente {
             c.setId(BDatos.clientes.size()+1);
             return c;}
         }
+        
+        
+        public  Modificacion solicitarModificación(Trabajo t) throws ParseException{
+            Modificacion m = new Modificacion();
+            Scanner sc = new Scanner (System.in);
+            System.out.println("introduce los datos a modificar:");
+            System.out.println("introduce la fecha de realización");
+            Date fechaRea = ToolBox.introducirFecha();
+            System.out.println("introduzca una descripción de la modificación");
+            String descripcion = sc.nextLine();
+            System.out.println("Su modificación es la siguiente" + descripcion);
+            System.out.println("Es correcta su modificación?");
+            boolean aceptar = ToolBox.leerBoolean();
+            if (aceptar){
+                m.setFecha(fechaRea);
+                m.setDesc(descripcion);
+                m.setAprob(aceptar);
+                System.out.println("Introduzca la fecha de hoy para aprobar el trabajo:");
+                Date fechaApro = ToolBox.introducirFecha();
+                m.setFechaAprob(fechaApro);
+                m.setIdTrabajo(t.getId());//id del trabajo
+                m.setIdCliente(this.id);//id del cliente
+            }
+            
+            return m;
+        }
+        
 }

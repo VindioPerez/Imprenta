@@ -5,6 +5,10 @@
  */
 package imprenta;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.util.Scanner;
+
 /**
  *
  * @author VindioPerez
@@ -54,4 +58,6 @@ public class OImpresion extends Operario {
         OImpresion oi = new OImpresion();
         return oi;
     }
+
+            
 }

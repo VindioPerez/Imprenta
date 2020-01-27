@@ -25,6 +25,8 @@ public class Modificacion {
     private Date fechaAprob;//fecha limite aprobación del cliente
     private long idCliente;//variable con el id de cliente que solicita la modificación
     private long idTrabajo;// variable con el id del trabajo a modificar
+    private Trabajo trabajo;
+    
 
     public String getDesc() {
         return desc;
@@ -96,6 +98,18 @@ public class Modificacion {
         this.fechaAprob = fechaAprob;
         this.maquina = maquina;
     }
+    
+    
+    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,Trabajo trabajo) {
+        this.operarios = new ArrayList<OImpresion>();
+        this.fecha = fecha;
+        this.desc = desc;
+        this.aprob = aprob;
+        this.fechaAprob = fechaAprob;
+        this.maquina = maquina;
+        this.trabajo = trabajo;
+    }
+    
 
     public ArrayList<OImpresion> getOperarios() {
         return operarios;
@@ -141,7 +155,7 @@ public class Modificacion {
 
     @Override
     public String toString() {
-        return "Modificacion{" + "id=" + id + ", operario=" + operarios + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", maquina=" + maquina + '}';
+        return "Modificacion{" + "id=" + id + ", operario=" + operarios + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", maquina=" + maquina + ", trabajo="+ trabajo.toString()+'}';
     }
 
     public static Modificacion nuevaModificacion() throws ParseException {
@@ -211,4 +225,15 @@ public class Modificacion {
 
         return t;
         }
+
+    public Trabajo getTrabajo() {
+        return trabajo;
+    }
+
+    public void setTrabajo(Trabajo trabajo) {
+        this.trabajo = trabajo;
+    }
+        
+        
+        
 }
