@@ -18,7 +18,7 @@ public class Imprenta {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args){
         // TODO code application logic here
         BDatos.inicializar();
         while(true){
@@ -36,6 +36,7 @@ public class Imprenta {
                     System.out.println("¿Qué quiere hacer?");
                     System.out.println("Si quiere registrarse, pulse R");
                     System.out.println("Si quiere encargar un trabajo, pulse E");
+                    System.out.println("Si quierer realizar una modificación, pulse M");
                     System.out.println("Si quiere salir, pulse S");
                     char opcionC = in.next().charAt(0);
                     switch (opcionC){
@@ -53,7 +54,12 @@ public class Imprenta {
                             System.out.println("Introduzca su id de cliente");
                             long idCliente = in.nextLong();
                             Cliente clienteActual = Cliente.getClienteById(idCliente);
-                            clienteActual.crearTrabajo();
+                            
+                            Trabajo t = clienteActual.crearTrabajo();
+                            
+                            
+                            t.setId(BDatos.trabajos.size()+1);
+                            BDatos.trabajos.add(t);
                             break;
                         default:
                             break;
@@ -67,6 +73,12 @@ public class Imprenta {
                     break;
                 case 'm':
                 case 'M':
+                    System.out.println("Introduzca el id del trabajo a modificar");
+                    long idTrabajo = in.nextLong();
+                    Trabajo t = Trabajo.getTrabajoById(idTrabajo);
+                   
+                    
+                    
                     break;
                 default:
                     break;

@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Modificacion {
 
     protected long id;// idenitficador 
-    private ArrayList<OImpresion> operarios; //operarios que realizan la modificación
+    private OImpresion operarioI; //operarios que realizan la modificación
     private Date fecha; //fecha de realización
     private String desc; //descripción del cambio
     private boolean aprob;//aprobacion del cliente
@@ -90,8 +90,8 @@ public class Modificacion {
     }
 
     //constructor con argumentos
-    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina) {
-        this.operarios = new ArrayList<OImpresion>();
+    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,OImpresion operarioI) {
+        this.operarioI = operarioI;
         this.fecha = fecha;
         this.desc = desc;
         this.aprob = aprob;
@@ -100,8 +100,8 @@ public class Modificacion {
     }
     
     
-    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,Trabajo trabajo) {
-        this.operarios = new ArrayList<OImpresion>();
+    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,Trabajo trabajo,OImpresion operarioI) {
+        this.operarioI = operarioI;
         this.fecha = fecha;
         this.desc = desc;
         this.aprob = aprob;
@@ -111,12 +111,12 @@ public class Modificacion {
     }
     
 
-    public ArrayList<OImpresion> getOperarios() {
-        return operarios;
+    public OImpresion getOperarios() {
+        return operarioI;
     }
 
-    public void setOperarios(ArrayList<OImpresion> operarios) {
-        this.operarios = operarios;
+    public void setOperarios(OImpresion operarioi) {
+        this.operarioI = operarioi;
     }
 
     public long getIdCliente() {
@@ -141,7 +141,7 @@ public class Modificacion {
 
     //constructor de copia
     public Modificacion(Modificacion m) {
-        this.operarios = new ArrayList<OImpresion>();
+        this.operarioI = m.getOperarios();
         this.fecha = m.getFecha();
         this.desc = m.getDesc();
         this.aprob = m.getAprob();
@@ -150,18 +150,18 @@ public class Modificacion {
     }
 
     public String data() {
-        return id + "|" + operarios + "|" + fecha + "|" + desc + "|" + aprob + "|" + fechaAprob + "|" + maquina;
+        return id + "|" + operarioI + "|" + fecha + "|" + desc + "|" + aprob + "|" + fechaAprob + "|" + maquina;
     }
 
     @Override
     public String toString() {
-        return "Modificacion{" + "id=" + id + ", operario=" + operarios + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", maquina=" + maquina + ", trabajo="+ trabajo.toString()+'}';
+        return "Modificacion{" + "id=" + id + ", operario=" + operarioI + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", maquina=" + maquina + ", trabajo="+ trabajo.toString()+'}';
     }
 
-    public static Modificacion nuevaModificacion() throws ParseException {
+    public static Modificacion nuevaModificacion(){
         Modificacion m = new Modificacion();
         Scanner in = new Scanner(System.in);
-        ArrayList<OImpresion> operarios = new ArrayList<OImpresion>();
+        OImpresion operarioI;
 
         boolean salir;
         boolean cliente;
@@ -173,16 +173,8 @@ public class Modificacion {
             System.out.println("introduzca la descripción del cambio:");
             String cambio = in.nextLine();
             m.setDesc(cambio);
-            boolean confirmarOperario;
-            do {
-
-                System.out.println("Quierés añadir un Operario de impresión?");
-                confirmarOperario = ToolBox.leerBoolean();
-                if (confirmarOperario) {
-                    operarios.add(OImpresion.nuevoOImpresion());
-                }
-
-            } while (!confirmarOperario);
+            
+          
 
             System.out.println("¿El cliente ha aprobado el cambio?");
             cliente = ToolBox.leerBoolean();
@@ -233,7 +225,15 @@ public class Modificacion {
     public void setTrabajo(Trabajo trabajo) {
         this.trabajo = trabajo;
     }
+
+    public OImpresion getOperarioI() {
+        return operarioI;
+    }
+
+    public void setOperarioI(OImpresion operarioI) {
+        this.operarioI = operarioI;
+    }
         
-        
+       
         
 }

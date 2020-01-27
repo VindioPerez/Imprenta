@@ -35,7 +35,7 @@ public class BDatos {
     public static ArrayList<Trabajo> trabajos;
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
-    public static void inicializar() throws ParseException{
+    public static void inicializar(){
         Cliente c1 = new Cliente("Pedro Ruiz", "634789231", 1);
         Cliente c2 = new Cliente("Luis Lopez", "632987216", 2);
         Cliente c3 = new Cliente("Rosa Sampedro", "694228234", 3);
@@ -90,12 +90,25 @@ public class BDatos {
         departamentos.add(d1);
         departamentos.add(d2);
         departamentos.add(d3);
-        Maquina m1 = new Maquina(1, sdf.parse("23/03/2016"), "departamento A", "din A0", "color", 3.0f, 6.0f);
-        Maquina m2 = new Maquina(2, sdf.parse("20/10/2017"), "departamento B", "din A0", "color", 4.0f, 6.0f);
-        Maquina m3 = new Maquina(3, sdf.parse("13/08/2018"), "departamento C", "din A1", "laser", 2.0f, 6.0f);
-        Maquina m4 = new Maquina(4, sdf.parse("23/09/2018"), "departamento A", "din A0", "color", 3.0f, 6.0f);
-        Maquina m5 = new Maquina(5, sdf.parse("20/08/2019"), "departamento B", "din A0", "color", 4.0f, 6.0f);
-        Maquina m6 = new Maquina(6, sdf.parse("13/09/2019"), "departamento C", "din A1", "laser", 2.0f, 6.0f);
+       
+        Maquina m1 = null;
+        Maquina m2 = null;
+        Maquina m3 = null;
+        Maquina m4 = null;
+        Maquina m5 = null;
+        Maquina m6 = null;
+        try {
+            m1 = new Maquina(1, sdf.parse("23/03/2016"), "departamento A", "din A0", "color", 3.0f, 6.0f);
+            m2 = new Maquina(2, sdf.parse("20/10/2017"), "departamento B", "din A0", "color", 4.0f, 6.0f);
+            m3 = new Maquina(3, sdf.parse("13/08/2018"), "departamento C", "din A1", "laser", 2.0f, 6.0f);
+            m4 = new Maquina(4, sdf.parse("23/09/2018"), "departamento A", "din A0", "color", 3.0f, 6.0f);
+            m5 = new Maquina(5, sdf.parse("20/08/2019"), "departamento B", "din A0", "color", 4.0f, 6.0f);
+            m6 = new Maquina(6, sdf.parse("13/09/2019"), "departamento C", "din A1", "laser", 2.0f, 6.0f);
+        } catch (ParseException parseException) {
+            System.out.println("La fecha es incorrecta...");
+        }
+        
+        
         ArrayList<Maquina> ms1 = new ArrayList<>();
         ArrayList<Maquina> ms2 = new ArrayList<>();
         ms1.add(m1);

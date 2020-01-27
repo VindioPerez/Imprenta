@@ -111,7 +111,7 @@ public class Poster extends Trabajo {
         return o;
     }
     
-    public static Poster encargo (Cliente c) throws ParseException {
+    public static Poster encargo (Cliente c) {
         Poster r;
         Scanner in = new Scanner(System.in);
         boolean check;

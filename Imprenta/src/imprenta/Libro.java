@@ -97,7 +97,7 @@ public class Libro extends Trabajo {
         return o;
     }
 
-    public static Libro encargo (Cliente c) throws ParseException {
+    public static Libro encargo (Cliente c){
         Libro r;
         Scanner in = new Scanner(System.in);
         boolean check;

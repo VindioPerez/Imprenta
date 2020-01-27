@@ -23,7 +23,7 @@ public class OImpresion extends Operario {
     public OImpresion(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
         super(nombre, apellidos, nif, telefono, direccion, senior);
     }
-    
+
     public OImpresion(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior, long id) {
         super(nombre, apellidos, nif, telefono, direccion, senior);
         this.id = id;
@@ -52,12 +52,57 @@ public class OImpresion extends Operario {
 
         return OI;
     }
-            public OImpresion getOperarioImpresionById(long id) {
+
+    public OImpresion getOperarioImpresionById(long id) {
         /*Este método recorrerá un ArrayList con todos los operarios buscando aquel con el id que le introduzcamos, y devolverá ese operario si es que existe o 
         nulo si es que no existe*/
         OImpresion oi = new OImpresion();
         return oi;
     }
 
-            
+    public static boolean realizarModificacion(Trabajo t, OImpresion I) throws TrabajoException {
+
+        Scanner sc = new Scanner(System.in);
+        boolean modificado = false;
+
+        Modificacion m = new Modificacion();
+        m.setId(BDatos.modificaciones.size() + 1);
+        System.out.println("Introduzca la fecha de realización de la modificación:");
+        Date fechaR = ToolBox.introducirFecha();
+        m.setFecha(fechaR);
+        System.out.println("Introduzca una descripción de la modificación:");
+        String descr = sc.nextLine();
+        m.setDesc(descr);
+        boolean aprobado = false;
+        m.setAprob(aprobado);
+        m.setOperarios(I);
+
+        return modificado;
+    }
+
+    public Modificacion solicitarModificación(Trabajo t) {
+        Modificacion m = new Modificacion();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("introduce los datos a modificar:");
+        System.out.println("introduce la fecha de realización");
+        Date fechaRea = ToolBox.introducirFecha();
+        System.out.println("introduzca una descripción de la modificación");
+        String descripcion = sc.nextLine();
+        System.out.println("Su modificación es la siguiente" + descripcion);
+        System.out.println("Es correcta su modificación?");
+        boolean aceptar = ToolBox.leerBoolean();
+        if (aceptar) {
+            m.setFecha(fechaRea);
+            m.setDesc(descripcion);
+            m.setAprob(aceptar);
+            System.out.println("Introduzca la fecha de hoy para aprobar el trabajo:");
+            Date fechaApro = ToolBox.introducirFecha();
+            m.setFechaAprob(fechaApro);
+            m.setIdTrabajo(t.getId());//id del trabajo
+            m.setIdCliente(this.id);//id del cliente
+        }
+
+        return m;
+
+    }
 }

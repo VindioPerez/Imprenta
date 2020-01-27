@@ -82,7 +82,7 @@ public class Rotulo extends Trabajo {
         return o;
     }
     
-    public static Rotulo encargo (Cliente c) throws ParseException {
+    public static Rotulo encargo (Cliente c){
         Rotulo r;
         Scanner in = new Scanner(System.in);
         boolean check;

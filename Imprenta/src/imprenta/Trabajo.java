@@ -76,7 +76,6 @@ public class Trabajo {
         this.idOperario = idOperario;
     }
 
-       
     /*
     public void setId(int id) {
         this.id = id;
@@ -113,16 +112,14 @@ public class Trabajo {
         this.idMaquina = idMaquina;
     }
 
-    public Trabajo getTrabajoById(long idTrabajo) {
+    public static Trabajo getTrabajoById(long idTrabajo) {
 
-        Trabajo t = new Trabajo();
-        /*
-        Este método se encarga de recorrer un arraylist con los trabajos, si el 
-        id de parametro coincide con el del trabajo se devuelve ese trabajo sino
-        se devuelve null
-         */
-
-        return t;
+        for (Trabajo t : BDatos.trabajos) {
+            if (t.getId() == idTrabajo) {
+                return t;
+            }
+        }
+        return null;
 
     }
 
@@ -156,109 +153,95 @@ public class Trabajo {
         } while (!salir);
         return t;
     }
-    
-    public static Trabajo encargo (Cliente c) throws ParseException{
+
+    public static Trabajo encargo(Cliente c) {
         Trabajo t = new Trabajo();
         Scanner in = new Scanner(System.in);
-            System.out.println("Introduzca la fecha de recogida");
-            Date fechaRec = ToolBox.introducirFecha();
-            t.setFechaRecogida(fechaRec);
-            System.out.println("Introduzca el relieve en el que desea su trabajo");
-            String relieve = in.nextLine();
-            t.setRelieve(relieve);
-            t.setCliente(c);
+        System.out.println("Introduzca la fecha de recogida");
+        Date fechaRec = ToolBox.introducirFecha();
+        t.setFechaRecogida(fechaRec);
+        System.out.println("Introduzca el relieve en el que desea su trabajo");
+        String relieve = in.nextLine();
+        t.setRelieve(relieve);
+        t.setCliente(c);
 
-            System.out.println("¿Son correctos estos datos? (s/n)");
-            System.out.println("Fecha Recogida: " + fechaRec);
-            System.out.println("Relieve: " + relieve);
+        System.out.println("¿Son correctos estos datos? (s/n)");
+        System.out.println("Fecha Recogida: " + fechaRec);
+        System.out.println("Relieve: " + relieve);
         return t;
     }
-     public static Trabajo solicitarTrabajo (Cliente c, Operario o) throws ParseException{
-         Trabajo t = c.crearTrabajo();
-         o.confirmar(t);
-         return t;
-     }
-     
-     
-     public boolean aceptarModificacion(){
-     
-         System.out.println("Es correcta la modificación?");
-         boolean aceptar = ToolBox.leerBoolean();
-         return aceptar;
-     
-     }
-     
-     protected static void modificarTrabajo(Modificacion m) throws TrabajoException{
-         
-         Trabajo t = m.getTrabajo();
-         Scanner sc = new Scanner(System.in);
-         System.out.println("Usted ha solicitado una modificación:");
-         do{
-         if(t instanceof Libro ){
-             System.out.println("Introduzca la nueva cantidad de páginas que quieres:");
-             int pag = sc.nextInt();
-             if(pag<1){
-                 throw new TrabajoException("El número de páginas no puede ser 0");
-             }
-             ((Libro) t).setNumPag(pag);
-             
-             System.out.println("Introduzca un nuevo color para cambiar:");
-             String color = sc.nextLine();
-             if(color.isEmpty()){
-                 throw new TrabajoException("El color no puede ser vacío");
-             
-             }
-             ((Libro) t).setColor(color);
-             System.out.println("Su trabajo ha quedado así:");
-             ((Libro) t).toString();
-             
-             
-             
-             
-         
-         }if(t instanceof Poster){
-             System.out.println("Introduzca el nuevo ancho del Poster:");
-             double ancho = sc.nextDouble();
-             if(ancho<=0.0){
-                 throw new TrabajoException("El ancho no puede ser negativo");
-             }
-             ((Poster)t).setAncho(ancho);
-             System.out.println("Introduzca el nuevo alto del Poster");
-             
-             double alto = sc.nextDouble();
-             if(alto<=0.0){
-                 throw new TrabajoException("El alto no puede ser negativo");
-             }
-             ((Poster)t).setAlto(alto);
-             System.out.println("Introduzca el nuevo número de copias:");
-             int copia = sc.nextInt();
-             if(copia<1){
-                 throw new TrabajoException("El número de copias no puede ser 0");
-             }
-             ((Poster)t).setNumCopias(copia);
-             System.out.println("Su trabajo ha quedado asi:");
-             ((Poster)t).toString();
-             
-             
-             
-         }if(t instanceof Rotulo){
-             System.out.println("Introduzca la nueva dirección donde enviar el rótulo:");
-             String direccion = sc.nextLine();
-             if(direccion.isEmpty()){
-                 throw new TrabajoException("La dirección no puede estar vacia");
-             }
-             ((Rotulo)t).setCentroComercial(direccion);
-             System.out.println("Su trabajo ha quedado asi:");
-             ((Rotulo)t).toString();
-         
-             
-         
-         }
-         }while(!t.aceptarModificacion());
-        
-        
-      
-     
-     
-     }
+
+    public static Trabajo solicitarTrabajo(Cliente c, Operario o) throws ParseException {
+        Trabajo t = c.crearTrabajo();
+        o.confirmar(t);
+        return t;
+    }
+
+    protected static void modificarTrabajo(Modificacion m) throws TrabajoException {
+
+        Trabajo t = m.getTrabajo();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Usted ha solicitado una modificación:");
+        if (t instanceof Libro) {
+            System.out.println("Introduzca la nueva cantidad de páginas que quieres:");
+            int pag = sc.nextInt();
+            if (pag < 1) {
+                throw new TrabajoException("El número de páginas no puede ser 0");
+            }
+            ((Libro) t).setNumPag(pag);
+
+            System.out.println("Introduzca un nuevo color para cambiar:");
+            String color = sc.nextLine();
+            if (color.isEmpty()) {
+                throw new TrabajoException("El color no puede ser vacío");
+
+            }
+            ((Libro) t).setColor(color);
+            System.out.println("La modificación ha quedado así:");
+            ((Libro) t).toString();
+
+        }
+        if (t instanceof Poster) {
+            System.out.println("Introduzca el nuevo ancho del Poster:");
+            double ancho = sc.nextDouble();
+            if (ancho <= 0.0) {
+                throw new TrabajoException("El ancho no puede ser negativo");
+            }
+            ((Poster) t).setAncho(ancho);
+            System.out.println("Introduzca el nuevo alto del Poster");
+
+            double alto = sc.nextDouble();
+            if (alto <= 0.0) {
+                throw new TrabajoException("El alto no puede ser negativo");
+            }
+            ((Poster) t).setAlto(alto);
+            System.out.println("Introduzca el nuevo número de copias:");
+            int copia = sc.nextInt();
+            if (copia < 1) {
+                throw new TrabajoException("El número de copias no puede ser 0");
+            }
+            ((Poster) t).setNumCopias(copia);
+            System.out.println("Su trabajo ha quedado asi:");
+            ((Poster) t).toString();
+
+        }
+        if (t instanceof Rotulo) {
+            System.out.println("Introduzca la nueva dirección donde enviar el rótulo:");
+            String direccion = sc.nextLine();
+            if (direccion.isEmpty()) {
+                throw new TrabajoException("La dirección no puede estar vacia");
+            }
+            ((Rotulo) t).setCentroComercial(direccion);
+            System.out.println("Su trabajo ha quedado asi:");
+            ((Rotulo) t).toString();
+
+        }
+
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 }
