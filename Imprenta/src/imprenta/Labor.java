@@ -233,6 +233,7 @@ public class Labor {
                 & !"no".equals(verif) & !"nO".equals(verif) & !"nO".equals(verif)) {
             if (!"NO".equals(verif) & !"no".equals(verif) & !"nO".equals(verif) & !"nO".equals(verif)) {
                 b=true;
+               System.out.println("El cambio se ha realizado satisfactioriamente"); 
             }
             } else { throw new LaborException("no ha dado una respuesta válida");}
                 
@@ -244,5 +245,6 @@ public class Labor {
             }
 
         } else { throw new LaborException("no ha dado una respuesta válida");}
+        
     }
     }
