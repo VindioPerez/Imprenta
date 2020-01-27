@@ -31,8 +31,9 @@ public class Trabajo {
 
     public Trabajo(Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
 
-        if(!TrabajoException.comprobarRelieve(relieve)){
-            throw new TrabajoException("El relieve no es válido");}
+        if (!TrabajoException.comprobarRelieve(relieve)) {
+            throw new TrabajoException("El relieve no es válido");
+        }
         this.fechaSolicitud = fechaSolicitud;
         this.fechaRecogida = fechaRecogida;
         this.relieve = relieve;
@@ -43,8 +44,9 @@ public class Trabajo {
     }
 
     public void setRelieve(String relieve) throws TrabajoException {
-        if(!TrabajoException.comprobarRelieve(relieve)){
-            throw new TrabajoException("El relieve no es válido");}
+        if (!TrabajoException.comprobarRelieve(relieve)) {
+            throw new TrabajoException("El relieve no es válido");
+        }
         this.relieve = relieve;
     }
 
@@ -65,9 +67,10 @@ public class Trabajo {
     }
 
     public Trabajo(Trabajo t) throws TrabajoException {
-        if(!TrabajoException.comprobarRelieve(relieve)){
-            throw new TrabajoException("El relieve no es válido");}
-        if(!TrabajoException.comprobarId(id)){
+        if (!TrabajoException.comprobarRelieve(relieve)) {
+            throw new TrabajoException("El relieve no es válido");
+        }
+        if (!TrabajoException.comprobarId(id)) {
             throw new TrabajoException("El id no es valido");
         }
         this.id = t.getId();
@@ -85,7 +88,7 @@ public class Trabajo {
     }
 
     public void setIdOperario(long idOperario) throws TrabajoException {
-        if(!TrabajoException.comprobarId(idOperario)){
+        if (!TrabajoException.comprobarId(idOperario)) {
             throw new TrabajoException("El id no es valido");
         }
         this.idOperario = idOperario;
@@ -116,10 +119,10 @@ public class Trabajo {
     }
 
     public void setCliente(Cliente cliente) throws TrabajoException {
-        if(!TrabajoException.comprobarClienteVacion(cliente)){
-            throw new TrabajoException ("El cliente no puede estar vacío");
+        if (!TrabajoException.comprobarClienteVacion(cliente)) {
+            throw new TrabajoException("El cliente no puede estar vacío");
         }
-        
+
         this.cliente = cliente;
     }
 
@@ -127,16 +130,16 @@ public class Trabajo {
         return idMaquina;
     }
 
-    public void setIdMaquina(long idMaquina)throws TrabajoException {
-        if(!TrabajoException.comprobarId(idMaquina)){
+    public void setIdMaquina(long idMaquina) throws TrabajoException {
+        if (!TrabajoException.comprobarId(idMaquina)) {
             throw new TrabajoException("El id no es valido");
         }
-        
+
         this.idMaquina = idMaquina;
     }
 
     public static Trabajo getTrabajoById(long idTrabajo) throws TrabajoException {
-        if(!TrabajoException.comprobarId(idTrabajo)){
+        if (!TrabajoException.comprobarId(idTrabajo)) {
             throw new TrabajoException("El id no es valido");
         }
 
@@ -149,7 +152,7 @@ public class Trabajo {
 
     }
 
-    public static Trabajo nuevoTrabajo(){
+    public static Trabajo nuevoTrabajo() {
         Trabajo t = new Trabajo();
         Scanner in = new Scanner(System.in);
         boolean salir;
@@ -185,7 +188,7 @@ public class Trabajo {
         Scanner in = new Scanner(System.in);
         System.out.println("Introduzca la fecha de recogida");
         Date fechaRec = ToolBox.introducirFecha();
-        while (fechaRec.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.now())){
+        while (fechaRec.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.now())) {
             System.out.println("Por favor, introduzca una fecha válida");
             fechaRec = ToolBox.introducirFecha();
         }
@@ -201,13 +204,13 @@ public class Trabajo {
         return t;
     }
 
-    public static Trabajo solicitarTrabajo(Cliente c, Operario o){
+    public static Trabajo solicitarTrabajo(Cliente c, Operario o) {
         Trabajo t = c.crearTrabajo();
         o.confirmar(t);
         return t;
     }
 
-    protected static void modificarTrabajo(Modificacion m){
+    protected static void modificarTrabajo(Modificacion m) {
 
         Trabajo t = m.getTrabajo();
 
@@ -270,9 +273,10 @@ public class Trabajo {
 
     }
 
-    public void setId(long id) throws TrabajoException{
-         if(!TrabajoException.comprobarId(id)){
-            throw new TrabajoException("El id no es valido");}
+    public void setId(long id) throws TrabajoException {
+        if (!TrabajoException.comprobarId(id)) {
+            throw new TrabajoException("El id no es valido");
+        }
         this.id = id;
     }
 
