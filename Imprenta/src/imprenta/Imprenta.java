@@ -5,8 +5,6 @@
  */
 package imprenta;
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -18,7 +16,6 @@ public class Imprenta {
 
     /**
      * @param args the command line arguments
-     * @throws imprenta.TrabajoException
      */
     public static void main(String[] args){
         // TODO code application logic here
@@ -82,19 +79,11 @@ public class Imprenta {
                             Cliente clienteMod = Cliente.getClienteById(idClienteMod);
 
                             System.out.println("");
-                            for (Trabajo tr : BDatos.trabajos) {
-                                if (tr.getCliente() == clienteMod) {
-                                    for (Modificacion m : BDatos.modificaciones) {
-                                        if (m.getTrabajo() == tr) {
-                                            clienteMod.aceptarModificacion(m);
-
-                                        }
-
-                                    }
-
-                                }
-
-                            }
+                            BDatos.trabajos.stream().filter((tr) -> (tr.getCliente() == clienteMod)).forEach((Trabajo tr) -> {
+                                BDatos.modificaciones.stream().filter((m) -> (m.getTrabajo() == tr)).forEach((m) -> {
+                                    clienteMod.aceptarModificacion(m);
+                });
+            });
                         default:
                             break;
 
