@@ -32,11 +32,7 @@ public class TrabajoException extends RuntimeException{
     
     public static boolean comprobarClienteVacion(Cliente c){
         boolean vacio;
-        if(c.equals(null)){
-            vacio = false;
-        }else{
-            vacio = true;
-        }
+        vacio = c != null;
         return vacio;
     }
 }
