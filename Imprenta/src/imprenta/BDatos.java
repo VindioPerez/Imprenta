@@ -16,23 +16,23 @@ import java.util.Date;
  */
 public class BDatos {
     
-    public static ArrayList<Cliente> clientes;
-    public static ArrayList<Departamento> departamentos;
-    public static ArrayList<Labor> labores;
-    public static ArrayList<Libro> libros;
-    public static ArrayList<Lote> lotes;
-    public static ArrayList<Maquina> maquinas;
-    public static ArrayList<Modificacion> modificaciones;
-    public static ArrayList<OCalidad> osCalidad;
-    public static ArrayList<OImpresion> osImpresion;
-    public static ArrayList<OMaquinas> osMaquinas;
-    public static ArrayList<Operario> operarios;
-    public static ArrayList<Politica> politicas;
-    public static ArrayList<Poster> posters;
-    public static ArrayList<Prueba> pruebas;
-    public static ArrayList<ReglaCalidad> reglas;
-    public static ArrayList<Rotulo> rotulos;
-    public static ArrayList<Trabajo> trabajos;
+    public static ArrayList<Cliente> clientes = new ArrayList<>();
+    public static ArrayList<Departamento> departamentos = new ArrayList<>();
+    public static ArrayList<Labor> labores = new ArrayList<>();
+    public static ArrayList<Libro> libros = new ArrayList<>();
+    public static ArrayList<Lote> lotes = new ArrayList<>();
+    public static ArrayList<Maquina> maquinas = new ArrayList<>();
+    public static ArrayList<Modificacion> modificaciones = new ArrayList<>();
+    public static ArrayList<OCalidad> osCalidad = new ArrayList<>();
+    public static ArrayList<OImpresion> osImpresion = new ArrayList<>();
+    public static ArrayList<OMaquinas> osMaquinas = new ArrayList<>();
+    public static ArrayList<Operario> operarios = new ArrayList<>();
+    public static ArrayList<Politica> politicas = new ArrayList<>();
+    public static ArrayList<Poster> posters = new ArrayList<>();
+    public static ArrayList<Prueba> pruebas = new ArrayList<>();
+    public static ArrayList<ReglaCalidad> reglas = new ArrayList<>();
+    public static ArrayList<Rotulo> rotulos = new ArrayList<>();
+    public static ArrayList<Trabajo> trabajos = new ArrayList<>();
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
     public static void inicializar(){
