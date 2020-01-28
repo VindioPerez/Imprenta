@@ -152,7 +152,7 @@ public class Trabajo {
 
     }
 
-    public static Trabajo nuevoTrabajo() {
+    public static Trabajo nuevoTrabajo() throws TrabajoException {
         Trabajo t = new Trabajo();
         Scanner in = new Scanner(System.in);
         boolean salir;
@@ -204,13 +204,13 @@ public class Trabajo {
         return t;
     }
 
-    public static Trabajo solicitarTrabajo(Cliente c, Operario o) {
+    public static Trabajo solicitarTrabajo(Cliente c, Operario o) throws TrabajoException {
         Trabajo t = c.crearTrabajo();
         o.confirmar(t);
         return t;
     }
 
-    protected static void modificarTrabajo(Modificacion m) {
+    protected static void modificarTrabajo(Modificacion m) throws TrabajoException {
 
         Trabajo t = m.getTrabajo();
 

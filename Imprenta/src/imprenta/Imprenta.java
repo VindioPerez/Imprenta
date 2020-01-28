@@ -18,8 +18,9 @@ public class Imprenta {
 
     /**
      * @param args the command line arguments
+     * @throws imprenta.TrabajoException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // TODO code application logic here
         BDatos.inicializar();
         while (true) {
@@ -62,11 +63,17 @@ public class Imprenta {
                                 clienteActual = Cliente.getClienteById(idCliente);
                             }
 
+                            try{
                             Trabajo t = clienteActual.crearTrabajo();
 
+                            
                             t.setId(BDatos.trabajos.size() + 1);
+                            
                             BDatos.trabajos.add(t);
                             break;
+                            }catch(TrabajoException tr){
+                               
+                            }
 
                         case 'x':
                         case 'X':
@@ -105,16 +112,21 @@ public class Imprenta {
                             OImpresion operarioI = OImpresion.getOperarioImpresionById(idUsuario);
                             System.out.println("Introduzca el ID del trabajo a modificar");
                             long idTrabajo = in.nextLong();
+                            try{
                             Trabajo t = Trabajo.getTrabajoById(idTrabajo);
                             Modificacion m = operarioI.realizarModificacion(t);
+                            
                             System.out.println("El cliente ha aceptado la modificación?");
                             Cliente c = t.getCliente();
                             boolean aceptado = c.aceptarModificacion(m);
+                            
+                            
                             if (aceptado) {
                                 System.out.println("La modificación ha sido aceptada por el cliente");
                             } else {
                                 System.out.println("La modificación no ha sido aceptada por el cliente");
                             }
+                            }catch(TrabajoException tr){}
 
                     }
 

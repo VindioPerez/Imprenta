@@ -19,7 +19,7 @@ public class Rotulo extends Trabajo {
 
     private String centroComercial; //variable de tipo String que recoge el lugar de destino del trabajo
 
-    public Rotulo(String centroComercial, Date fechaSolicitud, Date fechaRecogida, String relieve) {
+    public Rotulo(String centroComercial, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
         this.centroComercial = centroComercial;
     }
@@ -31,11 +31,11 @@ public class Rotulo extends Trabajo {
         this.centroComercial = r.getCentroComercial();
     }
     
-    public Rotulo(Trabajo t) {
+    public Rotulo(Trabajo t) throws TrabajoException {
         super(t);
     }
     
-    public static Rotulo nuevoRotulo() throws ParseException{
+    public static Rotulo nuevoRotulo() throws ParseException, TrabajoException{
         Rotulo r = new Rotulo(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
         boolean c;
@@ -82,7 +82,7 @@ public class Rotulo extends Trabajo {
         return o;
     }
     
-    public static Rotulo encargo (Cliente c){
+    public static Rotulo encargo (Cliente c) throws TrabajoException{
         Rotulo r;
         Scanner in = new Scanner(System.in);
         boolean check;

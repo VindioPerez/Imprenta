@@ -23,7 +23,7 @@ public class Libro extends Trabajo {
     public Libro() {
     }
 
-    public Libro(int numPag, String color, Date fechaSolicitud, Date fechaRecogida, String relieve) {
+    public Libro(int numPag, String color, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
         this.numPag = numPag;
         this.color = color;
@@ -34,11 +34,11 @@ public class Libro extends Trabajo {
         this.numPag = l.getNumPag();
     }
 
-    public Libro(Trabajo t) {
+    public Libro(Trabajo t) throws TrabajoException {
         super(t);
     }
 
-    public static Libro nuevoLibro() throws ParseException{
+    public static Libro nuevoLibro() throws TrabajoException{
         Libro l = new Libro(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
         boolean c;
@@ -97,7 +97,7 @@ public class Libro extends Trabajo {
         return o;
     }
 
-    public static Libro encargo (Cliente c){
+    public static Libro encargo (Cliente c) throws TrabajoException{
         Libro r;
         Scanner in = new Scanner(System.in);
         boolean check;

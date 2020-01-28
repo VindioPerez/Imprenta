@@ -9,7 +9,7 @@ package imprenta;
  *
  * @author vindi
  */
-public class TrabajoException extends RuntimeException{
+public class TrabajoException extends Exception{
 
     public TrabajoException() {
     }

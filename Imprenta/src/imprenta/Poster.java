@@ -24,7 +24,7 @@ public class Poster extends Trabajo {
     public Poster() {
     }
 
-    public Poster(double alto, double ancho, int numCopias, Date fechaSolicitud, Date fechaRecogida, String relieve) {
+    public Poster(double alto, double ancho, int numCopias, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
         this.alto = alto;
         this.ancho = ancho;
@@ -37,11 +37,11 @@ public class Poster extends Trabajo {
         this.numCopias = p.getNumCopias();
     }
 
-    public Poster(Trabajo t) {
+    public Poster(Trabajo t) throws TrabajoException {
         super(t);
     }
 
-    public static Poster nuevoPoster() throws ParseException{
+    public static Poster nuevoPoster() throws TrabajoException{
         Poster p = new Poster(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
         boolean c;
@@ -111,7 +111,7 @@ public class Poster extends Trabajo {
         return o;
     }
     
-    public static Poster encargo (Cliente c) {
+    public static Poster encargo (Cliente c) throws TrabajoException {
         Poster r;
         Scanner in = new Scanner(System.in);
         boolean check;

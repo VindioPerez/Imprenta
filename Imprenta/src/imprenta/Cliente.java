@@ -126,7 +126,7 @@ public class Cliente {
             }
         
         
-        public Trabajo crearTrabajo(){
+        public Trabajo crearTrabajo() throws TrabajoException{
             Trabajo t;
             Scanner in = new Scanner(System.in);
             System.out.println("¿Qué tipo de trabajo desea solicitar? (poster=P, libro=L, rótulo=R)");
