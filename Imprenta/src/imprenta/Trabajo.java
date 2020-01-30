@@ -63,6 +63,7 @@ public class Trabajo {
     }
 
     public void setFechaRecogida(Date fechaRecogida) {
+
         this.fechaRecogida = fechaRecogida;
     }
 
@@ -162,15 +163,57 @@ public class Trabajo {
             Date fechaSol = ToolBox.introducirFecha();
             System.out.println("Introduzca la fecha de recogida");
             Date fechaRec = ToolBox.introducirFecha();
+            try {
+                if (!TrabajoException.comprobarFechaRec(fechaRec, fechaSol)) {
+                    throw new TrabajoException("La fecha de Recogida es anterior a la de solicitud");
+                }
+            } catch (TrabajoException ex) {
+                System.out.println("Esto es un error por fechas" + ex.getMessage());
+
+            }
+
             System.out.println("Introduzca el relieve en el que desea su trabajo");
             String relieve = in.nextLine();
-            t.setRelieve(relieve);
+            try {
+                if (!TrabajoException.comprobarRelieve(relieve)) {
+                    throw new TrabajoException("El relieve introducido no es valido.");
+                }
+                t.setRelieve(relieve);
+            } catch (TrabajoException ex) {
+                System.out.println("Error por relieve" + ex.getMessage());
+            }
+
             System.out.println("Introduzca un cliente");
             Cliente cli = Cliente.nuevoCliente();
+            try {
+                if (!TrabajoException.comprobarClienteVacion(cli)) {
+                    throw new TrabajoException("El cliente no puede estar vacío");
+
+                }
+            } catch (TrabajoException ex) {
+                System.out.println("Error por cliente" + ex.getMessage());
+            }
+
             System.out.println("Introduzca el id de la maquina:");
+
             long idmaq = Maquina.nuevoMaquina().getId();
+            try {
+                if (!TrabajoException.comprobarId(idmaq)) {
+                    throw new TrabajoException("El id introducido no es válido.");
+                }
+            } catch (TrabajoException ex) {
+                System.out.println("Error por id" + ex.getMessage());
+            }
             System.out.println("Introduzca el id del operario");
+
             long idope = OImpresion.nuevoOImpresion().getId();
+            try {
+                if (!TrabajoException.comprobarId(idope)) {
+                    throw new TrabajoException("El id introducido no es válido");
+                }
+            } catch (TrabajoException ex) {
+                System.out.println("Error por id" + ex);
+            }
 
             System.out.println("¿Son correctos estos datos? (s/n)");
             System.out.println("Fecha Solicitud " + fechaSol);
