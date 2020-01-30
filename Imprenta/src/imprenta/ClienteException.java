@@ -19,13 +19,11 @@ public class ClienteException extends RuntimeException{
     }
     
     public static boolean comprobarTelefono(String telefono){
-        if (telefono.matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d")) return true;
-        else return false;
+        return telefono.matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d");
     }
     
     public static boolean comprobarNombre(String nombre){
-        if (!nombre.isEmpty()) return true;
-        else return false;
+        return !nombre.isEmpty();
     }
     
 }
