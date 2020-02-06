@@ -189,8 +189,7 @@ public class Operario {
         return o;
     }
 
-    public Trabajo confirmar(Trabajo t) throws TrabajoException{
+    public void confirmar(Trabajo t) throws TrabajoException{
         t.setIdOperario(this.getId());
-        return t;
     }
 }
