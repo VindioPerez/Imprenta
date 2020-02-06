@@ -34,9 +34,16 @@ public class Trabajo {
         if (!TrabajoException.comprobarRelieve(relieve)) {
             throw new TrabajoException("El relieve no es válido");
         }
+        else if(!TrabajoException.comprobarFechaSol(fechaSolicitud, fechaRecogida)){
+            throw new TrabajoException("La fecha de solicitud no puede ser posterios a la de recogida.");
+        }
+        else if(!TrabajoException.comprobarFechaRec(fechaRecogida, fechaSolicitud)){
+            throw new TrabajoException("La fecha de recogida no puede ser anterior a la de solicitud.");
+        }else{
         this.fechaSolicitud = fechaSolicitud;
         this.fechaRecogida = fechaRecogida;
         this.relieve = relieve;
+        }
     }
 
     public String getRelieve() {
@@ -71,13 +78,18 @@ public class Trabajo {
         if (!TrabajoException.comprobarRelieve(relieve)) {
             throw new TrabajoException("El relieve no es válido");
         }
-        if (!TrabajoException.comprobarId(id)) {
+        else if (!TrabajoException.comprobarId(id)) {
             throw new TrabajoException("El id no es valido");
-        }
+        }else if(!TrabajoException.comprobarFechaRec(fechaRecogida, fechaSolicitud)){
+            throw new TrabajoException("La fecha de recogida no es válida.");
+        }else if(!TrabajoException.comprobarFechaSol(fechaSolicitud, fechaRecogida)){
+            throw new TrabajoException("La fecha de solicitud no es válida.");
+        }else{
         this.id = t.getId();
         this.fechaRecogida = t.fechaRecogida;
         this.fechaSolicitud = t.fechaSolicitud;
         this.relieve = t.relieve;
+        }
     }
 
     public long getId() {
@@ -108,11 +120,6 @@ public class Trabajo {
     public String data() {
         return id + "|" + fechaSolicitud + "|" + fechaRecogida;
 
-    }
-
-    public Cliente getClienteById() {
-
-        return null;
     }
 
     public Cliente getCliente() {
@@ -229,21 +236,36 @@ public class Trabajo {
     public static Trabajo encargo(Cliente c) throws TrabajoException {
         Trabajo t = new Trabajo();
         Scanner in = new Scanner(System.in);
+        System.out.println("Introduzca la fecha de solicitud");
+        Date fechaSol = ToolBox.introducirFecha();
         System.out.println("Introduzca la fecha de recogida");
         Date fechaRec = ToolBox.introducirFecha();
-        while (fechaRec.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(LocalDate.now())) {
-            System.out.println("Por favor, introduzca una fecha válida");
-            fechaRec = ToolBox.introducirFecha();
+        if(!TrabajoException.comprobarFechaSol(fechaSol, fechaRec)){
+            throw new TrabajoException("La fecha de solicitud no puede ser posterios a la de recogida.");
+        }else{
+        t.setFechaSolicitud(fechaSol);
         }
+        if(!TrabajoException.comprobarFechaRec(fechaRec, fechaSol)){
+            throw new TrabajoException("La fecha de recogida no puede ser anterior a la de solicitud.");
+        }else{
         t.setFechaRecogida(fechaRec);
+        }
         System.out.println("Introduzca el relieve en el que desea su trabajo");
         String relieve = in.nextLine();
+        if(!TrabajoException.comprobarRelieve(relieve)){
+            throw new TrabajoException("El releive no es corrcto");
+        }else{
         t.setRelieve(relieve);
+        }if(!TrabajoException.comprobarClienteVacion(c)){
+            throw new TrabajoException("El cliente no puede estar vacío.");
+        }else{
         t.setCliente(c);
-
+        }
         System.out.println("¿Son correctos estos datos? (s/n)");
+        System.out.println("Fecha Solicitud: " + fechaSol);
         System.out.println("Fecha Recogida: " + fechaRec);
         System.out.println("Relieve: " + relieve);
+        
         return t;
     }
 

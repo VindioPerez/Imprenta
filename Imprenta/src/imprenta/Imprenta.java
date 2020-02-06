@@ -17,7 +17,7 @@ public class Imprenta {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         // TODO code application logic here
         BDatos.inicializar();
         while (true) {
@@ -60,16 +60,15 @@ public class Imprenta {
                                 clienteActual = Cliente.getClienteById(idCliente);
                             }
 
-                            try{
-                            Trabajo t = clienteActual.crearTrabajo();
+                            try {
+                                Trabajo t = clienteActual.crearTrabajo();
 
-                            
-                            t.setId(BDatos.trabajos.size() + 1);
-                            
-                            BDatos.trabajos.add(t);
-                            break;
-                            }catch(TrabajoException tr){
-                               
+                                t.setId(BDatos.trabajos.size() + 1);
+
+                                BDatos.trabajos.add(t);
+                                break;
+                            } catch (TrabajoException tr) {
+
                             }
 
                         case 'x':
@@ -82,8 +81,8 @@ public class Imprenta {
                             BDatos.trabajos.stream().filter((tr) -> (tr.getCliente() == clienteMod)).forEach((Trabajo tr) -> {
                                 BDatos.modificaciones.stream().filter((m) -> (m.getTrabajo() == tr)).forEach((m) -> {
                                     clienteMod.aceptarModificacion(m);
-                });
-            });
+                                });
+                            });
                         default:
                             break;
 
@@ -100,22 +99,22 @@ public class Imprenta {
                             long idUsuario = in.nextLong();
                             OImpresion operarioI = OImpresion.getOperarioImpresionById(idUsuario);
                             System.out.println("Introduzca el ID del trabajo a modificar");
-                            long idTrabajo = in.nextLong();
-                            try{
-                            Trabajo t = Trabajo.getTrabajoById(idTrabajo);
-                            Modificacion m = operarioI.realizarModificacion(t);
-                            
-                            System.out.println("El cliente ha aceptado la modificación?");
-                            Cliente c = t.getCliente();
-                            boolean aceptado = c.aceptarModificacion(m);
-                            
-                            
-                            if (aceptado) {
-                                System.out.println("La modificación ha sido aceptada por el cliente");
-                            } else {
-                                System.out.println("La modificación no ha sido aceptada por el cliente");
+                            try {
+                                long idTrabajo = in.nextLong();
+                                Trabajo t = Trabajo.getTrabajoById(idTrabajo);
+                                Modificacion m = operarioI.realizarModificacion();
+                                System.out.println("El cliente ha aceptado la modificación?");
+                                Cliente c = t.getCliente();
+                                boolean aceptado = c.aceptarModificacion(m);
+
+                                if (aceptado) {
+                                    System.out.println("La modificación ha sido aceptada por el cliente");
+                                } else {
+                                    System.out.println("La modificación no ha sido aceptada por el cliente");
+                                }
+                            } catch (TrabajoException tr) {
+                                System.out.println("error de trabajo." + tr.getMessage());
                             }
-                            }catch(TrabajoException tr){}
 
                     }
 

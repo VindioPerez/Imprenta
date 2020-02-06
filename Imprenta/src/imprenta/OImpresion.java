@@ -5,7 +5,7 @@
  */
 package imprenta;
 
-
+import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -60,9 +60,38 @@ public class OImpresion extends Operario {
         return oi;
     }
 
-    public Modificacion realizarModificacion(Trabajo t) throws TrabajoException {
+    public Modificacion realizarModificacion() throws TrabajoException {
 
         Scanner sc = new Scanner(System.in);
+        int i = 0;
+        boolean correcto = false;
+        System.out.println("Introduzca el id del trabajo que se va a modificar:");
+        do {
+            long idTrabajo = sc.nextLong();
+            i++;
+            if (!TrabajoException.comprobarId(idTrabajo)) {
+                throw new TrabajoException("El id introducido no es correcto \n"
+                        + "Vuelva a introducir un id:");
+
+            } else {
+                System.out.println("El id introducido es correcto:");
+                Trabajo t = Trabajo.getTrabajoById(idTrabajo);
+                correcto = true;
+
+                if (t instanceof Libro) {
+                    System.out.println("La modificación se realizará sobre un libro:");
+                }
+                if (t instanceof Poster) {
+                    System.out.println("La modificación se realizará sobre un poster:");
+                }
+                if (t instanceof Rotulo) {
+                    System.out.println("La modificación se realizará sobre un rótulo:");
+                }
+
+            }
+        } while (!correcto && i <= 3);
+
+        if(correcto){
         Modificacion m = new Modificacion();
         m.setId(BDatos.modificaciones.size() + 1);
         System.out.println("Introduzca la fecha de realización de la modificación:");
@@ -74,10 +103,12 @@ public class OImpresion extends Operario {
         boolean aprobado = false;
         m.setAprob(aprobado);
         m.setOperarioI(this);
-        
-        System.out.println("La modificación queda asi:" +m.toString());
-        
+        System.out.println("La modificación queda asi:" + m.toString());
         return m;
+        }else{
+            System.out.println("La modificación no se ha podido crear");
+        }
+        return null;
 
     }
 
