@@ -46,9 +46,9 @@ public class Imprenta {
                                 BDatos.clientes.add(nuevoCliente);
                             } catch (ClienteException clienteinvalido) {
                                 System.out.println("El cliente no es válido");
-                            } finally {
-                                break;
                             }
+                                break;
+                            
                         case 'e':
                         case 'E':
                             System.out.println("Introduzca su id de cliente");
@@ -68,7 +68,7 @@ public class Imprenta {
                                 BDatos.trabajos.add(t);
                                 break;
                             } catch (TrabajoException tr) {
-
+                                System.out.println("ERROR al crear el trabajo"+tr.getMessage());
                             }
 
                         case 'x':
@@ -98,13 +98,12 @@ public class Imprenta {
                             System.out.println("Introduzca su ID de usuario:");
                             long idUsuario = in.nextLong();
                             OImpresion operarioI = OImpresion.getOperarioImpresionById(idUsuario);
-                            System.out.println("Introduzca el ID del trabajo a modificar");
+                           
                             try {
-                                long idTrabajo = in.nextLong();
-                                Trabajo t = Trabajo.getTrabajoById(idTrabajo);
                                 Modificacion m = operarioI.realizarModificacion();
                                 System.out.println("El cliente ha aceptado la modificación?");
-                                Cliente c = t.getCliente();
+                                long idCliente = m.getIdCliente();
+                                Cliente c = Cliente.getClienteById(idCliente);
                                 boolean aceptado = c.aceptarModificacion(m);
 
                                 if (aceptado) {
@@ -114,7 +113,7 @@ public class Imprenta {
                                 }
                             } catch (TrabajoException tr) {
                                 System.out.println("error de trabajo." + tr.getMessage());
-                            }
+                            } finally {}
 
                     }
 

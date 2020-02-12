@@ -23,6 +23,7 @@ public class Politica {
     private long idOCalidad1;// primera firma
     private long idOCalidad2;// segunda firma 
     private Lote lote;
+    private long idLote;
 
     public Politica(String nom, Date fechaIni, long firma1, long firma2, Lote lote) {
         this.nom = nom;
@@ -125,12 +126,14 @@ public class Politica {
     
 
     public String data() {
-        return id + "|" + nom + "|" + fechaIni;
+        return "Politica:"+this.getId() + "\n"
+                + "|Nombre:" + this.getNom() + "|fecha de inicio:" + this.getFechaIni() + "|id Operario 1:" + this.getIdOCalidad1() + "|id Operario 2:" + this.getIdOCalidad2() + "| id Lote:"+ this.getIdLote();
     }
 
     @Override
     public String toString() {
-        return "PoliticaCalidad{" + "nom=" + nom + ", fechaIni=" + fechaIni + '}';
+        return "PoliticaCalidad:\n"
+                + "Nombre=" + nom + "|Fecha de inicio=" + fechaIni + "|id Operario 1=" + idOCalidad1+"|id Operario 2="+idOCalidad2 +"|id Lote="+idLote;
     }
     
     public Politica getPoliticaoById(long id) {
@@ -145,4 +148,23 @@ public class Politica {
         ArrayList<Politica> o = new ArrayList<>();
         return o;
     }
+
+    public long getIdLote() {
+        return idLote;
+    }
+
+    public void setIdLote(long idLote) {
+        this.idLote = idLote;
+    }
+
+    public Politica(long id, String nom, Date fechaIni, long idOCalidad1, long idOCalidad2, long idLote) {
+        this.id = id;
+        this.nom = nom;
+        this.fechaIni = fechaIni;
+        this.idOCalidad1 = idOCalidad1;
+        this.idOCalidad2 = idOCalidad2;
+        this.idLote = idLote;
+    }
+    
+    
 }

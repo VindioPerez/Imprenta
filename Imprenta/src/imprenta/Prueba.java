@@ -18,10 +18,12 @@ public class Prueba {
     protected long id; //id de la máquina de tipo long
     private Date fechaR;// tipo date fecha de realización
     private OCalidad operarioC;// Operario de calidad que sigue la prueba
+    private long idOperarioC;//clave ajena del Operario de Calidad
     private String desc;//descripción de la prueba
     private String res;// resultados obtenidos
     private String obs;//observaciones
     private Maquina maquina;//máquina que realiza la prueba
+    private long idMaquina;//id de la maquina que realiza la prueba
     
     // Constructor por defecto
     public Prueba() {
@@ -52,7 +54,7 @@ public class Prueba {
     
 
     
-    public static Prueba nuevoPrueba() throws ParseException{
+    public static Prueba nuevoPrueba(){
     Prueba prueba = new Prueba();
     Scanner in = new Scanner(System.in);
     boolean c;
@@ -144,17 +146,61 @@ public class Prueba {
         this.obs = obs;
     }
 
+
+    public Prueba(long id, Date fechaR, long idOperarioC, String desc, String res, String obs, Maquina maquina) {
+        this.id = id;
+        this.fechaR = fechaR;
+        this.idOperarioC = idOperarioC;
+        this.desc = desc;
+        this.res = res;
+        this.obs = obs;
+        this.maquina = maquina;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIdOperarioC() {
+        return idOperarioC;
+    }
+
+    public void setIdOperarioC(long idOperarioC) {
+        this.idOperarioC = idOperarioC;
+    }
+
+    public long getIdMaquina() {
+        return idMaquina;
+    }
+
+    public void setIdMaquina(long idMaquina) {
+        this.idMaquina = idMaquina;
+    }
+
+    public Prueba(long id, Date fechaR, long idOperarioC, String desc, String res, String obs, long idMaquina) {
+        this.id = id;
+        this.fechaR = fechaR;
+        this.idOperarioC = idOperarioC;
+        this.desc = desc;
+        this.res = res;
+        this.obs = obs;
+        this.idMaquina = idMaquina;
+    }
+       
     @Override
     public String toString() {
-        return "Prueba{" + "id=" + id + ", fechaR=" + fechaR + ", operarioC=" + operarioC + ", desc=" + desc + ", res=" + res + ", obs=" + obs + ", maquina=" + maquina + '}';
+        return "Prueba:\n"
+                + "id de la prueba=" + id +"| id de la máquina=" + idMaquina + "| fecha de realización=" + fechaR + "| id Operario=" + idOperarioC + "| descripció=" + desc + "| resultado=" + res + "| observaciones=" + obs + '}';
     }
     
     public String data() {
-        return id + "|" + fechaR + "|" + operarioC + "|" + desc + "|" + res + "|" + obs + "|" + maquina;
+        return "Prueba:\n"
+                +"id de la prueba:" +this.getId() + "id de máquina:" +this.getIdMaquina()+ "| fecha de realización:" + this.getFechaR() + "|" + "|id de Operario:" + this.getIdOperarioC() + "| descripción:" + this.getDesc() + "| resultados:" + this.getRes() + "| observaciones:" + this.getObs();
     }
-    
-    
-    
     
     
     

@@ -161,11 +161,13 @@ public class Operario {
 
     @Override
     public String toString() {
-        return "Operario{" + "nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif + ", telefono=" + telefono + ", direccion=" + direccion + ", senior=" + senior + ", id=" + id + '}';
+        return "Operario:\n"
+                + "|id=" + id + "|nombre=" + nombre + "| apellidos=" + apellidos + "| nif=" + nif + "| telefono=" + telefono + "| direccion=" + direccion + "| senior=" + senior + '}';
     }
 
     public String data() {
-        return id + "|" + nombre + "|" + apellidos + "|" + nif + "|" + telefono + "|" + direccion + "|" + senior;
+        return "Operario:\n"
+                + "ID:"+ this.getId() + "|Nombre:" + this.getNombre() + "|Apellidos_" + this.getApellidos() + "|NIF:" + this.getNif() + "|Teléfono:" + this.getTelefono() + "|Dirección:" + this.getDireccion() + "|Senior:" + this.isSenior();
     }
 
     public ArrayList<Departamento> getDepartamentos() {
