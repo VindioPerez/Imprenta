@@ -168,7 +168,7 @@ public class Cliente {
                 c.setTelefono(tlfn);
                 System.out.println("Son correctos los siguiente datos?(s/n)");
                 salir = ToolBox.leerBoolean();
-            } while (salir);
+            } while (!salir);
             if (!ClienteException.comprobarTelefono(c.getTelefono())){
                 throw new ClienteException("El telefono no es valido");
             } else if(!ClienteException.comprobarNombre(c.getNombre())){

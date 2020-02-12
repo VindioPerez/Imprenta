@@ -25,6 +25,7 @@ public class Trabajo {
     private Cliente cliente;//Instancia del Cliente que solicita el trabajo
     protected long idMaquina;//variable tipo long con el id de la máquina que realiza el trabajo
     protected long idOperario;//variable tipo long con el id del operario que se encarga del trabajo
+    protected long idCliente;//variable tipo long con el id del cliente que encarga del trabajo
 
     public Trabajo() {
     }
@@ -118,7 +119,7 @@ public class Trabajo {
     }
 
     public String data() {
-        return id + "|" + fechaSolicitud + "|" + fechaRecogida;
+        return id + "|" + idCliente + "|" + idOperario + "|" + idMaquina + "|" + fechaSolicitud + "|" + fechaRecogida;
 
     }
 
