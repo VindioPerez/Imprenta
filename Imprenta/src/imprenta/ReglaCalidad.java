@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package imprenta;
-
-import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -15,16 +13,21 @@ import java.util.ArrayList;
 public class ReglaCalidad {
 
     private ArrayList<Prueba> pruebas; //ArrayList que contiene las pruebas de 0 a n 
+    private String nombre;//Nombre de la regla
+    private long idPolitica;
+    private long idRegla;
 
     public ArrayList<Prueba> getPruebas() {
         return pruebas;
     }
+    
+    public ReglaCalidad(){};
 
     public void setPruebas(ArrayList<Prueba> pruebas) {
         this.pruebas = pruebas;
     }
 
-    public static ReglaCalidad nuevoRegla() throws ParseException{
+    public static ReglaCalidad nuevoRegla(){
         ReglaCalidad regla = new ReglaCalidad();
         boolean d;
         boolean c=true;
@@ -50,12 +53,48 @@ public class ReglaCalidad {
 
     @Override
     public String toString() {
-        return "ReglaCalidad{" + "pruebas=" + pruebas + '}';
+        return "ReglaCalidad:\n"
+                + "ID regla:"+idRegla+"|Nombre:"+nombre+"|ID política:"+idPolitica;
     }
     
     public String data() {
-        return pruebas.toString();
+        return "ReglaCalidad:\n"
+                + "ID regla:"+this.getIdRegla()+"|Nombre:"+this.getNombre()+"|ID política:"+this.getIdPolitica();
     }
 
+
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public long getIdPolitica() {
+        return idPolitica;
+    }
+
+    public void setIdPolitica(long idPolitica) {
+        this.idPolitica = idPolitica;
+    }
+
+    public long getIdRegla() {
+        return idRegla;
+    }
+
+    public void setIdRegla(long idRegla) {
+        this.idRegla = idRegla;
+    }
+
+    public ReglaCalidad(String nombre, long idPolitica, long idRegla) {
+        this.nombre = nombre;
+        this.idPolitica = idPolitica;
+        this.idRegla = idRegla;
+    }
+
+    
+    
 
 }

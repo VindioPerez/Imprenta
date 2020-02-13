@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package imprenta;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
+
 
 /**
  *
@@ -24,6 +24,7 @@ public class Prueba {
     private String obs;//observaciones
     private Maquina maquina;//máquina que realiza la prueba
     private long idMaquina;//id de la maquina que realiza la prueba
+    private long idRegla;//ID de la regla que se aplica
     
     // Constructor por defecto
     public Prueba() {
@@ -181,7 +182,7 @@ public class Prueba {
         this.idMaquina = idMaquina;
     }
 
-    public Prueba(long id, Date fechaR, long idOperarioC, String desc, String res, String obs, long idMaquina) {
+    public Prueba(long id, Date fechaR, long idOperarioC, String desc, String res, String obs, long idMaquina, long idRegla) {
         this.id = id;
         this.fechaR = fechaR;
         this.idOperarioC = idOperarioC;
@@ -189,17 +190,27 @@ public class Prueba {
         this.res = res;
         this.obs = obs;
         this.idMaquina = idMaquina;
+        this.idRegla = idRegla;
     }
+
        
     @Override
     public String toString() {
         return "Prueba:\n"
-                + "id de la prueba=" + id +"| id de la máquina=" + idMaquina + "| fecha de realización=" + fechaR + "| id Operario=" + idOperarioC + "| descripció=" + desc + "| resultado=" + res + "| observaciones=" + obs + '}';
+                + "id de la prueba=" + id +"| id de la regla=" + idRegla +"| id de la máquina=" + idMaquina + "| fecha de realización=" + fechaR + "| id Operario=" + idOperarioC + "| descripció=" + desc + "| resultado=" + res + "| observaciones=" + obs + '}';
     }
     
     public String data() {
         return "Prueba:\n"
-                +"id de la prueba:" +this.getId() + "id de máquina:" +this.getIdMaquina()+ "| fecha de realización:" + this.getFechaR() + "|" + "|id de Operario:" + this.getIdOperarioC() + "| descripción:" + this.getDesc() + "| resultados:" + this.getRes() + "| observaciones:" + this.getObs();
+                +"id de la prueba:" +this.getId() + "id de máquina:" +this.getIdMaquina()+ "id de regla:" +this.getIdRegla()+  "| fecha de realización:" + this.getFechaR() + "|" + "|id de Operario:" + this.getIdOperarioC() + "| descripción:" + this.getDesc() + "| resultados:" + this.getRes() + "| observaciones:" + this.getObs();
+    }
+
+    public long getIdRegla() {
+        return idRegla;
+    }
+
+    public void setIdRegla(long idRegla) {
+        this.idRegla = idRegla;
     }
     
     
