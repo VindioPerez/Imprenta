@@ -91,7 +91,7 @@ public class Cliente {
 
     public String data() {
 
-        return id + "|" + nombre + "|" + telefono;
+        return this.getId() + "|" + this.getNombre() + "|" + this.getTelefono();
     }
 
     public static Cliente nuevoCliente() {

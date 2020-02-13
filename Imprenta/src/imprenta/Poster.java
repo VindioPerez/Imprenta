@@ -95,7 +95,7 @@ public class Poster extends Trabajo {
 
     @Override
     public String data() {
-        return getId() + "|" + getFechaSolicitud() + getRelieve() + "|" + getFechaRecogida() + "|" + this.getAlto() + "|" + this.getAncho() + "|" + this.numCopias;
+        return this.getId() + "|" + this.getAlto() + "|" + this.getAncho() + "|" + this.getNumCopias();
     }
     
     public Poster getPosterById(long id) {

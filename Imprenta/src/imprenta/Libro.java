@@ -81,7 +81,7 @@ public class Libro extends Trabajo {
     @Override
     public String data() {
 
-        return getId() + "|" + getFechaSolicitud() + "|" + getRelieve() + getFechaRecogida() + "|" + color + "|" + numPag;
+        return this.getId() + "|" + this.getNumPag() + "|" + this.getColor();
     }
     
     public Libro getLibroById(long id) {

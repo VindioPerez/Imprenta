@@ -25,6 +25,7 @@ public class Modificacion {
     private Date fechaAprob;//fecha limite aprobación del cliente
     private long idCliente;//variable con el id de cliente que solicita la modificación
     private long idTrabajo;// variable con el id del trabajo a modificar
+    private long idOImpresion;
     private Trabajo trabajo;
     
 
@@ -135,6 +136,15 @@ public class Modificacion {
         this.idTrabajo = idTrabajo;
     }
 
+    public long getIdOImpresion() {
+        return idOImpresion;
+    }
+
+    public void setIdOImpresion(long idOImpresion) {
+        this.idOImpresion = idOImpresion;
+    }
+    
+    
     //constructor por defecto
     public Modificacion() {
     }
@@ -150,7 +160,7 @@ public class Modificacion {
     }
 
     public String data() {
-        return id + "|" + operarioI + "|" + fecha + "|" + desc + "|" + aprob + "|" + fechaAprob + "|" + maquina;
+        return this.getId() + "|" + this.getIdTrabajo() + "|" + this.getIdCliente() + "|" + this.getIdOImpresion() + "|" + this.getFecha() + "|" + this.getDesc() + "|" + this.isAprob() + "|" + this.getFechaAprob();
     }
 
     @Override

@@ -108,6 +108,16 @@ public class Trabajo {
         this.idOperario = idOperario;
     }
 
+    public long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(long idCliente) {
+        this.idCliente = idCliente;
+    }
+    
+    
+
     /*
     public void setId(int id) {
         this.id = id;
@@ -119,7 +129,7 @@ public class Trabajo {
     }
 
     public String data() {
-        return id + "|" + idCliente + "|" + idOperario + "|" + idMaquina + "|" + fechaSolicitud + "|" + fechaRecogida;
+        return this.getId() + "|" + this.getIdMaquina() + "|" + this.getIdOperario() + "|" + this.getIdCliente() + "|" + this.getFechaSolicitud() + "|" + this.getFechaRecogida() + "|" + this.getRelieve();
 
     }
 

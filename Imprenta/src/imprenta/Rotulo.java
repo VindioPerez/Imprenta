@@ -65,7 +65,7 @@ public class Rotulo extends Trabajo {
 
     @Override
     public String data() {
-        return getId() + "|" + getFechaSolicitud() + getRelieve() + "|" + getFechaRecogida() + "|" + centroComercial;
+        return getId() + "|" + this.getCentroComercial();
 
     }
     
