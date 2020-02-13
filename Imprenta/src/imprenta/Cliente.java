@@ -134,10 +134,6 @@ public class Cliente {
         return c;
 
     }
-
-    
-    
-        
         
     public Trabajo crearTrabajo() throws TrabajoException{
         Trabajo t;
@@ -190,10 +186,6 @@ public class Cliente {
         c.setId(BDatos.clientes.size()+1);
         return c;}
     }
-
-
-
-
 
     public boolean aceptarModificacion(Modificacion m){
 
