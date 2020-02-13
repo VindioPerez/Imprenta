@@ -130,7 +130,6 @@ public class Trabajo {
 
     public String data() {
         return this.getId() + "|" + this.getIdMaquina() + "|" + this.getIdOperario() + "|" + this.getIdCliente() + "|" + this.getFechaSolicitud() + "|" + this.getFechaRecogida() + "|" + this.getRelieve();
-
     }
 
     public Cliente getCliente() {

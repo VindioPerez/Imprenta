@@ -66,7 +66,6 @@ public class Rotulo extends Trabajo {
     @Override
     public String data() {
         return getId() + "|" + this.getCentroComercial();
-
     }
     
     public Rotulo getRotuloById(long id) {

@@ -80,7 +80,6 @@ public class Libro extends Trabajo {
 
     @Override
     public String data() {
-
         return this.getId() + "|" + this.getNumPag() + "|" + this.getColor();
     }
     

@@ -90,7 +90,6 @@ public class Cliente {
     }
 
     public String data() {
-
         return this.getId() + "|" + this.getNombre() + "|" + this.getTelefono();
     }
 
