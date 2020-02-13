@@ -19,37 +19,27 @@ public class Rotulo extends Trabajo {
 
     private String centroComercial; //variable de tipo String que recoge el lugar de destino del trabajo
 
+    //constructor por argumentos
     public Rotulo(String centroComercial, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
         this.centroComercial = centroComercial;
     }
 
+    //constructor por defecto
     public Rotulo() {
     }
 
+    //constructor de copia
     public Rotulo(Rotulo r) {
         this.centroComercial = r.getCentroComercial();
     }
     
+    //constructor desde clase padre
     public Rotulo(Trabajo t) throws TrabajoException {
         super(t);
     }
     
-    public static Rotulo nuevoRotulo() throws ParseException, TrabajoException{
-        Rotulo r = new Rotulo(Trabajo.nuevoTrabajo());
-        Scanner in = new Scanner(System.in);
-        boolean c;
-        do {
-            System.out.println("Introduzca el centro comercial");
-            String cen = in.nextLine();
-            r.setCentroComercial(cen);
-            System.out.println("¿Son correctos estos datos? (s/n)");
-            System.out.println("Centro comercial: " + cen);
-            c = ToolBox.leerBoolean();
-        } while (!c);
-        return r;
-    }
-
+    //getters y setters
     public String getCentroComercial() {
         return centroComercial;
     }
@@ -57,7 +47,8 @@ public class Rotulo extends Trabajo {
     public void setCentroComercial(String centroComercial) {
         this.centroComercial = centroComercial;
     }
-
+    
+    //getAll, getById, data y toString
     @Override
     public String toString() {
         return "Rotulo{" + "direccion=" + centroComercial + '}';
@@ -79,6 +70,22 @@ public class Rotulo extends Trabajo {
         /*Este método devolverá un arrayList con todos los rotulos existentes*/
         ArrayList<Rotulo> o = new ArrayList<>();
         return o;
+    }
+    
+    //metodos propios
+    public static Rotulo nuevoRotulo() throws ParseException, TrabajoException{
+        Rotulo r = new Rotulo(Trabajo.nuevoTrabajo());
+        Scanner in = new Scanner(System.in);
+        boolean c;
+        do {
+            System.out.println("Introduzca el centro comercial");
+            String cen = in.nextLine();
+            r.setCentroComercial(cen);
+            System.out.println("¿Son correctos estos datos? (s/n)");
+            System.out.println("Centro comercial: " + cen);
+            c = ToolBox.leerBoolean();
+        } while (!c);
+        return r;
     }
     
     public static Rotulo encargo (Cliente c) throws TrabajoException{

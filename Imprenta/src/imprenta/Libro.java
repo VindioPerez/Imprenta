@@ -20,43 +20,29 @@ public class Libro extends Trabajo {
     private int numPag;//variable tipo int que recoge el número de páginas que tiene el libro;
     private String color; //variable tipo String que recoge el color del libro
 
+    //constructor por defecto
     public Libro() {
     }
 
+    //constructor por argumentos
     public Libro(int numPag, String color, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
         this.numPag = numPag;
         this.color = color;
     }
 
+    //constructor de copia
     public Libro(Libro l) {
         this.color = l.getColor();
         this.numPag = l.getNumPag();
     }
 
+    //constructor desde clase padre
     public Libro(Trabajo t) throws TrabajoException {
         super(t);
     }
-
-    public static Libro nuevoLibro() throws TrabajoException{
-        Libro l = new Libro(Trabajo.nuevoTrabajo());
-        Scanner in = new Scanner(System.in);
-        boolean c;
-        do {
-            System.out.println("Introduzca el número de páginas");
-            int num = in.nextInt();
-            l.setNumPag(num);
-            System.out.println("Introduzca el color");
-            String col = in.nextLine();
-            l.setColor(col);
-            System.out.println("¿Son correctos estos datos? (s/n)");
-            System.out.println("Número de páginas: " + num);
-            System.out.println("Color: " + col);
-            c = ToolBox.leerBoolean();
-        } while (!c);
-        return l;
-    }
-
+    
+    //getters y setters
     public int getNumPag() {
         return numPag;
     }
@@ -72,7 +58,8 @@ public class Libro extends Trabajo {
     public void setColor(String color) {
         this.color = color;
     }
-
+    
+    //getAll, getById, data y toString
     @Override
     public String toString() {
         return "Libro{" + "numPag=" + numPag + ", color=" + color + '}';
@@ -94,6 +81,26 @@ public class Libro extends Trabajo {
         /*Este método devolverá un arrayList con todos los libros existentes*/
         ArrayList<Libro> o = new ArrayList<>();
         return o;
+    }
+    
+    //metodos propios
+    public static Libro nuevoLibro() throws TrabajoException{
+        Libro l = new Libro(Trabajo.nuevoTrabajo());
+        Scanner in = new Scanner(System.in);
+        boolean c;
+        do {
+            System.out.println("Introduzca el número de páginas");
+            int num = in.nextInt();
+            l.setNumPag(num);
+            System.out.println("Introduzca el color");
+            String col = in.nextLine();
+            l.setColor(col);
+            System.out.println("¿Son correctos estos datos? (s/n)");
+            System.out.println("Número de páginas: " + num);
+            System.out.println("Color: " + col);
+            c = ToolBox.leerBoolean();
+        } while (!c);
+        return l;
     }
 
     public static Libro encargo (Cliente c) throws TrabajoException{

@@ -21,9 +21,11 @@ public class Poster extends Trabajo {
     private double ancho;//variable tipo integer que recoge el ancho del poster
     private int numCopias;//variable tipo integer que recoge el número de copias de los posters solicitados
 
+    //constructor por defecto
     public Poster() {
     }
 
+    //constructor por argumentos
     public Poster(double alto, double ancho, int numCopias, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
         this.alto = alto;
@@ -31,39 +33,19 @@ public class Poster extends Trabajo {
         this.numCopias = numCopias;
     }
 
+    //constructor de copia
     public Poster(Poster p) {
         this.alto = p.getAlto();
         this.ancho = p.getAncho();
         this.numCopias = p.getNumCopias();
     }
 
+    //constructor desde clase padre
     public Poster(Trabajo t) throws TrabajoException {
         super(t);
     }
-
-    public static Poster nuevoPoster() throws TrabajoException{
-        Poster p = new Poster(Trabajo.nuevoTrabajo());
-        Scanner in = new Scanner(System.in);
-        boolean c;
-        do {
-            System.out.println("Introduzca el alto en cm");
-            double alt = in.nextDouble();
-            p.setAlto(alt);
-            System.out.println("Introduzca el ancho en cm");
-            double anc = in.nextDouble();
-            p.setAncho(anc);
-            System.out.println("Introduzca el número de copias");
-            int num = in.nextInt();
-            p.setNumCopias(num);
-            System.out.println("¿Son correctos estos datos? (s/n)");
-            System.out.println("Alto (cm): " + alt);
-            System.out.println("Ancho (cm): " + anc);
-            System.out.println("Número de copias: " + num);
-            c = ToolBox.leerBoolean();
-        } while (!c);
-        return p;
-    }
-
+    
+    //getters y setters
     public double getAlto() {
         return alto;
     }
@@ -87,7 +69,8 @@ public class Poster extends Trabajo {
     public void setNumCopias(int numCopias) {
         this.numCopias = numCopias;
     }
-
+    
+    //getAll, getById, data y toString
     @Override
     public String toString() {
         return "Poster{" + "alto=" + alto + ", ancho=" + ancho + ", numCopias=" + numCopias + '}';
@@ -109,6 +92,30 @@ public class Poster extends Trabajo {
         /*Este método devolverá un arrayList con todos los posters existentes*/
         ArrayList<Poster> o = new ArrayList<>();
         return o;
+    }
+
+    //metodos propios
+    public static Poster nuevoPoster() throws TrabajoException{
+        Poster p = new Poster(Trabajo.nuevoTrabajo());
+        Scanner in = new Scanner(System.in);
+        boolean c;
+        do {
+            System.out.println("Introduzca el alto en cm");
+            double alt = in.nextDouble();
+            p.setAlto(alt);
+            System.out.println("Introduzca el ancho en cm");
+            double anc = in.nextDouble();
+            p.setAncho(anc);
+            System.out.println("Introduzca el número de copias");
+            int num = in.nextInt();
+            p.setNumCopias(num);
+            System.out.println("¿Son correctos estos datos? (s/n)");
+            System.out.println("Alto (cm): " + alt);
+            System.out.println("Ancho (cm): " + anc);
+            System.out.println("Número de copias: " + num);
+            c = ToolBox.leerBoolean();
+        } while (!c);
+        return p;
     }
     
     public static Poster encargo (Cliente c) throws TrabajoException {

@@ -17,31 +17,84 @@ import java.util.Scanner;
  */
 public class Modificacion {
 
-    protected long id;// idenitficador 
-    private OImpresion operarioI; //operarios que realizan la modificación
-    private Date fecha; //fecha de realización
-    private String desc; //descripción del cambio
+    protected long id;//idenitficador 
+    private OImpresion operarioI;//operarios que realizan la modificación
+    private Date fecha;//fecha de realización
+    private String desc;//descripción del cambio
     private boolean aprob;//aprobacion del cliente
     private Date fechaAprob;//fecha limite aprobación del cliente
     private long idCliente;//variable con el id de cliente que solicita la modificación
-    private long idTrabajo;// variable con el id del trabajo a modificar
-    private long idOImpresion;
-    private Trabajo trabajo;
+    private long idTrabajo;//variable con el id del trabajo a modificar
+    private long idOImpresion;//variable con el id del operario de impresion que crea la modificacion
+    private Trabajo trabajo;//trabajo sobre el que se crea la modificacion
     
+    
+    
+    //constructores con argumentos
+    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,OImpresion operarioI) {
+        this.operarioI = operarioI;
+        this.fecha = fecha;
+        this.desc = desc;
+        this.aprob = aprob;
+        this.fechaAprob = fechaAprob;
+    }    
+    
+    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,Trabajo trabajo,OImpresion operarioI) {
+        this.operarioI = operarioI;
+        this.fecha = fecha;
+        this.desc = desc;
+        this.aprob = aprob;
+        this.fechaAprob = fechaAprob;
+        this.trabajo = trabajo;
+    }
+    
+    //constructor por defecto
+    public Modificacion() {
+    }
+
+    //constructor de copia
+    public Modificacion(Modificacion m) {
+        this.operarioI = m.getOperarioI();
+        this.fecha = m.getFecha();
+        this.desc = m.getDesc();
+        this.aprob = m.isAprob();
+        this.fechaAprob = m.getFechaAprob();
+    }
+
+    //getters y setters
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public OImpresion getOperarioI() {
+        return operarioI;
+    }
+
+    public void setOperarioI(OImpresion operarioI) {
+        this.operarioI = operarioI;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
     public String getDesc() {
         return desc;
-    }
-
-    public boolean isAprob() {
-        return aprob;
     }
 
     public void setDesc(String desc) {
         this.desc = desc;
     }
 
-    public boolean getAprob() {
+    public boolean isAprob() {
         return aprob;
     }
 
@@ -55,69 +108,6 @@ public class Modificacion {
 
     public void setFechaAprob(Date fechaAprob) {
         this.fechaAprob = fechaAprob;
-    }
-    Maquina maquina;//maquina que la realiza
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getdesc() {
-        return desc;
-    }
-
-    public void setdesc(String desc) {
-        this.desc = desc;
-    }
-
-    public Maquina getMaquina() {
-        return maquina;
-    }
-
-    public void setMaquina(Maquina maquina) {
-        this.maquina = maquina;
-    }
-
-    //constructor con argumentos
-    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,OImpresion operarioI) {
-        this.operarioI = operarioI;
-        this.fecha = fecha;
-        this.desc = desc;
-        this.aprob = aprob;
-        this.fechaAprob = fechaAprob;
-        this.maquina = maquina;
-    }
-    
-    
-    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,Trabajo trabajo,OImpresion operarioI) {
-        this.operarioI = operarioI;
-        this.fecha = fecha;
-        this.desc = desc;
-        this.aprob = aprob;
-        this.fechaAprob = fechaAprob;
-        this.maquina = maquina;
-        this.trabajo = trabajo;
-    }
-    
-
-    public OImpresion getOperarios() {
-        return operarioI;
-    }
-
-    public void setOperarios(OImpresion operarioi) {
-        this.operarioI = operarioi;
     }
 
     public long getIdCliente() {
@@ -143,31 +133,44 @@ public class Modificacion {
     public void setIdOImpresion(long idOImpresion) {
         this.idOImpresion = idOImpresion;
     }
-    
-    
-    //constructor por defecto
-    public Modificacion() {
+
+    public Trabajo getTrabajo() {
+        return trabajo;
     }
 
-    //constructor de copia
-    public Modificacion(Modificacion m) {
-        this.operarioI = m.getOperarios();
-        this.fecha = m.getFecha();
-        this.desc = m.getDesc();
-        this.aprob = m.getAprob();
-        this.fechaAprob = m.getFechaAprob();
-        this.maquina = m.getMaquina();
+    public void setTrabajo(Trabajo trabajo) {
+        this.trabajo = trabajo;
     }
 
+    //data y toString
     public String data() {
         return this.getId() + "|" + this.getIdTrabajo() + "|" + this.getIdCliente() + "|" + this.getIdOImpresion() + "|" + this.getFecha() + "|" + this.getDesc() + "|" + this.isAprob() + "|" + this.getFechaAprob();
     }
 
     @Override
     public String toString() {
-        return "Modificacion{" + "id=" + id + ", operario=" + operarioI + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", maquina=" + maquina + ", trabajo="+ trabajo.toString()+'}';
+        return "Modificacion{" + "id=" + id + ", operario=" + operarioI + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", trabajo="+ trabajo.toString()+'}';
+    }
+    
+    public Modificacion getModificacionById(long idModificacion) {
+
+        Modificacion t = new Modificacion();
+        /*
+        Este método se encarga de recorrer un arraylist con las modificaciones, si el 
+        id de parametro coincide con el del modificacion se devuelve esa modificacion sino
+        se devuelve null
+         */
+
+        return t;
+        }
+    
+    public ArrayList<Modificacion> getAllModificacion() {
+        /*Este método devolverá un arrayList con todos los libros existentes*/
+        ArrayList<Modificacion> o = new ArrayList<>();
+        return o;
     }
 
+    //metodos propios
     public static Modificacion nuevaModificacion(){
         Modificacion m = new Modificacion();
         Scanner in = new Scanner(System.in);
@@ -214,36 +217,5 @@ public class Modificacion {
 
         } while (!salir);
         return m;
-    }
-
-        public Modificacion getModificacionById(long idModificacion) {
-
-        Modificacion t = new Modificacion();
-        /*
-        Este método se encarga de recorrer un arraylist con las modificaciones, si el 
-        id de parametro coincide con el del modificacion se devuelve esa modificacion sino
-        se devuelve null
-         */
-
-        return t;
-        }
-
-    public Trabajo getTrabajo() {
-        return trabajo;
-    }
-
-    public void setTrabajo(Trabajo trabajo) {
-        this.trabajo = trabajo;
-    }
-
-    public OImpresion getOperarioI() {
-        return operarioI;
-    }
-
-    public void setOperarioI(OImpresion operarioI) {
-        this.operarioI = operarioI;
-    }
-        
-       
-        
+    }    
 }

@@ -8,6 +8,7 @@ package imprenta;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -27,9 +28,11 @@ public class Trabajo {
     protected long idOperario;//variable tipo long con el id del operario que se encarga del trabajo
     protected long idCliente;//variable tipo long con el id del cliente que encarga del trabajo
 
+    //constructor por defecto
     public Trabajo() {
     }
 
+    //constructor por argumentos
     public Trabajo(Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
 
         if (!TrabajoException.comprobarRelieve(relieve)) {
@@ -46,7 +49,27 @@ public class Trabajo {
         this.relieve = relieve;
         }
     }
-
+    
+    //constructor de copia
+    public Trabajo(Trabajo t) throws TrabajoException {
+        if (!TrabajoException.comprobarRelieve(relieve)) {
+            throw new TrabajoException("El relieve no es válido");
+        }
+        else if (!TrabajoException.comprobarId(id)) {
+            throw new TrabajoException("El id no es valido");
+        }else if(!TrabajoException.comprobarFechaRec(fechaRecogida, fechaSolicitud)){
+            throw new TrabajoException("La fecha de recogida no es válida.");
+        }else if(!TrabajoException.comprobarFechaSol(fechaSolicitud, fechaRecogida)){
+            throw new TrabajoException("La fecha de solicitud no es válida.");
+        }else{
+        this.id = t.getId();
+        this.fechaRecogida = t.fechaRecogida;
+        this.fechaSolicitud = t.fechaSolicitud;
+        this.relieve = t.relieve;
+        }
+    }
+   
+    //getters y setters
     public String getRelieve() {
         return relieve;
     }
@@ -74,27 +97,16 @@ public class Trabajo {
 
         this.fechaRecogida = fechaRecogida;
     }
-
-    public Trabajo(Trabajo t) throws TrabajoException {
-        if (!TrabajoException.comprobarRelieve(relieve)) {
-            throw new TrabajoException("El relieve no es válido");
-        }
-        else if (!TrabajoException.comprobarId(id)) {
-            throw new TrabajoException("El id no es valido");
-        }else if(!TrabajoException.comprobarFechaRec(fechaRecogida, fechaSolicitud)){
-            throw new TrabajoException("La fecha de recogida no es válida.");
-        }else if(!TrabajoException.comprobarFechaSol(fechaSolicitud, fechaRecogida)){
-            throw new TrabajoException("La fecha de solicitud no es válida.");
-        }else{
-        this.id = t.getId();
-        this.fechaRecogida = t.fechaRecogida;
-        this.fechaSolicitud = t.fechaSolicitud;
-        this.relieve = t.relieve;
-        }
-    }
-
+    
     public long getId() {
         return id;
+    }
+    
+    public void setId(long id) throws TrabajoException {
+        if (!TrabajoException.comprobarId(id)) {
+            throw new TrabajoException("El id no es valido");
+        }
+        this.id = id;
     }
 
     public long getIdOperario() {
@@ -116,22 +128,18 @@ public class Trabajo {
         this.idCliente = idCliente;
     }
     
+    public long getIdMaquina() {
+        return idMaquina;
+    }
+
+    public void setIdMaquina(long idMaquina) throws TrabajoException {
+        if (!TrabajoException.comprobarId(idMaquina)) {
+            throw new TrabajoException("El id no es valido");
+        }
+
+        this.idMaquina = idMaquina;
+    }
     
-
-    /*
-    public void setId(int id) {
-        this.id = id;
-    }
-     */
-    @Override
-    public String toString() {
-        return "Trabajo{" + "id=" + id + ", fechaSolicitud=" + fechaSolicitud + ", fechaRecogida=" + fechaRecogida + '}';
-    }
-
-    public String data() {
-        return this.getId() + "|" + this.getIdMaquina() + "|" + this.getIdOperario() + "|" + this.getIdCliente() + "|" + this.getFechaSolicitud() + "|" + this.getFechaRecogida() + "|" + this.getRelieve();
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -143,17 +151,15 @@ public class Trabajo {
 
         this.cliente = cliente;
     }
-
-    public long getIdMaquina() {
-        return idMaquina;
+    
+    //getAll, getById, data y toString
+    @Override
+    public String toString() {
+        return "Trabajo{" + "id=" + id + ", fechaSolicitud=" + fechaSolicitud + ", fechaRecogida=" + fechaRecogida + '}';
     }
 
-    public void setIdMaquina(long idMaquina) throws TrabajoException {
-        if (!TrabajoException.comprobarId(idMaquina)) {
-            throw new TrabajoException("El id no es valido");
-        }
-
-        this.idMaquina = idMaquina;
+    public String data() {
+        return this.getId() + "|" + this.getIdMaquina() + "|" + this.getIdOperario() + "|" + this.getIdCliente() + "|" + this.getFechaSolicitud() + "|" + this.getFechaRecogida() + "|" + this.getRelieve();
     }
 
     public static Trabajo getTrabajoById(long idTrabajo) throws TrabajoException {
@@ -167,9 +173,15 @@ public class Trabajo {
             }
         }
         return null;
-
+    }
+    
+    public ArrayList<Trabajo> getAllTrabajo() {
+        /*Este método devolverá un arrayList con todos los rotulos existentes*/
+        ArrayList<Trabajo> o = new ArrayList<>();
+        return o;
     }
 
+    //metodos propios
     public static Trabajo nuevoTrabajo() throws TrabajoException {
         Trabajo t = new Trabajo();
         Scanner in = new Scanner(System.in);
@@ -348,11 +360,6 @@ public class Trabajo {
 
     }
 
-    public void setId(long id) throws TrabajoException {
-        if (!TrabajoException.comprobarId(id)) {
-            throw new TrabajoException("El id no es valido");
-        }
-        this.id = id;
-    }
+    
 
 }
