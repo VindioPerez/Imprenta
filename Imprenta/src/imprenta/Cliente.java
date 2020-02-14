@@ -134,11 +134,10 @@ public class Cliente {
                 buffer = new BufferedReader(lector);
                 String linea;
                 while((linea=buffer.readLine())!=null){
-                    int indice1 = linea.indexOf('|',0);
-                    int indice2 = linea.indexOf('|',1);
-                    long id = Long.parseLong(linea.substring(0, indice1));
-                    String nombre = linea.substring(indice1+1, indice2);
-                    String telefono = linea.substring(indice2+1);
+                    String[] campos = linea.split("|");
+                    long id = Long.parseLong(campos[0]);
+                    String nombre = campos[1];
+                    String telefono = campos[2];
                     Cliente c = new Cliente(nombre, telefono, id);
                     ret.add(c);                   
                 }
