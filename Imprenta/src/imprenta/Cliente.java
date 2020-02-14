@@ -1,5 +1,12 @@
 package imprenta;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -114,6 +121,82 @@ public class Cliente {
         ArrayList<Cliente> o = new ArrayList<>();
         return o;
     }
+    
+    //lectura y escritura
+    public static ArrayList<Cliente> fromTextFile (String path) {
+        ArrayList<Cliente> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    int indice1 = linea.indexOf('|',0);
+                    int indice2 = linea.indexOf('|',1);
+                    long id = Long.parseLong(linea.substring(0, indice1));
+                    String nombre = linea.substring(indice1+1, indice2);
+                    String telefono = linea.substring(indice2+1);
+                    Cliente c = new Cliente(nombre, telefono, id);
+                    ret.add(c);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(ClienteException e){
+            System.out.println("Se ha producido una ClienteException");
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+        return ret;
+    }
+    
+    public static ArrayList<Cliente> fromBinaryFile (String path) {
+        ArrayList<Cliente> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Cliente c;
+                while((c = (Cliente)lectorObjeto.readObject())!=null)
+                    ret.add(c);
+            }finally{
+                if(lector!=null)
+                    lector.close();
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+            }
+        }
+        catch(ClienteException e){
+            System.out.println("Se ha producido una ClienteException");
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("Se ha producido una ClassNotFoundException");
+        }
+        return ret;
+    }
+
 
     //metodos propios
     public static Cliente nuevoCliente() {
