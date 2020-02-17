@@ -4,9 +4,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -193,7 +197,63 @@ public class Cliente {
         catch(ClassNotFoundException e){
             System.out.println("Se ha producido una ClassNotFoundException");
         }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
         return ret;
+    }
+    
+    public void toTextFile (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero);
+                buffer = new PrintWriter(escritor);
+                buffer.println(this.data());
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+    
+    public void toBinaryFile (String path) {
+        FileOutputStream escritor = null;
+        ObjectOutputStream escritorObjeto = null;
+        try{
+            try{
+                escritor = new FileOutputStream(path);
+                escritorObjeto = new ObjectOutputStream(escritor);
+                escritorObjeto.writeObject(this);
+            }finally{
+                if(escritor!=null)
+                    escritor.close();
+                if(escritorObjeto!=null)
+                    escritorObjeto.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
     }
 
 
