@@ -138,7 +138,7 @@ public class Cliente {
                 buffer = new BufferedReader(lector);
                 String linea;
                 while((linea=buffer.readLine())!=null){
-                    String[] campos = linea.split("|");
+                    String[] campos = linea.split("\\|");
                     long id = Long.parseLong(campos[0]);
                     String nombre = campos[1];
                     String telefono = campos[2];
@@ -179,10 +179,10 @@ public class Cliente {
                 while((c = (Cliente)lectorObjeto.readObject())!=null)
                     ret.add(c);
             }finally{
-                if(lector!=null)
-                    lector.close();
                 if(lectorObjeto!=null)
                     lectorObjeto.close();
+                if(lector!=null)
+                    lector.close();
             }
         }
         catch(ClienteException e){
@@ -238,11 +238,11 @@ public class Cliente {
                 escritor = new FileOutputStream(path);
                 escritorObjeto = new ObjectOutputStream(escritor);
                 escritorObjeto.writeObject(this);
-            }finally{
-                if(escritor!=null)
-                    escritor.close();
+            }finally{                
                 if(escritorObjeto!=null)
                     escritorObjeto.close();
+                if(escritor!=null)
+                    escritor.close();
             }
         }
         catch(FileNotFoundException e){
