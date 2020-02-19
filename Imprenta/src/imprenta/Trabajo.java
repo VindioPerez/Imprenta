@@ -5,7 +5,20 @@
  */
 package imprenta;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -47,6 +60,25 @@ public class Trabajo {
         this.fechaSolicitud = fechaSolicitud;
         this.fechaRecogida = fechaRecogida;
         this.relieve = relieve;
+        }
+    }
+    public Trabajo(long id, long idMaq, long idOpe, long idCli, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException{
+        if (!TrabajoException.comprobarRelieve(relieve)) {
+            throw new TrabajoException("El relieve no es válido");
+        }
+        else if(!TrabajoException.comprobarFechaSol(fechaSolicitud, fechaRecogida)){
+            throw new TrabajoException("La fecha de solicitud no puede ser posterios a la de recogida.");
+        }
+        else if(!TrabajoException.comprobarFechaRec(fechaRecogida, fechaSolicitud)){
+            throw new TrabajoException("La fecha de recogida no puede ser anterior a la de solicitud.");
+        }else{
+            this.id = id;
+            this.idMaquina = idMaq;
+            this.idOperario = idOpe;
+            this.idCliente = idCli;
+            this.fechaSolicitud = fechaSolicitud;
+            this.fechaRecogida = fechaRecogida;
+            this.relieve = relieve;
         }
     }
     
@@ -179,6 +211,135 @@ public class Trabajo {
         /*Este método devolverá un arrayList con todos los rotulos existentes*/
         ArrayList<Trabajo> o = new ArrayList<>();
         return o;
+    }
+    
+    //lectura y escritura
+    public static ArrayList<Trabajo> readTrabajoFromTextFile (String path) {
+        ArrayList<Trabajo> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    long id = Long.parseLong(campos[0]);
+                    long idMaq = Long.parseLong(campos[1]);
+                    long idOpe = Long.parseLong(campos[2]);
+                    long idCli = Long.parseLong(campos[3]);
+                    Date fSol = df.parse(campos[4]);
+                    Date fRec = df.parse(campos[5]);
+                    String relieve = campos[6];
+                    Trabajo c = new Trabajo(id, idMaq, idOpe, idCli, fSol, fRec, relieve);
+                    ret.add(c);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(TrabajoException e){
+            System.out.println("Se ha producido una TrabajoException");
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+        return ret;
+    }
+    
+    public static ArrayList<Trabajo> readTrabajoFromBinaryFile (String path) {
+        ArrayList<Trabajo> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Trabajo c;
+                while((c = (Trabajo)lectorObjeto.readObject())!=null){
+                    ret.add(c);
+                    lector.skip(4);}
+            }finally{
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(EOFException e){
+            System.out.println("Final de fichero");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException: "+e.getMessage());
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("Se ha producido una ClassNotFoundException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+        return ret;
+    }
+    
+    public void writeTrabajoToTextFile (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero, true);
+                buffer = new PrintWriter(escritor);
+                buffer.print(this.data()+"\r\n");
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+    }
+    
+    public void writeTrabajoToBinaryFile (String path) {
+        try{
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(this);
+            escritor.flush();
+            escritor.close();
+        }       
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
     }
 
     //metodos propios

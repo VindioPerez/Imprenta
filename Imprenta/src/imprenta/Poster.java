@@ -1,5 +1,17 @@
 package imprenta;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +40,13 @@ public class Poster extends Trabajo {
     //constructor por argumentos
     public Poster(double alto, double ancho, int numCopias, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
+        this.alto = alto;
+        this.ancho = ancho;
+        this.numCopias = numCopias;
+    }
+    
+    public Poster(long id, double alto, double ancho, int numCopias){
+        this.id = id;
         this.alto = alto;
         this.ancho = ancho;
         this.numCopias = numCopias;
@@ -92,6 +111,128 @@ public class Poster extends Trabajo {
         /*Este método devolverá un arrayList con todos los posters existentes*/
         ArrayList<Poster> o = new ArrayList<>();
         return o;
+    }
+    
+    //lectura y escritura
+    public static ArrayList<Poster> readPosterFromTextFile (String path) {
+        ArrayList<Poster> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    double alto = Double.parseDouble(campos[1]);
+                    double ancho = Double.parseDouble(campos[2]);
+                    int numCopias = Integer.parseInt(campos[3]);
+                    Poster c = new Poster(id, alto, ancho, numCopias);
+                    ret.add(c);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+        return ret;
+    }
+    
+    public static ArrayList<Poster> readPosterFromBinaryFile (String path) {
+        ArrayList<Poster> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Poster c;
+                while((c = (Poster)lectorObjeto.readObject())!=null){
+                    ret.add(c);
+                    lector.skip(4);}
+            }finally{
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(EOFException e){
+            System.out.println("Final de fichero");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException: "+e.getMessage());
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("Se ha producido una ClassNotFoundException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+        return ret;
+    }
+    
+    public void writePosterToTextFile (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero, true);
+                buffer = new PrintWriter(escritor);
+                buffer.print(this.data()+"\r\n");
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+    }
+    
+    public void writePosterToBinaryFile (String path) {
+        try{
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(this);
+            escritor.flush();
+            escritor.close();
+        }       
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
     }
 
     //metodos propios

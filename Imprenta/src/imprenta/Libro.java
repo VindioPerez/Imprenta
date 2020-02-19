@@ -1,6 +1,7 @@
 package imprenta;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -100,7 +101,7 @@ public class Libro extends Trabajo {
     }
     
     //lectura y escritura
-    public static ArrayList<Libro> fromTextFile (String path) {
+    public static ArrayList<Libro> readLibroFromTextFile (String path) {
         ArrayList<Libro> ret = new ArrayList<>();
         File fichero = new File(path);
         FileReader lector = null;
@@ -126,18 +127,18 @@ public class Libro extends Trabajo {
             }
         }
         catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException");
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
         }
         catch(IOException e){
-            System.out.println("Se ha producido una IOException");
+            System.out.println("Se ha producido una IOException"+e.getMessage());
         }
         catch(Exception e){
-            System.out.println("Se ha producido una Exception");
+            System.out.println("Se ha producido una Exception"+e.getMessage());
         }
         return ret;
     }
     
-    public static ArrayList<Libro> fromBinaryFile (String path) {
+    public static ArrayList<Libro> readLibroFromBinaryFile (String path) {
         ArrayList<Libro> ret = new ArrayList<>();
         FileInputStream lector = null;
         ObjectInputStream lectorObjeto = null;
@@ -146,39 +147,43 @@ public class Libro extends Trabajo {
                 lector = new FileInputStream(path);
                 lectorObjeto = new ObjectInputStream(lector);
                 Libro c;
-                while((c = (Libro)lectorObjeto.readObject())!=null)
+                while((c = (Libro)lectorObjeto.readObject())!=null){
                     ret.add(c);
+                    lector.skip(4);}
             }finally{
-                if(lector!=null)
-                    lector.close();
                 if(lectorObjeto!=null)
                     lectorObjeto.close();
+                if(lector!=null)
+                    lector.close();
             }
         }
         catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException");
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(EOFException e){
+            System.out.println("Final de fichero");
         }
         catch(IOException e){
-            System.out.println("Se ha producido una IOException");
+            System.out.println("Se ha producido una IOException: "+e.getMessage());
         }
         catch(ClassNotFoundException e){
-            System.out.println("Se ha producido una ClassNotFoundException");
+            System.out.println("Se ha producido una ClassNotFoundException"+e.getMessage());
         }
         catch(Exception e){
-            System.out.println("Se ha producido una Exception");
+            System.out.println("Se ha producido una Exception"+e.getMessage());
         }
         return ret;
     }
     
-    public void toTextFile (String path){
+    public void writeLibroToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
         PrintWriter buffer = null ;
         try {
             try {
-                escritor = new FileWriter(fichero);
+                escritor = new FileWriter(fichero, true);
                 buffer = new PrintWriter(escritor);
-                buffer.println(this.data());
+                buffer.print(this.data()+"\r\n");
             }finally{
                 if(buffer!=null)
                     buffer.close();
@@ -187,39 +192,32 @@ public class Libro extends Trabajo {
             }
         }
         catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException");
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
         }
         catch(IOException e){
-            System.out.println("Se ha producido una IOException");
+            System.out.println("Se ha producido una IOException"+e.getMessage());
         }
         catch(Exception e){
-            System.out.println("Se ha producido una Exception");
+            System.out.println("Se ha producido una Exception"+e.getMessage());
         }
     }
     
-    public void toBinaryFile (String path) {
-        FileOutputStream escritor = null;
-        ObjectOutputStream escritorObjeto = null;
+    public void writeLibroToBinaryFile (String path) {
         try{
-            try{
-                escritor = new FileOutputStream(path);
-                escritorObjeto = new ObjectOutputStream(escritor);
-                escritorObjeto.writeObject(this);
-            }finally{
-                if(escritor!=null)
-                    escritor.close();
-                if(escritorObjeto!=null)
-                    escritorObjeto.close();
-            }
-        }
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(this);
+            escritor.flush();
+            escritor.close();
+        }       
         catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException");
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
         }
         catch(IOException e){
-            System.out.println("Se ha producido una IOException");
+            System.out.println("Se ha producido una IOException"+e.getMessage());
         }
         catch(Exception e){
-            System.out.println("Se ha producido una Exception");
+            System.out.println("Se ha producido una Exception"+e.getMessage());
         }
     }
     

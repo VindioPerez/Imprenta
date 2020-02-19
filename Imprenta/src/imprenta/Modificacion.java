@@ -5,7 +5,20 @@
  */
 package imprenta;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -46,6 +59,17 @@ public class Modificacion {
         this.aprob = aprob;
         this.fechaAprob = fechaAprob;
         this.trabajo = trabajo;
+    }
+    
+    public Modificacion(long id, long idTra, long idCli, long idOpe, Date fecha, String desc, boolean aprob, Date fApro){
+        this.id = id;
+        this.idCliente = idCli;
+        this.idOImpresion = idOpe;
+        this.idTrabajo = idTra;
+        this.fecha = fecha;
+        this.desc = desc;
+        this.aprob = aprob;
+        this.fechaAprob = fApro;
     }
     
     //constructor por defecto
@@ -168,6 +192,133 @@ public class Modificacion {
         /*Este método devolverá un arrayList con todos los libros existentes*/
         ArrayList<Modificacion> o = new ArrayList<>();
         return o;
+    }
+    
+    //lectura y escritura
+    public static ArrayList<Modificacion> readModificacionFromTextFile (String path) {
+        ArrayList<Modificacion> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    long id = Long.parseLong(campos[0]);
+                    long idTra = Long.parseLong(campos[1]);
+                    long idCli = Long.parseLong(campos[2]);
+                    long idOpe = Long.parseLong(campos[3]);
+                    Date fecha = df.parse(campos[4]);
+                    String desc = campos[5];
+                    boolean aprob = Boolean.parseBoolean(campos[6]);
+                    Date fApro = df.parse(campos[7]);
+                    Modificacion c = new Modificacion(id, idTra, idCli, idOpe, fecha, desc, aprob, fApro);
+                    ret.add(c);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+        return ret;
+    }
+    
+    public static ArrayList<Modificacion> readModificacionFromBinaryFile (String path) {
+        ArrayList<Modificacion> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Modificacion c;
+                while((c = (Modificacion)lectorObjeto.readObject())!=null){
+                    ret.add(c);
+                    lector.skip(4);}
+            }finally{
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(EOFException e){
+            System.out.println("Final de fichero");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException: "+e.getMessage());
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("Se ha producido una ClassNotFoundException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+        return ret;
+    }
+    
+    public void writeModificacionToTextFile (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero, true);
+                buffer = new PrintWriter(escritor);
+                buffer.print(this.data()+"\r\n");
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
+    }
+    
+    public void writeModificacionToBinaryFile (String path) {
+        try{
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(this);
+            escritor.flush();
+            escritor.close();
+        }       
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException"+e.getMessage());
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception"+e.getMessage());
+        }
     }
 
     //metodos propios
