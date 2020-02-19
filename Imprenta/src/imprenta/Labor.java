@@ -253,6 +253,7 @@ public class Labor {
         }
     }
 
+    // El orden de los campos es el siguiente: id- fechaini-tarea-maquina-operariosM-idMaquina-estado-maquina;
     public String data() {
         return id + "|" + fechaini + "|" + fechafin + "|" + tarea + "|" + maquina + "|" + operariosM + "|" + idMaquina + "|" + estado + "|" + maquina ;
 

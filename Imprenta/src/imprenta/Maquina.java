@@ -4,6 +4,17 @@
  * and open the template in the editor.
  */
 package imprenta;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -141,7 +152,8 @@ public class Maquina {
         this.volTinta = volTinta;
         this.capMax = capMax;
     }
-     
+    
+    
     //constructor por defecto
     public Maquina() {
     }
@@ -155,7 +167,124 @@ public class Maquina {
         this.volTinta = q.getVolTinta();
         this.capMax = q.getCapMax();
     }
+    
+    
+    public static ArrayList<Maquina> readMaquinaFromTextFile(String path) {
+        ArrayList<Maquina> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while ((linea = buffer.readLine()) != null) {
+                    String[] campos = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    Date fechaCompra = new Date(campos[1]);
+                    String ubicacion = campos[2];
+                    String imprTipo = campos[3];
+                    String imprModo = campos[4];
+                    float volTinta = Float.parseFloat(campos[5]);
+                    float capMax=Float.parseFloat(campos[6]);
 
+                    Maquina maq = new Maquina(id, fechaCompra, ubicacion ,imprTipo,imprModo, volTinta, capMax);
+                    ret.add(maq);
+                }
+            } finally {
+                if (buffer != null) {
+                    buffer.close();
+                }
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException");
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException");
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception");
+        }
+        return ret;
+    }
+
+    public static ArrayList<Maquina> readMaquinaFromBinaryFile(String path) {
+        ArrayList<Maquina> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try {
+            try {
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Maquina maq;
+                while ((maq = (Maquina) lectorObjeto.readObject()) != null) {
+                    ret.add(maq);
+                }
+            } finally {
+                if (lectorObjeto != null) {
+                    lectorObjeto.close();
+                }
+                if (lector != null) {
+                    lector.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException");
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Se ha producido una ClassNotFoundException");
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception");
+        }
+        return ret;
+    }
+
+    public void writeMaquinaToTextFile(String path) {
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null;
+        try {
+            try {
+                escritor = new FileWriter(fichero);
+                buffer = new PrintWriter(escritor);
+                buffer.println(this.data() + "\r\n");
+            } finally {
+                if (buffer != null) {
+                    buffer.close();
+                }
+                if (escritor != null) {
+                    escritor.close();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException");
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException");
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+
+    public void writeMaquinaToBinaryFile(String path) {
+        try {
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            try (ObjectOutputStream escritor = new ObjectOutputStream(fichero)) {
+                escritor.writeObject(this);
+                escritor.flush();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
+        }
+    }
+    
+    // El orden de los campos será el siguiente: id-fechaCompra-ubicacion-imprTipo-imprModo-volTinta-capMax
     public String data() { 
      return id + "|" + fechaCompra + "|" + ubicacion + "|" + imprTipo + "|" + imprModo + "|" + volTinta + "|" + capMax ;
             }
