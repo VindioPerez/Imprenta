@@ -6,6 +6,7 @@
 package imprenta;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -274,7 +275,7 @@ public class Politica {
             try {
                 escritor = new FileWriter(fichero);
                 buffer = new PrintWriter(escritor);
-                buffer.println(this.data());
+                buffer.println(this.data()+"\r\n");
             }finally{
                 if(buffer!=null)
                     buffer.close();

@@ -169,7 +169,7 @@ public class OCalidad extends Operario {
             try {
                 escritor = new FileWriter(fichero);
                 buffer = new PrintWriter(escritor);
-                buffer.println(this.data());
+                buffer.println(this.data()+"\r\n");
             }finally{
                 if(buffer!=null)
                     buffer.close();
@@ -189,30 +189,24 @@ public class OCalidad extends Operario {
     }
     
     public void toBinaryFile (String path) {
-        FileOutputStream escritor = null;
-        ObjectOutputStream escritorObjeto = null;
-        try{
-            try{
-                escritor = new FileOutputStream(path);
-                escritorObjeto = new ObjectOutputStream(escritor);
-                escritorObjeto.writeObject(this);
-            }finally{                
-                if(escritorObjeto!=null)
-                    escritorObjeto.close();
-                if(escritor!=null)
-                    escritor.close();
-            }
-        }
+               try{
+            FileOutputStream fichero = new FileOutputStream(path, true);
+                   try(ObjectOutputStream escritor = new ObjectOutputStream(fichero)) {
+                       escritor.writeObject(this);
+                       escritor.flush();
+                   }
+        }       
         catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException");
+            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
         }
         catch(IOException e){
-            System.out.println("Se ha producido una IOException");
+            System.out.println("Se ha producido una IOException"+e.getMessage());
         }
         catch(Exception e){
-            System.out.println("Se ha producido una Exception");
+            System.out.println("Se ha producido una Exception"+e.getMessage());
         }
     }
+
 }
 
 
