@@ -28,7 +28,7 @@ public class Operario {
     protected boolean senior;
     //La categoria del empleado, solo puede o ser senior o no serlo
     protected long id;
-    //variable identificador 
+    //variable identificador del operario
     protected ArrayList<Departamento> departamentos;
 
     public Operario() {
