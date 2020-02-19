@@ -5,6 +5,17 @@
  */
 package imprenta;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +36,7 @@ public class Labor {
     private Maquina maquina;//maquina que lo realiza
     private ArrayList<OMaquinas> operariosM; // operarios que hacen la labor
     private char estado;// estado de la labor
+    private long idMaquina;
 
     public static Labor nuevoLabor() throws ParseException {
         Labor lab = new Labor();
@@ -71,6 +83,18 @@ public class Labor {
 
     }
 
+    public long getIdMaquina() {
+        return idMaquina;
+    }
+
+    public void setIdMaquina(long idMaquina) throws LaborException {
+        if (!LaborException.comprobarIdMaquina(idMaquina)) {
+            throw new LaborException("El idMaquina no es valido");
+        } else {
+            this.idMaquina = idMaquina;
+        }
+    }
+
     public long getId() {
         return id;
     }
@@ -83,16 +107,24 @@ public class Labor {
         return fechaini;
     }
 
-    public void setFechaini(Date fechaini) {
-        this.fechaini = fechaini;
+    public void setFechaini(Date fechaini) throws LaborException {
+        if (!LaborException.comprobarFechaini(fechaini)) {
+            throw new LaborException("La Fechaini no es valida");
+        } else {
+            this.fechaini = fechaini;
+        }
     }
 
     public Date getFechafin() {
         return fechafin;
     }
 
-    public void setFechafin(Date fechafin) {
-        this.fechafin = fechafin;
+    public void setFechafin(Date fechafin) throws LaborException {
+        if (!LaborException.comprobarFechafin(fechafin)) {
+            throw new LaborException("La Fechafin no es valida");
+        } else {
+            this.fechafin = fechafin;
+        }
     }
 
     public char getEstado() {
@@ -107,24 +139,36 @@ public class Labor {
         return tarea;
     }
 
-    public void setTarea(String tarea) {
-        this.tarea = tarea;
+    public void setTarea(String tarea) throws LaborException {
+        if (!LaborException.comprobarTarea(tarea)) {
+            throw new LaborException("La Tarea no es valida");
+        } else {
+            this.tarea = tarea;
+        }
     }
 
     public Maquina getMaquina() {
         return maquina;
     }
 
-    public void setMaquina(Maquina maquina) {
-        this.maquina = maquina;
+    public void setMaquina(Maquina maquina) throws LaborException {
+        if (!LaborException.comprobarMaquina(maquina)) {
+            throw new LaborException("La Maquina no es valida");
+        } else {
+            this.maquina = maquina;
+        }
     }
 
     public ArrayList<OMaquinas> getOperariosM() {
         return operariosM;
     }
 
-    public void setOperariosM(ArrayList<OMaquinas> operariosM) {
-        this.operariosM = operariosM;
+    public void setOperariosM(ArrayList<OMaquinas> operariosM) throws LaborException {
+        if (!LaborException.comprobarOperariosM(operariosM)) {
+            throw new LaborException("El Array de operariosM no es valido");
+        } else {
+            this.operariosM = operariosM;
+        }
     }
 
     //constructor por defecto
@@ -132,36 +176,85 @@ public class Labor {
     }
 
     //constructor con argumentos
-    public Labor(long id, Date fecha, String tarea, Maquina maquina) {
-        this.id = id;
-
-        this.fechaini = fecha;
-        this.tarea = tarea;
-        this.maquina = maquina;
+    public Labor(Date fecha, String tarea, Maquina maquina) throws LaborException {
+        if (!LaborException.comprobarFechaini(fechaini)) {
+            throw new LaborException("La Fechaini no es valida");
+        } else if (!LaborException.comprobarMaquina(maquina)) {
+            throw new LaborException("La Maquina no es valida");
+        } else if (!LaborException.comprobarTarea(tarea)) {
+            throw new LaborException("La Tarea no es valida");
+        } else {
+            this.fechaini = fecha;
+            this.tarea = tarea;
+            this.maquina = maquina;
+        }
     }
 
     //constructor con argumentos ampliado 
-    public Labor(long id, Date fechaini, Date fechafin, String tarea, Maquina maquina, ArrayList<OMaquinas> operariosM, char estado) {
-        this.id = id;
-        this.fechaini = fechaini;
-        this.fechafin = fechafin;
-        this.tarea = tarea;
-        this.maquina = maquina;
-        this.operariosM = operariosM;
-        this.estado = estado;
+    public Labor(Date fechaini, Date fechafin, String tarea, Maquina maquina, ArrayList<OMaquinas> operariosM, char estado) throws LaborException {
+
+        if (!LaborException.comprobarFechaini(fechaini)) {
+            throw new LaborException("La Fechaini no es valida");
+        } else if (!LaborException.comprobarMaquina(maquina)) {
+            throw new LaborException("La Maquina no es valida");
+        } else if (!LaborException.comprobarOperariosM(operariosM)) {
+            throw new LaborException("El Array de operariosM no es valido");
+        } else if (!LaborException.comprobarFechafin(fechafin)) {
+            throw new LaborException("La Fechafin no es valida");
+        } else if (!LaborException.comprobarTarea(tarea)) {
+            throw new LaborException("La Tarea no es valida");
+        } else {
+            this.fechaini = fechaini;
+            this.fechafin = fechafin;
+            this.tarea = tarea;
+            this.maquina = maquina;
+            this.operariosM = operariosM;
+            this.estado = estado;
+        }
+    }
+
+    public Labor(Date fechaini, Date fechafin, String tarea, Maquina maquina, ArrayList<OMaquinas> operariosM, char estado, long idMaquina) throws LaborException {
+        if (!LaborException.comprobarMaquina(maquina)) {
+            throw new LaborException("La Maquina no es valida");
+        } else if (!LaborException.comprobarFechaini(fechaini)) {
+            throw new LaborException("La Fechaini no es valida");
+        } else if (!LaborException.comprobarOperariosM(operariosM)) {
+            throw new LaborException("El Array de operariosM no es valido");
+        } else if (!LaborException.comprobarFechafin(fechafin)) {
+            throw new LaborException("La Fechafin no es valida");
+        } else if (!LaborException.comprobarIdMaquina(idMaquina)) {
+            throw new LaborException("El idMaquina no es valido");
+        } else if (!LaborException.comprobarTarea(tarea)) {
+            throw new LaborException("La Tarea no es valida");
+        } else {
+            this.fechaini = fechaini;
+            this.fechafin = fechafin;
+            this.tarea = tarea;
+            this.maquina = maquina;
+            this.operariosM = operariosM;
+            this.estado = estado;
+            this.idMaquina = idMaquina;
+        }
     }
 
     //constructor de copia
-    public Labor(Labor l) {
-        this.id = l.getId();
+    public Labor(Labor l) throws LaborException {
 
-        this.fechaini = l.getFechaini();
-        this.tarea = l.getTarea();
-        this.maquina = l.getMaquina();
+        if (!LaborException.comprobarMaquina(maquina)) {
+            throw new LaborException("La Maquina no es valida");
+        } else if (!LaborException.comprobarFechaini(fechaini)) {
+            throw new LaborException("La Fechaini no es valida");
+        } else if (!LaborException.comprobarTarea(tarea)) {
+            throw new LaborException("La Tarea no es valida");
+        } else {
+            this.fechaini = l.getFechaini();
+            this.tarea = l.getTarea();
+            this.maquina = l.getMaquina();
+        }
     }
 
     public String data() {
-        return id + "|" + fechaini + "|" + fechafin + "|" + tarea + "|" + maquina;
+        return id + "|" + fechaini + "|" + fechafin + "|" + tarea + "|" + maquina + "|" + operariosM + "|" + idMaquina + "|" + estado + "|" + maquina ;
 
     }
 
@@ -174,7 +267,7 @@ public class Labor {
         Scanner in = new Scanner(System.in);
         System.out.println("El estado actual de la labor es el siguiente: ");
         char estado;
-        boolean  b=false;
+        boolean b = false;
         estado = l.getEstado();
         if (estado != 'p' && estado != 'P' && estado != '0' && estado != 'f' && estado != 'F') {
             throw new LaborException(" El Estado no tiene un valor  válido");
@@ -202,60 +295,204 @@ public class Labor {
         if (!"si".equals(ans) & !"Si".equals(ans) & !"SI".equals(ans) & !"sI".equals(ans) & !"NO".equals(ans)
                 & !"no".equals(ans) & !"nO".equals(ans) & !"nO".equals(ans)) {
             if (!"NO".equals(ans) & !"no".equals(ans) & !"nO".equals(ans) & !"nO".equals(ans)) {
-                do{
-                  
-                System.out.println("Introduzca el nuevo estado de la labor, las opciones validas son las siguientes: (0: sin comenzar,"
-                        + "p: en pausa, r: en realización, f: finalizado ");
-                
-                char nuevoestado =in.next().charAt(0);
-                 
-                System.out.println("El estado actual de la labor es el siguiente: ");
-                switch (estado) {
-                case 0:
-                    System.out.println("La labor no se ha comenzado (0)");
-                    break;
-                case 'p':
-                case 'P':
-                    System.out.println("En pausa ('p'||'P') ");
-                    break;
-                case 'r':
-                case 'R':
-                    System.out.println(" En realización('p'||'P') ");
-                    break;
-                case 'f':
-                case 'F':
-                    System.out.println("Finalizado ('f'||'F') ");
-                    break;
-                }
-              System.out.println("¿Está de acuerdo con lo mostrado? (si/no");      
-              String verif = in.nextLine();
-              if (!"si".equals(verif) & !"Si".equals(verif) & !"SI".equals(verif) & !"sI".equals(verif) & !"NO".equals(verif)
-                & !"no".equals(verif) & !"nO".equals(verif) & !"nO".equals(verif)) {
-            if (!"NO".equals(verif) & !"no".equals(verif) & !"nO".equals(verif) & !"nO".equals(verif)) {
-                b=true;
-               System.out.println("El cambio se ha realizado satisfactioriamente"); 
-            }
-            } else { throw new LaborException("no ha dado una respuesta válida");}
-                
-                if(estado != 'p' && estado != 'P' && estado != '0' && estado != 'f' && estado != 'F'){
-                 
-                  
-                }else {throw new LaborException("El nuevo valor de estado no es válido");}
-                 l.estado= nuevoestado; } while(b=false);
+                do {
+
+                    System.out.println("Introduzca el nuevo estado de la labor, las opciones validas son las siguientes: (0: sin comenzar,"
+                            + "p: en pausa, r: en realización, f: finalizado ");
+
+                    char nuevoestado = in.next().charAt(0);
+
+                    System.out.println("El estado actual de la labor es el siguiente: ");
+                    switch (estado) {
+                        case 0:
+                            System.out.println("La labor no se ha comenzado (0)");
+                            break;
+                        case 'p':
+                        case 'P':
+                            System.out.println("En pausa ('p'||'P') ");
+                            break;
+                        case 'r':
+                        case 'R':
+                            System.out.println(" En realización('p'||'P') ");
+                            break;
+                        case 'f':
+                        case 'F':
+                            System.out.println("Finalizado ('f'||'F') ");
+                            break;
+                    }
+                    System.out.println("¿Está de acuerdo con lo mostrado? (si/no");
+                    String verif = in.nextLine();
+                    if (!"si".equals(verif) & !"Si".equals(verif) & !"SI".equals(verif) & !"sI".equals(verif) & !"NO".equals(verif)
+                            & !"no".equals(verif) & !"nO".equals(verif) & !"nO".equals(verif)) {
+                        if (!"NO".equals(verif) & !"no".equals(verif) & !"nO".equals(verif) & !"nO".equals(verif)) {
+                            b = true;
+                            System.out.println("El cambio se ha realizado satisfactioriamente");
+                        }
+                    } else {
+                        throw new LaborException("no ha dado una respuesta válida");
+                    }
+
+                    if (estado != 'p' && estado != 'P' && estado != '0' && estado != 'f' && estado != 'F') {
+
+                    } else {
+                        throw new LaborException("El nuevo valor de estado no es válido");
+                    }
+                    l.estado = nuevoestado;
+                } while (b = false);
             }
 
-        } else { throw new LaborException("no ha dado una respuesta válida");}
-        
+        } else {
+            throw new LaborException("no ha dado una respuesta válida");
+        }
+
+    }
+
+    //lectura y escritura
+    public static ArrayList<Labor> readLaborFromTextFile(String path) {
+        ArrayList<Labor> lab = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while ((linea = buffer.readLine()) != null) {
+                    String[] campos = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    String nombre = campos[1];
+                    String telefono = campos[2];
+                    Date fechafin;
+                    Date fechaini;
+                    String tarea;
+                    Maquina maquina;
+                    ArrayList<OMaquinas> operariosM;
+                    char estado;
+                    long idMaquina;
+               //     Labor l = new Labor(fechafin, fechaini, idMaquina, estado, operariosM,tarea, maquina);
+      
+
+   // lab.add (l);
+}
+}finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(ClienteException e){
+            System.out.println("Se ha producido una ClienteException");
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+        return lab;
     }
     
-     public static Labor getLaborById(long idLabor) {
-            
-            Labor temp = null;
-            for (Labor l : BDatos.labores){
-                if (l.getId()==idLabor){
-                temp = l;
-                }
+    public static ArrayList<Labor> readLaborFromBinaryFile (String path) {
+        ArrayList<Labor> lab = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Labor l;
+                while((l = (Labor)lectorObjeto.readObject())!=null)
+                    lab.add(l);
+            }finally{
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+                if(lector!=null)
+                    lector.close();
             }
-            return temp;
-            }
+        }
+        catch(LaborException l){
+            System.out.println("Se ha producido una LaborException");
+        }
+        catch(FileNotFoundException l){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException l){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(ClassNotFoundException l){
+            System.out.println("Se ha producido una ClassNotFoundException");
+        }
+        catch(Exception l){
+            System.out.println("Se ha producido una Exception");
+        }
+        return lab;
     }
+    
+    public void writeLaborToTextFile (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero);
+                buffer = new PrintWriter(escritor);
+                buffer.println(this.data());
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException l){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException l){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception l){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+    
+    public void writeLaborToBinaryFile (String path) {
+        FileOutputStream escritor = null;
+        ObjectOutputStream escritorObjeto = null;
+        try{
+            try{
+                escritor = new FileOutputStream(path);
+                escritorObjeto = new ObjectOutputStream(escritor);
+                escritorObjeto.writeObject(this);
+            }finally{                
+                if(escritorObjeto!=null)
+                    escritorObjeto.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException l){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException l){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception l){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+    public static Labor getLaborById(long idLabor) {
+
+        Labor temp = null;
+        for (Labor l : BDatos.labores) {
+            if (l.getId() == idLabor) {
+                temp = l;
+            }
+        }
+        return temp;
+    }
+}
