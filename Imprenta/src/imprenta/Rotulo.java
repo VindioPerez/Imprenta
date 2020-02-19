@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +28,7 @@ import java.util.Scanner;
  * @author Ander
  * @version 1.1
  */
-public class Rotulo extends Trabajo {
+public class Rotulo extends Trabajo implements Serializable {
 
     private String centroComercial; //variable de tipo String que recoge el lugar de destino del trabajo
 

@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ import java.util.Scanner;
  * @author Ander
  * @version 1.1
  */
-public class Trabajo {
+public class Trabajo implements Serializable {
 
     protected long id; //variable tipo integer con el identificador del trabajo
     protected Date fechaSolicitud;//variable tipo Date donde se recoge la enfecha de entre del trabajo

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +28,7 @@ import java.util.Scanner;
  * @author Ander
  * @version 1.1
  */
-public class Poster extends Trabajo {
+public class Poster extends Trabajo implements Serializable {
 
     private double alto;//variable tipo integer que recoge el alton del poster
     private double ancho;//variable tipo integer que recoge el ancho del poster

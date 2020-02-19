@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -26,7 +27,7 @@ import java.util.Scanner;
  * @author DAW108
  * @version 1.1
  */
-public class Libro extends Trabajo {
+public class Libro extends Trabajo implements Serializable {
 
     private int numPag;//variable tipo int que recoge el número de páginas que tiene el libro;
     private String color; //variable tipo String que recoge el color del libro

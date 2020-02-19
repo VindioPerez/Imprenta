@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +29,7 @@ import java.util.Scanner;
  * @author Alberto
  * @version1
  */
-public class Modificacion {
+public class Modificacion implements Serializable {
 
     protected long id;//idenitficador 
     private OImpresion operarioI;//operarios que realizan la modificación
