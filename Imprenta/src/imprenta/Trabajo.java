@@ -27,9 +27,11 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- *
+ * Modela el trabajo que solicita un {@link Cliente}. Tiene 3 clases hijas, {@link Libro}, {@link Rotulo} y {@link Poster}
+ * @author Alberto
  * @author Ander
- * @version 1.1
+ * @author Vindio
+ * @version 1.5
  */
 public class Trabajo implements Serializable {
 
@@ -43,35 +45,52 @@ public class Trabajo implements Serializable {
     protected long idCliente;//variable tipo long con el id del cliente que encarga del trabajo
 
     //constructor por defecto
+    /**
+     * Crea una instancia de Trabajo con los valores por defecto para los atributos
+     */
     public Trabajo() {
     }
 
     //constructor por argumentos
+    /**
+     * Crea una instancia de Trabajo con los atributos propios de la clase, no de las relaciones
+     * @param fechaSolicitud la fecha de solicitud que se le va a setear al trabajo
+     * @param fechaRecogida la fecha de recogida que se le va a setear al trabajo
+     * @param relieve el relieve en el que se imprimira el trabajo
+     * @throws TrabajoException si la fecha de solicitud es posterior a la de recogida
+     */
     public Trabajo(Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
 
         if (!TrabajoException.comprobarRelieve(relieve)) {
             throw new TrabajoException("El relieve no es válido");
         }
         else if(!TrabajoException.comprobarFechaSol(fechaSolicitud, fechaRecogida)){
-            throw new TrabajoException("La fecha de solicitud no puede ser posterios a la de recogida.");
+            throw new TrabajoException("La fecha de solicitud no puede ser posterior a la de recogida.");
         }
-        else if(!TrabajoException.comprobarFechaRec(fechaRecogida, fechaSolicitud)){
-            throw new TrabajoException("La fecha de recogida no puede ser anterior a la de solicitud.");
-        }else{
+        else{
         this.fechaSolicitud = fechaSolicitud;
         this.fechaRecogida = fechaRecogida;
         this.relieve = relieve;
         }
     }
+    
+    /**
+     * Crea una instancia de Trabajo con todos los atributos
+     * @param id el id del trabajo
+     * @param idMaq el id de la {@link Maquina} que imprime el trabajo
+     * @param idOpe el id del {@link Operario} que registra el trabajo
+     * @param idCli el id del {@link Cliente} que solicita el trabajo
+     * @param fechaSolicitud la fecha de solicitud que se le va a setear al trabajo
+     * @param fechaRecogida la fecha de recogida que se le va a setear al trabajo
+     * @param relieve el relieve en el que se imprimira el trabajo
+     * @throws TrabajoException si la fecha de solicitud es posterior a la de recogida
+     */
     public Trabajo(long id, long idMaq, long idOpe, long idCli, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException{
         if (!TrabajoException.comprobarRelieve(relieve)) {
             throw new TrabajoException("El relieve no es válido");
         }
         else if(!TrabajoException.comprobarFechaSol(fechaSolicitud, fechaRecogida)){
             throw new TrabajoException("La fecha de solicitud no puede ser posterios a la de recogida.");
-        }
-        else if(!TrabajoException.comprobarFechaRec(fechaRecogida, fechaSolicitud)){
-            throw new TrabajoException("La fecha de recogida no puede ser anterior a la de solicitud.");
         }else{
             this.id = id;
             this.idMaquina = idMaq;
@@ -84,14 +103,17 @@ public class Trabajo implements Serializable {
     }
     
     //constructor de copia
+    /**
+     * Crea una instancia de Trabajo a partir de otra, copiando cada atributo
+     * @param t el Trabajo que se va a copiar
+     * @throws TrabajoException si la fecha de solicitud es posterior a la de recogida
+     */
     public Trabajo(Trabajo t) throws TrabajoException {
         if (!TrabajoException.comprobarRelieve(relieve)) {
             throw new TrabajoException("El relieve no es válido");
         }
         else if (!TrabajoException.comprobarId(id)) {
             throw new TrabajoException("El id no es valido");
-        }else if(!TrabajoException.comprobarFechaRec(fechaRecogida, fechaSolicitud)){
-            throw new TrabajoException("La fecha de recogida no es válida.");
         }else if(!TrabajoException.comprobarFechaSol(fechaSolicitud, fechaRecogida)){
             throw new TrabajoException("La fecha de solicitud no es válida.");
         }else{
@@ -186,15 +208,29 @@ public class Trabajo implements Serializable {
     }
     
     //getAll, getById, data y toString
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de trabajo que llama al metodo
+     * @return un <code>String</code> con los atributos del objeto en este orden: <code>id</code>, <code>fechaSolicitud</code>, <code>fechaRecogida</code>, <code>relieve</code>
+     */
     @Override
     public String toString() {
-        return "Trabajo{" + "id=" + id + ", fechaSolicitud=" + fechaSolicitud + ", fechaRecogida=" + fechaRecogida + '}';
+        return "Trabajo{" + "id=" + id + ", fechaSolicitud=" + fechaSolicitud + ", fechaRecogida=" + fechaRecogida + ", relieve=" + relieve + '}';
     }
 
+    /**
+     * Devuelve un <code>String</code> con los atributos formateados para exportar a un fichero de texto
+     * @return un <code>String</code> con los atributos del objeto en este orden: <code>id</code>, <code>idMaquina</code>, <code>idOperario</code>, <code>idCliente</code>, <code>fechaSolicitud</code>, <code>fechaRecogida</code>, <code>relieve</code>, separados por una barra vertical
+     */
     public String data() {
         return this.getId() + "|" + this.getIdMaquina() + "|" + this.getIdOperario() + "|" + this.getIdCliente() + "|" + this.getFechaSolicitud() + "|" + this.getFechaRecogida() + "|" + this.getRelieve();
     }
 
+    /**
+     * Recorre el <code>ArrayList</code> de Trabajos de {@link BDatos} y devuelve el trabajo con el id que se pasa como parametro
+     * @param idTrabajo el id del trabajo que se quiere buscar en la base de datos
+     * @return el <code>Trabajo</code> con el id coincidente con <code>idTrabajo</code>, o nulo si no existe dicho trabajo
+     * @throws TrabajoException si el id introducido no es valido
+     */
     public static Trabajo getTrabajoById(long idTrabajo) throws TrabajoException {
         if (!TrabajoException.comprobarId(idTrabajo)) {
             throw new TrabajoException("El id no es valido");
@@ -208,13 +244,24 @@ public class Trabajo implements Serializable {
         return null;
     }
     
+    /**
+     * Devuelve todos los trabajos registrados en el sistema
+     * @return un <code>ArrayList</code> con todos los trabajos de la base de datos
+     */
     public ArrayList<Trabajo> getAllTrabajo() {
         /*Este método devolverá un arrayList con todos los rotulos existentes*/
-        ArrayList<Trabajo> o = new ArrayList<>();
-        return o;
+        return BDatos.trabajos;
     }
     
     //lectura y escritura
+    /**
+     * Importa un grupo de trabajos desde un fichero de texto
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos los trabajos existentes en el fichero
+     * @throws TrabajoException si los datos leidos del fichero no permiten construir un <code>Trabajo</code>
+     * @throws FileNotFoundException si no se puede acceder al trabajo con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public static ArrayList<Trabajo> readTrabajoFromTextFile (String path) {
         ArrayList<Trabajo> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -260,6 +307,15 @@ public class Trabajo implements Serializable {
         return ret;
     }
     
+    /**
+     * Importa un grupo de trabajos desde un fichero binario
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos los trabajos existentes en el fichero
+     * @throws FileNotFoundException si no se puede acceder al trabajo con la ruta especificada
+     * @throws EOFException al llegar al final del fichero
+     * @throws IOException si hay un problema de entrada/salida
+     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
+     */
     public static ArrayList<Trabajo> readTrabajoFromBinaryFile (String path) {
         ArrayList<Trabajo> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -297,6 +353,13 @@ public class Trabajo implements Serializable {
         return ret;
     }
     
+    /**
+     * Exporta los datos de un <code>Trabajo</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
+     * @param path la ruta del fichero al que exportar los datos del objeto
+     * @throws FileNotFoundException si no se puede acceder al trabajo con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     * @see Trabajo.data() data
+     */
     public void writeTrabajoToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -324,6 +387,12 @@ public class Trabajo implements Serializable {
         }
     }
     
+    /**
+     * Exporta un <code>Trabajo</code> a un fichero binario
+     * @param path la ruta del fichero al que exportar
+     * @throws FileNotFoundException si no se puede acceder al trabajo con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public void writeTrabajoToBinaryFile (String path) {
         try{
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -344,6 +413,11 @@ public class Trabajo implements Serializable {
     }
 
     //metodos propios
+    /**
+     * Crea una nueva instancia de la clase <code>Trabajo</code> pidiendo al usuario por pantalla que introduzca los datos
+     * @return el <code>Trabajo</code> que se crea con el método
+     * @throws TrabajoException si los datos introducidos no son validos
+     */
     public static Trabajo nuevoTrabajo() throws TrabajoException {
         Trabajo t = new Trabajo();
         Scanner in = new Scanner(System.in);
@@ -417,6 +491,16 @@ public class Trabajo implements Serializable {
         return t;
     }
 
+    /**
+     * Crea un <code>Trabajo</code> nuevo pidiendo datos por pantalla. Relacionado con el caso de uso Solicitar trabajo
+     * @param c el <code>Cliente</code> que solicita el trabajo
+     * @return el <code>Trabajo</code> que se crea con el método
+     * @throws TrabajoException si los datos introducidos no son validos
+     * @see Libro.encargo(Cliente) Libro.encargo
+     * @see Rotulo.encargo(Cliente) Rotulo.encargo
+     * @see Poster.encargo(Cliente) Poster.encargo
+     * @see Cliente.crearTrabajo() Cliente.crearTrabajo
+     */
     public static Trabajo encargo(Cliente c) throws TrabajoException {
         Trabajo t = new Trabajo();
         Scanner in = new Scanner(System.in);
@@ -453,18 +537,34 @@ public class Trabajo implements Serializable {
         return t;
     }
 
+    /**
+     * Crea un <code>Trabajo</code> nuevo pidiendo datos por pantalla, requiriendo tanto un operario como un cliente. 
+     * Creado para contemplar la posibilidad de ejecutar el programa en una tienda fisica en la que esten presentes tanto el operario como el cliente
+     * @param c el <code>Cliente</code> que solicita el trabajo
+     * @param o el <code>Operario</code> que registra el trabajo
+     * @return el <code>Trabajo</code> que se crea con el método
+     * @throws TrabajoException si los datos introducidos no son validos
+     * @see Cliente.crearTrabajo() Cliente.crearTrabajo
+     * @see Operario.confirmar(Trabajo) Operario.confirmar
+     */
     public static Trabajo solicitarTrabajo(Cliente c, Operario o) throws TrabajoException {
         Trabajo t = c.crearTrabajo();
         o.confirmar(t);
         return t;
     }
 
+    /**
+     * Modifica los datos de un <code>Trabajo</code> de acuerdo a una <code>Modificacion</code>
+     * @param m la <code>Modificacion</code> de la que se extraen los nuevos datos
+     * @throws TrabajoException si los datos nuevos del trabajo no son correctos
+     */
     protected static void modificarTrabajo(Modificacion m) throws TrabajoException {
 
         Trabajo t = m.getTrabajo();
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Usted ha solicitado una modificación:");
+        System.out.println(m.getDesc());
         if (t instanceof Libro) {
             System.out.println("Introduzca la nueva cantidad de páginas que quieres:");
             int pag = sc.nextInt();
