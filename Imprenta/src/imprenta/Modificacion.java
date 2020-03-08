@@ -41,14 +41,14 @@ public class Modificacion implements Serializable {
     
     //constructor por defecto
     /**
-     * Crea una instancia de Trabajo con los valores por defecto para los atributos
+     * Crea una instancia de Modificacion con los valores por defecto para los atributos
      */
     public Modificacion() {
     }
     
     //constructores con argumentos
     /**
-     * Crea una instancia de Trabajo con los atributos propios de la clase menos el id, y con el {@link OImpresion} que la crea
+     * Crea una instancia de Modificacion con los atributos propios de la clase menos el id, y con el {@link OImpresion} que la crea
      * @param fecha la fecha de realizacion de la modificacion
      * @param desc la descripcion de la modificacion
      * @param aprob si la modificacion esta o no aprobada por el cliente
@@ -64,7 +64,7 @@ public class Modificacion implements Serializable {
     }    
     
     /**
-     * Crea una instancia de Trabajo con los atributos propios de la clase menos el id, y con el {@link OImpresion} que la crea y el {@link Trabajo} sobre el que se aplica
+     * Crea una instancia de Modificacion con los atributos propios de la clase menos el id, y con el {@link OImpresion} que la crea y el {@link Trabajo} sobre el que se aplica
      * @param fecha la fecha de realizacion de la modificacion
      * @param desc la descripcion de la modificacion
      * @param aprob si la modificacion esta o no aprobada por el cliente
@@ -82,7 +82,7 @@ public class Modificacion implements Serializable {
     }
     
     /**
-     * Crea una instancia de Trabajo con los atributos propios de la clase y todos los atributos id de las relaciones
+     * Crea una instancia de Modificacion con los atributos propios de la clase y todos los atributos id de las relaciones
      * @param id el id de la modificacion
      * @param idTra el id del {@link Trabajo} sobre el que se crea
      * @param idCli el id del {@link Cliente} que pidio el trabajo
