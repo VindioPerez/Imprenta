@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * Modela el tipo de operario que realiza una diversa tarea. Tiene 3 clases
+ * hijas, {@link OCaldiad}, {@link OMaquinas} y {@link OImpresion}
  *
- * @author VindioPerez
- * @version 1.1
+ * @author Alberto
+ * @author Ander
+ * @author Vindio
+ * @version 1.5
  */
 public class Operario {
 
@@ -31,9 +35,26 @@ public class Operario {
     //variable identificador del operario
     protected ArrayList<Departamento> departamentos;
 
+    //constructor por defecto
+    /**
+     * Crea una instancia de Operario con los valores por defecto para los
+     * atributos
+     */
     public Operario() {
     }
 
+    //constructor por argumentos
+    /**
+     * Crea una instancia de Operario con los atributos propios de la clase, sin
+     * los de de las relaciones ni el id
+     *
+     * @param nombre
+     * @param apellidos
+     * @param nif
+     * @param telefono
+     * @param direccion
+     * @param senior
+     */
     public Operario(String nombre, String apellidos, String nif, String telefono, String direccion, boolean senior) {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -43,6 +64,12 @@ public class Operario {
         this.senior = senior;
     }
 
+    //constructor de copia
+    /**
+     * Crea una instancia de Operario a partir de otra, copiando cada atributo
+     *
+     * @param o el Opearario que se va a copiar
+     */
     public Operario(Operario o) {
         this.nombre = o.getNombre();
         this.apellidos = o.getApellidos();
@@ -51,6 +78,11 @@ public class Operario {
         this.direccion = o.getDireccion();
         this.senior = o.isSenior();
     }
+
+    /**
+     *Crea una instancia de Operario asignando los atributos por teclado.
+     * @return devuelve un nuevo objeto de Operario
+     */
 
     public static Operario nuevoOperario() {
         Operario o = new Operario();
@@ -157,8 +189,18 @@ public class Operario {
 
     public long getId() {
         return id;
-    }    
+    }
 
+    //getById,getAll,data y toString
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de operario
+     * que llama al metodo
+     *
+     * @return un <code>String</code> con los atributos del objeto en este
+     * orden: <code>id</code>, <code>nombre</code>, <code>apellidos</code>,
+     * <code>nif</code>,<code>telefono</code>,<code>dirección</code> y
+     * <code>senior</code>,
+     */
     @Override
     public String toString() {
         return "Operario:\n"
@@ -167,7 +209,7 @@ public class Operario {
 
     public String data() {
         return "Operario:\n"
-                + "ID:"+ this.getId() + "|Nombre:" + this.getNombre() + "|Apellidos_" + this.getApellidos() + "|NIF:" + this.getNif() + "|Teléfono:" + this.getTelefono() + "|Dirección:" + this.getDireccion() + "|Senior:" + this.isSenior();
+                + "ID:" + this.getId() + "|Nombre:" + this.getNombre() + "|Apellidos_" + this.getApellidos() + "|NIF:" + this.getNif() + "|Teléfono:" + this.getTelefono() + "|Dirección:" + this.getDireccion() + "|Senior:" + this.isSenior();
     }
 
     public ArrayList<Departamento> getDepartamentos() {
@@ -191,7 +233,12 @@ public class Operario {
         return o;
     }
 
-    public void confirmar(Trabajo t) throws TrabajoException{
+    /**
+     * Asigna un id al trabajo perteneciente al Operario que lo confirma. 
+     * @param t Trabajo que se pasa para saber si es confirmado. 
+     * @throws TrabajoException cuando uno de los argumentos de Trabajo es incorrecto. 
+     */
+    public void confirmar(Trabajo t) throws TrabajoException {
         t.setIdOperario(this.getId());
     }
 }

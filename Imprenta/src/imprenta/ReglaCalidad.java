@@ -22,8 +22,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * Modela una regla de calidad de tipo <code>ReglaCalidad</code>.
  *
- * @author DAW104
+ * @author Alberto
+ * @author Ander
+ * @author Vindio
+ * @version 1.5
  */
 public class ReglaCalidad {
 
@@ -32,30 +36,38 @@ public class ReglaCalidad {
     private String nombre;//Nombre de la regla
     private long idPolitica;//id de la politica que se aplica
 
-
-
     //constructores
+    /**
+     * Crea una instancia de <code>ReglaCalidad</code> con los valores por
+     * defecto para los atributos
+     */
     public ReglaCalidad() {
     }
 
-    
-    public ReglaCalidad(long idRegla,String nombre, long idPolitica) {
+    /**
+     * Crea una instancia de <code>ReglaCalidad</code> relacionandolo con la
+     * clase {@link Politica} mediante su id.
+     *
+     * @param idRegla id de la regla de tipo long.
+     * @param nombre nombre de la regla de tipo long.
+     * @param idPolitica id de la politica que se le aplica de tipo long.
+     */
+    public ReglaCalidad(long idRegla, String nombre, long idPolitica) {
         this.idRegla = idRegla;
         this.nombre = nombre;
         this.idPolitica = idPolitica;
-        
+
     }
-    
+
     //getters and setters
-    
     public void setPruebas(ArrayList<Prueba> pruebas) {
         this.pruebas = pruebas;
     }
-    
+
     public ArrayList<Prueba> getPruebas() {
         return pruebas;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -81,6 +93,13 @@ public class ReglaCalidad {
     }
 
     //tostring and data
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de regla de
+     * calidad <code>ReglaCalidad</code> que llama al metodo.
+     *
+     * @return un <code>String</code> con los atributos del objeto en este
+     * orden: <code>id</code>, <code>nombre</code> y  <code>id politica</code>
+     */
     @Override
     public String toString() {
         return "ReglaCalidad:\n"
@@ -117,123 +136,146 @@ public class ReglaCalidad {
     }
 
     //lectura y escritura 
-        public static ArrayList<ReglaCalidad> FromTextFile (String path) {
+    /**
+     * Importa un grupo de reglas de calidad <code>ReglaCalidad</code> desde un
+     * fichero de texto.
+     *
+     * @param path la ruta del fichero a importar de tipo String.
+     * @return un <code>ArrayList</code> con todos las Reglas de calidad
+     * existentes en el fichero.
+     */
+    public static ArrayList<ReglaCalidad> FromTextFile(String path) {
         ArrayList<ReglaCalidad> ret = new ArrayList<>();
         File fichero = new File(path);
         FileReader lector = null;
-        BufferedReader buffer = null ;
+        BufferedReader buffer = null;
         try {
             try {
                 lector = new FileReader(fichero);
                 buffer = new BufferedReader(lector);
                 String linea;
-                while((linea=buffer.readLine())!=null){
+                while ((linea = buffer.readLine()) != null) {
                     String[] campos = linea.split("\\|");
                     long id = Long.parseLong(campos[0]);
                     String nombre = campos[1];
                     long idPolitica = Long.parseLong(campos[2]);
                     ReglaCalidad r = new ReglaCalidad(id, nombre, idPolitica);
-                    ret.add(r);                   
+                    ret.add(r);
                 }
-            }finally{
-                if(buffer!=null)
+            } finally {
+                if (buffer != null) {
                     buffer.close();
-                if(lector!=null)
+                }
+                if (lector != null) {
                     lector.close();
+                }
             }
-        }
-        catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
-        }
-        catch(IOException e){
-            System.out.println("Se ha producido una IOException"+e.getMessage());
-        }
-        catch(Exception e){
-            System.out.println("Se ha producido una Exception"+e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
         }
         return ret;
     }
-    
-    public static ArrayList<ReglaCalidad> FromBinaryFile (String path) {
+
+    /**
+     * Importa un grupo de Reglas de calidad desde un fichero binario.
+     *
+     * @param path la ruta del fichero a importar de tipo String. 
+     * @return un <code>ArrayList</code> con todas las Reglas de calidad
+     * existentes en el fichero. 
+     */
+    public static ArrayList<ReglaCalidad> FromBinaryFile(String path) {
         ArrayList<ReglaCalidad> ret = new ArrayList<>();
         FileInputStream lector = null;
         ObjectInputStream lectorObjeto = null;
-        try{
-            try{
+        try {
+            try {
                 lector = new FileInputStream(path);
                 lectorObjeto = new ObjectInputStream(lector);
                 ReglaCalidad r;
-                while((r = (ReglaCalidad)lectorObjeto.readObject())!=null){
+                while ((r = (ReglaCalidad) lectorObjeto.readObject()) != null) {
                     ret.add(r);
-                    lector.skip(4);}
-            }finally{
-                if(lectorObjeto!=null)
+                    lector.skip(4);
+                }
+            } finally {
+                if (lectorObjeto != null) {
                     lectorObjeto.close();
-                if(lector!=null)
+                }
+                if (lector != null) {
                     lector.close();
+                }
             }
-        }
-        catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
-        }
-        catch(EOFException e){
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (EOFException e) {
             System.out.println("Final de fichero");
-        }
-        catch(IOException e){
-            System.out.println("Se ha producido una IOException: "+e.getMessage());
-        }
-        catch(ClassNotFoundException e){
-            System.out.println("Se ha producido una ClassNotFoundException"+e.getMessage());
-        }
-        catch(Exception e){
-            System.out.println("Se ha producido una Exception"+e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println("Se ha producido una ClassNotFoundException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
         }
         return ret;
     }
+
+    /**
+     * Exporta los datos de un <code>Politica</code> a un fichero de texto, a
+     * traves del metodo <code>Data</code> introduciendo al final un retorno de
+     * carro.
+     *
+     * @param path la ruta del fichero al que exportar los datos del objeto de tipo String. 
+     * @see ReglaCalidad.data() data
+     */
     
-    public void toTextFile (String path){
+    public void toTextFile(String path) {
         File fichero = new File(path);
         FileWriter escritor = null;
-        PrintWriter buffer = null ;
+        PrintWriter buffer = null;
         try {
             try {
                 escritor = new FileWriter(fichero, true);
                 buffer = new PrintWriter(escritor);
-                buffer.print(this.data()+"\r\n");
-            }finally{
-                if(buffer!=null)
+                buffer.print(this.data() + "\r\n");
+            } finally {
+                if (buffer != null) {
                     buffer.close();
-                if(escritor!=null)
+                }
+                if (escritor != null) {
                     escritor.close();
+                }
             }
-        }
-        catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
-        }
-        catch(IOException e){
-            System.out.println("Se ha producido una IOException"+e.getMessage());
-        }
-        catch(Exception e){
-            System.out.println("Se ha producido una Exception"+e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
         }
     }
+
+        /**
+     * Exporta una <code>ReglaCalidad</code> a un fichero binario.
+     *
+     * @param path la ruta del fichero al que exportar de tipo String.
+     */
     
-    public void toBinaryFile (String path) {
-        try{
+    public void toBinaryFile(String path) {
+        try {
             FileOutputStream fichero = new FileOutputStream(path, true);
             try (ObjectOutputStream escritor = new ObjectOutputStream(fichero)) {
                 escritor.writeObject(this);
                 escritor.flush();
             }
-        }       
-        catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
-        }
-        catch(IOException e){
-            System.out.println("Se ha producido una IOException"+e.getMessage());
-        }
-        catch(Exception e){
-            System.out.println("Se ha producido una Exception"+e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
         }
     }
 }

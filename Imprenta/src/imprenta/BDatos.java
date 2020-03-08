@@ -45,9 +45,9 @@ public class BDatos {
         Departamento d1 = new Departamento('A', 1);
         Departamento d2 = new Departamento('B', 2);
         Departamento d3 = new Departamento('C', 3);
-        OCalidad oc1 = new OCalidad("Luisa", "Martinez Perez", "20304050T", "634235904", "aqui", true, 1);
-        OCalidad oc2 = new OCalidad("Pedro", "Lopez Aguado", "23223981Q", "654352254", "alli", false, 2);
-        OCalidad oc3 = new OCalidad("Javier", "Martinez Perez", "70754635M", "694785124", "aca", false, 3);
+        OCalidad oc1 = new OCalidad(1,"Luisa", "Martinez Perez", "20304050T", "634235904", "aqui", true);
+        OCalidad oc2 = new OCalidad(2,"Pedro", "Lopez Aguado", "23223981Q", "654352254", "alli", false);
+        OCalidad oc3 = new OCalidad(3,"Javier", "Martinez Perez", "70754635M", "694785124", "aca", false);
         OImpresion oi1 = new OImpresion("Luis", "Garcia Martin", "44378261T", "69853147", "aculla", true, 4);
         OImpresion oi2 = new OImpresion("Ana", "Garcia Mellado", "48976645R", "698778542", "calle melancolia", true, 5);
         OImpresion oi3 = new OImpresion("Maria", "Perez Gonzalez", "41414141Y", "788542316", "io k se xD", true, 6);

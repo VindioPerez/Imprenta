@@ -24,9 +24,12 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
+ * Modela una Politica.
  *
  * @author Alberto
- * @version 1.1
+ * @author Ander
+ * @author Vindio
+ * @version 1.5
  */
 public class Politica {
 
@@ -39,7 +42,16 @@ public class Politica {
     private long idLote;//ID del lote al que se aplica la política
 
     //constructoras
-    
+    /**
+     * Crea una instancia de Politica con los atributos propios de la clase, sin
+     * los de de las relaciones ni el id
+     *
+     * @param nom nombre de la politica de tipo String
+     * @param fechaIni fecha de inicio de la politica de tipo Date
+     * @param firma1 firma de uno de los operarios de calidad de tipo long
+     * @param firma2 firma del segundo operario de calidad de tipo long
+     * @param lote instanci de lote de tipo Lote
+     */
     public Politica(String nom, Date fechaIni, long firma1, long firma2, Lote lote) {
         this.nom = nom;
         this.fechaIni = fechaIni;
@@ -48,9 +60,18 @@ public class Politica {
         this.lote = lote;
     }
 
+    /**
+     * Crea una instancia de Politica con los valores por defecto para los
+     * atributos
+     */
     public Politica() {
     }
 
+    /**
+     * Crea una instancia de Politica a partir de los atributos de Politica.
+     *
+     * @param p Argumento de tipo Politica
+     */
     public Politica(Politica p) {
         this.nom = p.getNom();
         this.fechaIni = p.getFechaIni();
@@ -58,8 +79,21 @@ public class Politica {
         this.idOCalidad2 = p.getIdOCalidad2();
         this.lote = p.getLote();
     }
-    
-        public Politica(long id, String nom, Date fechaIni, long idOCalidad1, long idOCalidad2, long idLote) {
+
+    /**
+     * Crea una instancia de Politica relacionando a los operarios de Calidad
+     * {@link OCalidad} y el {@link Lote} mediante sus ids.
+     *
+     * @param id id de la politica de tipo long
+     * @param nom nombre de la politica de tipo String
+     * @param fechaIni fecha de inicializacion de tipo Date
+     * @param idOCalidad1 id del operario de calidad 1 que firma la politica de
+     * tipo long
+     * @param idOCalidad2 id del operario de calidad 2 que firma la politica de
+     * tipo long
+     * @param idLote id del lote al que se aplica la politica de tipo long.
+     */
+    public Politica(long id, String nom, Date fechaIni, long idOCalidad1, long idOCalidad2, long idLote) {
         this.id = id;
         this.nom = nom;
         this.fechaIni = fechaIni;
@@ -67,15 +101,27 @@ public class Politica {
         this.idOCalidad2 = idOCalidad2;
         this.idLote = idLote;
     }
-        public Politica(long id, String nom,long idOCalidad1, long idOCalidad2, long idLote) {
-            this.id = id;
-            this.nom = nom;
-            this.idOCalidad1 = idOCalidad1;
-            this.idOCalidad2 = idOCalidad2;
-            this.idLote = idLote;
+
+    /**
+     * Crea una instancia de Politica relacionando a los operarios de Calidad
+     * {@link OCalidad} y el {@link Lote} mediante sus ids.
+     *
+     * @param id id de la politica de tipo long
+     * @param nom nombre de la politica de tipo String
+     * @param idOCalidad1 id del operario de calidad 1 que firma la politica de
+     * tipo long
+     * @param idOCalidad2 id del operario de calidad 2 que firma la politica de
+     * tipo long
+     * @param idLote id del lote al que se aplica la politica de tipo long.
+     */
+    public Politica(long id, String nom, long idOCalidad1, long idOCalidad2, long idLote) {
+        this.id = id;
+        this.nom = nom;
+        this.idOCalidad1 = idOCalidad1;
+        this.idOCalidad2 = idOCalidad2;
+        this.idLote = idLote;
     }
-    
-        
+
     //getters and setters
     public long getId() {
         return id;
@@ -124,16 +170,16 @@ public class Politica {
     public void setLote(Lote lote) {
         this.lote = lote;
     }
-    
+
     public Politica getPoliticaoById(long id) {
-    /*Este método recorrerá un ArrayList con todas las politicas buscando aquella con el id que le introduzcamos, y devolverá esa politica si es que existe o 
+        /*Este método recorrerá un ArrayList con todas las politicas buscando aquella con el id que le introduzcamos, y devolverá esa politica si es que existe o 
     nulo si es que no existe*/
         Politica l = new Politica();
         return l;
     }
 
     public ArrayList<Politica> getAllPolitica() {
-    /*Este método devolverá un arrayList con todas las politicas existentes*/
+        /*Este método devolverá un arrayList con todas las politicas existentes*/
         ArrayList<Politica> o = new ArrayList<>();
         return o;
     }
@@ -146,21 +192,32 @@ public class Politica {
         this.idLote = idLote;
     }
 
-
-    
     //Metodos de Data y toString
-
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de
+     * {@link Politica} que llama al metodo.
+     *
+     * @return un <code>String</code> con los atributos del objeto en este
+     * orden: <code>id</code>, <code>nombre</code>, <code>fecha inicio</code>,
+     * <code>id operario 1</code>,<code>id operario 2</code>,<code>id del lote</code>
+     */
     public String data() {
-        return this.getId() + this.getNom()+ this.getFechaIni() + this.getIdOCalidad1() + this.getIdOCalidad2() + this.getIdLote();
+        return this.getId() + this.getNom() + this.getFechaIni() + this.getIdOCalidad1() + this.getIdOCalidad2() + this.getIdLote();
     }
 
     @Override
     public String toString() {
         return "PoliticaCalidad:\n"
-              +"id=" + id + "Nombre=" + nom + "|Fecha de inicio=" + fechaIni + "|id Operario 1=" + idOCalidad1+"|id Operario 2="+idOCalidad2 +"|id Lote="+idLote;
+                + "id=" + id + "Nombre=" + nom + "|Fecha de inicio=" + fechaIni + "|id Operario 1=" + idOCalidad1 + "|id Operario 2=" + idOCalidad2 + "|id Lote=" + idLote;
     }
-    
- //Método para crear políticas
+
+    //Método para crear políticas
+    /**
+     * Crea una Politica introduciendo los atributos por teclado.
+     *
+     * @return una instancia de Politica.
+     * @throws ParseException cuando el formato de fecha no es correcto.
+     */
     public static Politica nuevaPolitica() throws ParseException {
         Politica p = new Politica();
         Scanner in = new Scanner(System.in);
@@ -191,20 +248,26 @@ public class Politica {
         } while (!c);
         return p;
     }
-    
+
     //lectura y escritura
-    
-    public static ArrayList<Politica> fromTextFile (String path){
+    /**
+     * Importa un grupo de políticas {@link Politica} desde un fichero de texto
+     *
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos las politicas
+     * {@link Politica} existentes en el fichero
+     */
+    public static ArrayList<Politica> fromTextFile(String path) {
         ArrayList<Politica> ret = new ArrayList<>();
-        File fichero = new File (path);
+        File fichero = new File(path);
         FileReader lector = null;
         BufferedReader buffer = null;
-        try{
-            try{
+        try {
+            try {
                 lector = new FileReader(fichero);
                 buffer = new BufferedReader(lector);
                 String linea;
-                while((linea=buffer.readLine())!=null){
+                while ((linea = buffer.readLine()) != null) {
                     String[] campos = linea.split("\\|");
                     long id = Long.parseLong(campos[0]);
                     String nombre = campos[1];
@@ -213,109 +276,128 @@ public class Politica {
                     long idOpe1 = Long.parseLong(campos[3]);
                     long idOpe2 = Long.parseLong(campos[4]);
                     long idLote = Long.parseLong(campos[5]);
-                    Politica p = new Politica(id,nombre,fecha,idOpe1,idOpe2,idLote);
+                    Politica p = new Politica(id, nombre, fecha, idOpe1, idOpe2, idLote);
                     ret.add(p);
                 }
-            }finally{
-                if(buffer!=null){
+            } finally {
+                if (buffer != null) {
                     buffer.close();
-                }if(lector!=null){
+                }
+                if (lector != null) {
                     lector.close();
                 }
             }
-        
-        }catch(FileNotFoundException e){
+
+        } catch (FileNotFoundException e) {
             System.out.println("FileNotFoundException encontrado");
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println("IOExceotion encontrado");
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Exception encontrada");
         }
         return ret;
     }
-    
- public static ArrayList<Politica> fromBinaryFile (String path) {
+
+    /**
+     * Importa un grupo de politicas {@link Politica} desde un fichero binario.
+     *
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos las politicas
+     * {@link Politica} existentes en el fichero.
+     */
+    public static ArrayList<Politica> fromBinaryFile(String path) {
         ArrayList<Politica> ret = new ArrayList<>();
         FileInputStream lector = null;
         ObjectInputStream lectorObjeto = null;
-        try{
-            try{
+        try {
+            try {
                 lector = new FileInputStream(path);
                 lectorObjeto = new ObjectInputStream(lector);
                 Politica p;
-                while((p = (Politica)lectorObjeto.readObject())!=null)
+                while ((p = (Politica) lectorObjeto.readObject()) != null) {
                     ret.add(p);
-            }finally{
-                if(lector!=null)
+                }
+            } finally {
+                if (lector != null) {
                     lector.close();
-                if(lectorObjeto!=null)
+                }
+                if (lectorObjeto != null) {
                     lectorObjeto.close();
+                }
             }
-        }
-        catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Se ha producido una FileNotFoundException");
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Se ha producido una IOException");
-        }
-        catch(ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             System.out.println("Se ha producido una ClassNotFoundException");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Se ha producido una Exception");
         }
         return ret;
     }
- 
-     public void toTextFile (String path){
+
+    /**
+     * Exporta los datos de una <code>Politica</code> a un fichero de texto, a
+     * traves del metodo <code>Data</code> introduciendo al final un retorno de
+     * carro.
+     *
+     * @param path la ruta del fichero al que exportar los datos del objeto de
+     * tipo String.
+     * @see Politica.data() data
+     */
+    public void toTextFile(String path) {
         File fichero = new File(path);
         FileWriter escritor = null;
-        PrintWriter buffer = null ;
+        PrintWriter buffer = null;
         try {
             try {
                 escritor = new FileWriter(fichero);
                 buffer = new PrintWriter(escritor);
-                buffer.println(this.data()+"\r\n");
-            }finally{
-                if(buffer!=null)
+                buffer.println(this.data() + "\r\n");
+            } finally {
+                if (buffer != null) {
                     buffer.close();
-                if(escritor!=null)
+                }
+                if (escritor != null) {
                     escritor.close();
+                }
             }
-        }
-        catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Se ha producido una FileNotFoundException");
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Se ha producido una IOException");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Se ha producido una Exception");
         }
     }
-    
-    public void toBinaryFile (String path) {
+
+    /**
+     * Exporta una <code>Politica</code> a un fichero binario.
+     *
+     * @param path la ruta del fichero al que exportar de tipo String.
+     */
+    public void toBinaryFile(String path) {
         FileOutputStream escritor = null;
         ObjectOutputStream escritorObjeto = null;
-        try{
-            try{
+        try {
+            try {
                 escritor = new FileOutputStream(path);
                 escritorObjeto = new ObjectOutputStream(escritor);
                 escritorObjeto.writeObject(this);
-            }finally{
-                if(escritor!=null)
+            } finally {
+                if (escritor != null) {
                     escritor.close();
-                if(escritorObjeto!=null)
+                }
+                if (escritorObjeto != null) {
                     escritorObjeto.close();
+                }
             }
-        }
-        catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Se ha producido una FileNotFoundException");
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Se ha producido una IOException");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Se ha producido una Exception");
         }
     }

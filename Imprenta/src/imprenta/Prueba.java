@@ -23,8 +23,12 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
+ * Modela una Prueba.
  *
- * @author DAW104
+ * @author Alberto
+ * @author Ander
+ * @author Vindio
+ * @version 1.5
  */
 public class Prueba {
 
@@ -40,10 +44,25 @@ public class Prueba {
     private long idRegla;//ID de la regla que se aplica
 
     // Constructor por defecto
+    /**
+     * Crea una instancia de Calidad con los valores por defecto para los
+     * atributos
+     */
     public Prueba() {
     }
 
     // Constructor con argumentos
+    /**
+     * Crea una instancia de Prueba con los atributos propios de la clase, sin
+     * los de de las relaciones ni el id
+     *
+     *
+     * @param fechaR fecha de realización de tipo Date.
+     * @param operario objeto de tipo Operario.
+     * @param desc descripción de la prueba a realizar de tipo String
+     * @param res resultado de la prueba de tipo String
+     * @param obs observaciones de la prueba de tipo String
+     */
     public Prueba(Date fechaR, OCalidad operario, String desc, String res, String obs) {
 
         this.fechaR = fechaR;
@@ -54,6 +73,11 @@ public class Prueba {
     }
 
     // Constructor de copia
+    /**
+     * Crea una de Prueba copiando los argumentos de otro objeto de tipo Prueba.
+     *
+     * @param prueba Prueba de la que se van a copiar los argumentos.
+     */
     public Prueba(Prueba prueba) {
 
         this.fechaR = prueba.getFechaR();
@@ -65,6 +89,20 @@ public class Prueba {
     }
 
 //constructores
+    /**
+     * Crea una instancia de Prueba creando la relación con {@link Regla} y
+     * {@link Maquina} mediante el atributo id.
+     *
+     * @param id id de la prueba de tipo Long
+     * @param fechaR fecha de realizacíon de tipo Date
+     * @param idOperarioC id del operario de calidad que realiza la prueba de
+     * tipo Long
+     * @param desc descripcion de la prueba de tipo String
+     * @param res resultado de la prueba de tipo String
+     * @param obs observaciones de la prueba de tipo String
+     * @param idMaquina id de la maquina que realiza la preuba de tipo Long
+     * @param idRegla id de la regla que se le aplica de tipo Long
+     */
     public Prueba(long id, Date fechaR, long idOperarioC, String desc, String res, String obs, long idMaquina, long idRegla) {
         this.id = id;
         this.fechaR = fechaR;
@@ -76,6 +114,18 @@ public class Prueba {
         this.idRegla = idRegla;
     }
 
+    /**
+     * Crea una instancia de Prueba creando la relación con {@link Regla} y
+     * {@link Maquina} sin id.
+     *
+     * @param id
+     * @param fechaR
+     * @param idOperarioC
+     * @param desc
+     * @param res
+     * @param obs
+     * @param maquina
+     */
     public Prueba(long id, Date fechaR, long idOperarioC, String desc, String res, String obs, Maquina maquina) {
         this.id = id;
         this.fechaR = fechaR;
@@ -168,6 +218,16 @@ public class Prueba {
     }
 
     //data y tostring
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de Prueba
+     * que llama al metodo
+     *
+     * @return un <code>String</code> con los atributos del objeto en este
+     * orden: <code>id de la prueba</code>, <code>id de la regla</code>,
+     * <code>id de la maquina</code>,
+     * <code>fecha de Realizacion</code>,<code>id del operario</code>,<code>descripcion</code>,<code>observación</code>
+     * y <code>resultado</code>,
+     */
     @Override
     public String toString() {
         return "Prueba:\n"
@@ -180,6 +240,11 @@ public class Prueba {
     }
 
     //metodos propios
+    /**
+     * Crea una instancia de Prueba introduciendo los atributos por teclado
+     *
+     * @return devuelve un objeto de tipo Prueba.
+     */
     public static Prueba nuevoPrueba() {
         Prueba prueba = new Prueba();
         Scanner in = new Scanner(System.in);
@@ -219,17 +284,24 @@ public class Prueba {
         return prueba;
     }
 
-        public static ArrayList<Prueba> readPruebaFromTextFile (String path) {
+    /**
+     * Importa un grupo de Prueba desde un fichero de texto
+     *
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos los Pruebas de calidad
+     * existentes en el fichero
+     */
+    public static ArrayList<Prueba> readPruebaFromTextFile(String path) {
         ArrayList<Prueba> ret = new ArrayList<>();
         File fichero = new File(path);
         FileReader lector = null;
-        BufferedReader buffer = null ;
+        BufferedReader buffer = null;
         try {
             try {
                 lector = new FileReader(fichero);
                 buffer = new BufferedReader(lector);
                 String linea;
-                while((linea=buffer.readLine())!=null){
+                while ((linea = buffer.readLine()) != null) {
                     String[] campos = linea.split("\\|");
                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                     long id = Long.parseLong(campos[0]);
@@ -241,107 +313,119 @@ public class Prueba {
                     long idMaq = Long.parseLong(campos[6]);
                     long idReg = Long.parseLong(campos[7]);
                     Prueba p = new Prueba(id, fecha, idOperario, desc, res, obs, idMaq, idReg);
-                    ret.add(p);                   
+                    ret.add(p);
                 }
-            }finally{
-                if(buffer!=null)
+            } finally {
+                if (buffer != null) {
                     buffer.close();
-                if(lector!=null)
+                }
+                if (lector != null) {
                     lector.close();
+                }
             }
-        }
-        catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
-        }
-        catch(IOException e){
-            System.out.println("Se ha producido una IOException"+e.getMessage());
-        }
-        catch(Exception e){
-            System.out.println("Se ha producido una Exception"+e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
         }
         return ret;
     }
-    
-    public static ArrayList<Prueba> FromBinaryFile (String path) {
+
+    /**
+     * Importa un grupo de Prueba desde un fichero binario
+     *
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos los s de Calidad existentes
+     * en el fichero
+     */
+    public static ArrayList<Prueba> FromBinaryFile(String path) {
         ArrayList<Prueba> ret = new ArrayList<>();
         FileInputStream lector = null;
         ObjectInputStream lectorObjeto = null;
-        try{
-            try{
+        try {
+            try {
                 lector = new FileInputStream(path);
                 lectorObjeto = new ObjectInputStream(lector);
                 Prueba c;
-                while((c = (Prueba)lectorObjeto.readObject())!=null){
+                while ((c = (Prueba) lectorObjeto.readObject()) != null) {
                     ret.add(c);
-                    }
-            }finally{
-                if(lectorObjeto!=null)
+                }
+            } finally {
+                if (lectorObjeto != null) {
                     lectorObjeto.close();
-                if(lector!=null)
+                }
+                if (lector != null) {
                     lector.close();
+                }
             }
-        }
-        catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
-        }
-        catch(EOFException e){
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (EOFException e) {
             System.out.println("Final de fichero");
-        }
-        catch(IOException e){
-            System.out.println("Se ha producido una IOException: "+e.getMessage());
-        }
-        catch(ClassNotFoundException e){
-            System.out.println("Se ha producido una ClassNotFoundException"+e.getMessage());
-        }
-        catch(Exception e){
-            System.out.println("Se ha producido una Exception"+e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println("Se ha producido una ClassNotFoundException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
         }
         return ret;
     }
-    
-    public void ToTextFile (String path){
+
+    /**
+     * Exporta los datos de un <code>Prueba</code> a un fichero de texto, a
+     * traves del metodo <code>Data</code> introduciendo al final un retorno de
+     * carro. 
+     *
+     * @param path la ruta del fichero al que exportar los datos del objeto. 
+     * @see Prueba.data() data
+     */
+    public void ToTextFile(String path) {
         File fichero = new File(path);
         FileWriter escritor = null;
-        PrintWriter buffer = null ;
+        PrintWriter buffer = null;
         try {
             try {
                 escritor = new FileWriter(fichero, true);
                 buffer = new PrintWriter(escritor);
-                buffer.print(this.data()+"\r\n");
-            }finally{
-                if(buffer!=null)
+                buffer.print(this.data() + "\r\n");
+            } finally {
+                if (buffer != null) {
                     buffer.close();
-                if(escritor!=null)
+                }
+                if (escritor != null) {
                     escritor.close();
+                }
             }
-        }
-        catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
-        }
-        catch(IOException e){
-            System.out.println("Se ha producido una IOException"+e.getMessage());
-        }
-        catch(Exception e){
-            System.out.println("Se ha producido una Exception"+e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
         }
     }
-    
-    public void ToBinaryFile (String path) {
-        try{
+
+    /**
+     * Exporta un <code>OCalidad</code> a un fichero binario
+     *
+     * @param path la ruta del fichero al que exportar
+     */
+    public void ToBinaryFile(String path) {
+        try {
             FileOutputStream fichero = new FileOutputStream(path, true);
             try (ObjectOutputStream escritor = new ObjectOutputStream(fichero)) {
                 escritor.writeObject(this);
                 escritor.flush();
             }
-        }       
-        catch(FileNotFoundException e){
-            System.out.println("Se ha producido una FileNotFoundException"+e.getMessage());
-        }
-        catch(IOException e){
-            System.out.println("Se ha producido una IOException"+e.getMessage());
-        }
-        catch(Exception e){
-            System.out.println("Se ha producido una Exception"+e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Se ha producido una IOException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Se ha producido una Exception" + e.getMessage());
         }
     }
 
