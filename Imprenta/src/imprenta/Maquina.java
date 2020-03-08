@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package imprenta;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,28 +22,34 @@ import java.util.Scanner;
 import java.text.ParseException;
 
 /**
+ * Modela la maquina (impresora) que realiza un {@link Trabajo}
  *
  * @author Alberto
- * @version1
+ * @author Ander
+ * @author Vindio
+ * @version 1.5
  */
 public class Maquina {
-    
-   protected long id;//identificador
-   private Date fechaCompra;//fecha de compra
-   private String ubicacion;//localización
-   private String imprTipo;//tipo de impresión
-   private String imprModo;// modo de impresión 
-   private float  volTinta ;//volumen ACTUAL de tinta - Valores [0,capMax]
-   private float capMax;//capacidad máxima de tinta - Valor unico nº
-   private boolean disponible=true;
 
-   
-   
-   
-   public static Maquina nuevoMaquina(){
-    Maquina m = new Maquina();   
-           
-    Scanner in = new Scanner(System.in);
+    protected long id;//identificador
+    private Date fechaCompra;//fecha de compra
+    private String ubicacion;//localización
+    private String imprTipo;//tipo de impresión
+    private String imprModo;// modo de impresión 
+    private float volTinta;//volumen ACTUAL de tinta - Valores [0,capMax]
+    private float capMax;//capacidad máxima de tinta - Valor unico nº
+    private boolean disponible = true;
+
+    /**
+     * Crea una nueva instancia de la clase <code>Maquina</code> pidiendo al
+     * usuario por pantalla que introduzca los datos
+     *
+     * @return el <code>Maquina</code> que se crea con el método
+     */
+    public static Maquina nuevoMaquina() {
+        Maquina m = new Maquina();
+
+        Scanner in = new Scanner(System.in);
         Boolean c;
         do {
             System.out.println("Introduzca la ubicación");
@@ -63,7 +70,7 @@ public class Maquina {
             System.out.println("Introduzca la fecha de inicio");
             Date fecha = ToolBox.introducirFecha();
             m.setFechaCompra(fecha);
-            
+
             System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
             System.out.println("Ubicación: " + ubi);
             System.out.println("Tipo de Impresión: " + tipo);
@@ -73,12 +80,12 @@ public class Maquina {
             System.out.println("Fecha de compra: " + fecha);
             c = ToolBox.leerBoolean();
 
-        } while (c= false);
-        
-    
-       
-     return m;  
-   }
+        } while (c = false);
+
+        return m;
+    }
+    // getters y setters
+
     public long getId() {
         return id;
     }
@@ -144,7 +151,19 @@ public class Maquina {
     }
 
     //constructor con argumentos
+    /**
+     * Crea una instancia de Maquina con
+     *
+     * @param id el id de la Maquina
+     * @param fechaCompra la fecha en la que se compra la maquina
+     * @param ubicacion la ubicacion en la que se encuentra la Maquina
+     * @param imprTipo el tipo de impresion de la maquina
+     * @param imprModo el modo de impresion de la maquina
+     * @param volTinta el volumen de tinta de la maquina
+     * @param capMax la capacidad maxima de tinta de la maquina
+     */
     public Maquina(long id, Date fechaCompra, String ubicacion, String imprTipo, String imprModo, float volTinta, float capMax) {
+        this.id = id;
         this.fechaCompra = fechaCompra;
         this.ubicacion = ubicacion;
         this.imprTipo = imprTipo;
@@ -152,13 +171,21 @@ public class Maquina {
         this.volTinta = volTinta;
         this.capMax = capMax;
     }
-    
-    
+
     //constructor por defecto
+    /**
+     * Crea una instancia de Maquina con los valores por defecto para los
+     * atributos
+     */
     public Maquina() {
     }
-    
-     //Constructor de copia
+
+    //Constructor de copia
+    /**
+     * Realiza una copia a partir de una Maquina existente
+     *
+     * @param q la maquina que se va a copiar
+     */
     public Maquina(Maquina q) {
         this.fechaCompra = q.getFechaCompra();
         this.ubicacion = q.getUbicacion();
@@ -167,8 +194,19 @@ public class Maquina {
         this.volTinta = q.getVolTinta();
         this.capMax = q.getCapMax();
     }
-    
-    
+
+    // metodos de lectura y escritura
+    /**
+     * Importa un grupo de maquinas desde un archivo de texto
+     *
+     * @param path la ruta del archivo a importar
+     * @return un <code>ArrayList</code> con todas las maquinas existentes en el
+     * fichero
+     * construir un <code>Maquina</code>
+     * @throws FileNotFoundException si no se puede acceder al fichero con la
+     * ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public static ArrayList<Maquina> readMaquinaFromTextFile(String path) {
         ArrayList<Maquina> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -187,9 +225,9 @@ public class Maquina {
                     String imprTipo = campos[3];
                     String imprModo = campos[4];
                     float volTinta = Float.parseFloat(campos[5]);
-                    float capMax=Float.parseFloat(campos[6]);
+                    float capMax = Float.parseFloat(campos[6]);
 
-                    Maquina maq = new Maquina(id, fechaCompra, ubicacion ,imprTipo,imprModo, volTinta, capMax);
+                    Maquina maq = new Maquina(id, fechaCompra, ubicacion, imprTipo, imprModo, volTinta, capMax);
                     ret.add(maq);
                 }
             } finally {
@@ -210,6 +248,18 @@ public class Maquina {
         return ret;
     }
 
+    /**
+     * Importa un grupo de maquinas desde un fichero binario
+     *
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos las maquinas existentes en el
+     * fichero
+     * @throws FileNotFoundException si no se puede acceder al fichero con la
+     * ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     * @throws ClassNotFoundException si no se encuentra la clase al leer el
+     * objeto
+     */
     public static ArrayList<Maquina> readMaquinaFromBinaryFile(String path) {
         ArrayList<Maquina> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -242,6 +292,17 @@ public class Maquina {
         return ret;
     }
 
+    /**
+     * Exporta los datos de una <code>Maquina</code> a un fichero de texto, a
+     * traves del metodo <code>Data</code> introduciendo al final un retorno de
+     * carro
+     *
+     * @param path la ruta del fichero al que exportar los datos del objeto
+     * @throws FileNotFoundException si no se puede acceder al fichero con la
+     * ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     * @see Maquina.data() data
+     */
     public void writeMaquinaToTextFile(String path) {
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -268,6 +329,14 @@ public class Maquina {
         }
     }
 
+    /**
+     * Exporta un <code>Maquina</code> a un fichero binario
+     *
+     * @param path la ruta del fichero al que exportar
+     * @throws FileNotFoundException si no se puede acceder al fichero con la
+     * ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public void writeMaquinaToBinaryFile(String path) {
         try {
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -283,32 +352,59 @@ public class Maquina {
             System.out.println("Se ha producido una Exception" + e.getMessage());
         }
     }
-    
+
+    //getAll, getById, data y toString
+    /**
+     * Devuelve un <code>String</code> con los atributos formateados para
+     * exportar a un fichero de texto
+     *
+     * @return un <code>String</code> con los atributos del objeto en este
+     * orden: <code>id</code>, <code>fechaCompra</code>, <code>ubicacion</code>,
+     * <code>imprTipo</code>, <code> imprModo </code>, <code> volTinta</code>, <code>capMax</code>,  separados por una barra vertical
+     */
     // El orden de los campos será el siguiente: id-fechaCompra-ubicacion-imprTipo-imprModo-volTinta-capMax
-    public String data() { 
-     return id + "|" + fechaCompra + "|" + ubicacion + "|" + imprTipo + "|" + imprModo + "|" + volTinta + "|" + capMax ;
-            }
-    
+    public String data() {
+        return id + "|" + fechaCompra + "|" + ubicacion + "|" + imprTipo + "|" + imprModo + "|" + volTinta + "|" + capMax;
+    }
+
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de maquina
+     * que llama al metodo
+     *
+     * @return un <code>String</code> con los atributos del objeto en este
+     * orden: <code>id</code>, <code>fechaCompra</code>, <code>ubicacion</code>,
+     * <code>imprTipo</code>, <code> imprModo </code>, <code> volTinta</code>, <code>capMax
+     * </code>, separados por una barra vertical
+     */
     @Override
     public String toString() {
         return "Maquina{" + "id=" + id + ", fechaCompra=" + fechaCompra + ", loc=" + ubicacion + ", imprTipo=" + imprTipo + ", imprModo=" + imprModo + ", volTinta=" + volTinta + ", capMax=" + capMax + '}';
     }
-    public static void noDisponible(Maquina m){
+
+    /**
+     * Cambia el estado de una maquina a no disponible
+     *
+     * @param m la maquina cuyo estado se va a modificar
+     */
+    public static void noDisponible(Maquina m) {
         m.setDisponible(false);
     }
-    
-    
+
+    /**
+     *
+     * @param idMaquina el id de la maquina que se quiere buscar en la base de
+     * datos
+     * @return
+     */
     public static Maquina getMaquinaById(long idMaquina) {
-            
-            Maquina temp = null;
-            for (Maquina m : BDatos.maquinas){
-                if (m.getId()==idMaquina){
+
+        Maquina temp = null;
+        for (Maquina m : BDatos.maquinas) {
+            if (m.getId() == idMaquina) {
                 temp = m;
-                }
             }
-            return temp;
-            }
-    
-    
-    
+        }
+        return temp;
+    }
+
 }

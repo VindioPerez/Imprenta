@@ -21,9 +21,12 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
+ * Modela el Departamento donde trabajan los {@link Operario} y los {@link Lote}.
  *
- * @author VindioPerez
- * @version 1.0
+ * @author Alberto
+ * @author Ander
+ * @author Vindio
+ * @version 1.5
  */
 public class Departamento {
 
@@ -31,22 +34,44 @@ public class Departamento {
     protected long id;// variable identificador
     private ArrayList<Operario> operarios;//lista de operarios del Departamento
 
+    // Constructor por defecto
     public Departamento() {
     }
 
+    // Constructor con argumentos
+    /**
+     * Crea una instancia de Departamento con los siguientes atributos
+     *
+     * @param letraDep letra del Departamento
+     */
     public Departamento(char letraDep) {
         this.letraDep = letraDep;
     }
-    
+
+    // Constructor con argumentos
+    /**
+     * Crea una instancia de Departamento con los siguientes atributos
+     *
+     * @param letraDep letra del Departamento
+     * @param id id del departamento
+     */
     public Departamento(char letraDep, long id) {
         this.letraDep = letraDep;
         this.id = id;
     }
 
+    //constructor de copia
+    /**
+     * Crea una instancia de Departamento a partir de otra, copiando cada
+     * atributo
+     *
+     * @param d el Departamento que se va a copiar
+     */
     public Departamento(Departamento d) {
         this.letraDep = d.getLetraDep();
     }
 
+    // getters y setters 
     public char getLetraDep() {
         return letraDep;
     }
@@ -63,16 +88,6 @@ public class Departamento {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Departamento{" + "letraDep=" + letraDep + ", id=" + id + '}';
-    }
-    
-    // El orden de los campos es el siguiente: id-letraDep
-    public String data() {
-        return id + "|" + Character.toString(letraDep);
-    }
-
     public ArrayList<Operario> getOperarios() {
         return operarios;
     }
@@ -80,7 +95,74 @@ public class Departamento {
     public void setOperarios(ArrayList<Operario> operarios) {
         this.operarios = operarios;
     }
-    
+
+    //getAll, getById, data y toString
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de departamento
+     * que llama al metodo
+     *
+     * @return un <code>String</code> con los atributos del objeto en este
+     * orden: <code>id</code>, <code>idMaquina</code>, <code>idOperario</code>,
+     * <code>idCliente</code>, <code>fechaSolicitud</code>,
+     * <code>fechaRecogida</code>, <code>relieve</code>
+     */
+    @Override
+    public String toString() {
+        return "Departamento{" + "letraDep=" + letraDep + ", id=" + id + '}';
+    }
+
+    // El orden de los campos es el siguiente: id-letraDep
+    /**
+     * Devuelve un <code>String</code> con los atributos formateados para
+     * exportar a un fichero de texto
+     *
+     * @return un <code>String</code> con los atributos del objeto en este
+     * orden: <code>id</code>, <code>letraDep</code>,  separados por una barra vertical
+     */
+    public String data() {
+        return id + "|" + Character.toString(letraDep);
+    }
+
+    /**
+     * Recorre el <code>ArrayList</code> de Departamentos de {@link BDatos} y
+     * devuelve el departamento con el id que se pasa como parametro
+     *
+     * @param idDepartamento el id del departamento que se quiere buscar en la base
+     * de datos
+     * @return el <code>Departamento</code> con el id coincidente con
+     * <code>idDepartamento</code>, o nulo si no existe dicho departamento
+     */
+    public static Departamento getDepartamentoById(long idDepartamento) {
+        for (Departamento d : BDatos.departamentos) {
+            if (d.getId() == idDepartamento) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Devuelve todos los departamentos registrados en el sistema
+     *
+     * @return un <code>ArrayList</code> con todos los departamentos de la base
+     * de datos
+     */
+    public ArrayList<Departamento> getAllDepartamento() {
+        /*Este método devolverá un arrayList con todos los departamentos existentes*/
+        return BDatos.departamentos;
+    }
+
+    //lectura y escritura
+    /**
+     * Importa un grupo de departamentos desde un fichero de texto
+     *
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos los departamentos existentes
+     * en el fichero
+     * @throws FileNotFoundException si no se puede acceder al fichero con
+     * la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public static ArrayList<Departamento> readDepartamentoFromTextFile(String path) {
         ArrayList<Departamento> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -95,7 +177,7 @@ public class Departamento {
                     String[] campos = linea.split("\\|");
                     char letraDep = campos[1].charAt(0);
                     long id = Long.parseLong(campos[0]);
-                    Departamento  dep = new Departamento( letraDep, id);
+                    Departamento dep = new Departamento(letraDep, id);
                     ret.add(dep);
                 }
             } finally {
@@ -116,6 +198,18 @@ public class Departamento {
         return ret;
     }
 
+    /**
+     * Importa un grupo de departamentos desde un fichero binario
+     *
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos los departamento existentes
+     * en el fichero
+     * @throws FileNotFoundException si no se puede acceder al fichero con
+     * la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     * @throws ClassNotFoundException si no se encuentra la clase al leer el
+     * objeto
+     */
     public static ArrayList<Departamento> readDepartamentoFromBinaryFile(String path) {
         ArrayList<Departamento> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -148,6 +242,17 @@ public class Departamento {
         return ret;
     }
 
+    /**
+     * Exporta los datos de un <code>Departamento</code> a un fichero de texto,
+     * a traves del metodo <code>Data</code> introduciendo al final un retorno
+     * de carro
+     *
+     * @param path la ruta del fichero al que exportar los datos del objeto
+     * @throws FileNotFoundException si no se puede acceder al fichero con la
+     * ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     * @see Departamento.data() data
+     */
     public void writeDepartamentoToTextFile(String path) {
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -174,6 +279,14 @@ public class Departamento {
         }
     }
 
+    /**
+     * Exporta un <code>Departamento</code> a un fichero binario
+     *
+     * @param path la ruta del fichero al que exportar
+     * @throws FileNotFoundException si no se puede acceder al fichero con
+     * la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public void writeDepartamentoToBinaryFile(String path) {
         try {
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -189,7 +302,13 @@ public class Departamento {
             System.out.println("Se ha producido una Exception" + e.getMessage());
         }
     }
-   
+
+    /**
+     * Crea una nueva instancia de la clase <code>Departamento</code> pidiendo
+     * al usuario por pantalla que introduzca los datos
+     *
+     * @return el <code>Departamento</code> que se crea con el método
+     */
     public static Departamento nuevoDepartamento() {
         Departamento dep = new Departamento();
         Scanner in = new Scanner(System.in);
@@ -200,13 +319,12 @@ public class Departamento {
             char l = 0;
             l = in.next().charAt(l);
             dep.setLetraDep(l);
-            
+
             ArrayList<Operario> os = new ArrayList();
             dep.setOperarios(os);
-            
+
             System.out.println("Quiere Introducir un nuevo Operario? s/n ");
             d = in.next().charAt(0);
-            
 
             while (d == 's') {
                 dep.operarios.add(Operario.nuevoOperario());
@@ -217,10 +335,9 @@ public class Departamento {
 
             System.out.println("¿Son correctos estos datos? (introduzca una s si lo son)");
             System.out.println("letraDep: " + l);
-            
 
             c = ToolBox.leerBoolean();
-        } while (c= false);
+        } while (c = false);
         return dep;
     }
 

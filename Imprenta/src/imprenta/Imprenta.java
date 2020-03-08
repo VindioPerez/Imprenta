@@ -138,7 +138,13 @@ public class Imprenta {
                             long idLabor = in.nextLong();
                             Labor l = Labor.getLaborById(idLabor);
                             System.out.println("La labor a realizar es :" + l);
-                            Labor.realizarLabor(l);
+                                       try {
+                                                     omq.realizarLabor(l);
+
+                            } catch (LaborException lb) {
+                                System.out.println("ERROR al realizar la Labor"+lb.getMessage());
+                            }
+
                             break;
                         case 'r':
                         case 'R':

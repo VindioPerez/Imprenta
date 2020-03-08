@@ -22,9 +22,11 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- *
+ * Modela las labores que se realizan en las  {@link Maquina} por {@link OMaquinas}. 
  * @author Alberto
- * @version1
+ * @author Ander
+ * @author Vindio
+ * @version 1.5
  */
 public class Labor {
 
@@ -35,10 +37,14 @@ public class Labor {
     private String tarea;//en que consiste
     private Maquina maquina;//maquina que lo realiza
     private ArrayList<OMaquinas> operariosM; // operarios que hacen la labor
-    private char estado;// estado de la labor
+    char estado;// estado de la labor
     private long idMaquina;
 
-    public static Labor nuevoLabor() throws ParseException {
+    /**
+     * Crea una nueva instancia de la clase <code>Labor</code> pidiendo al usuario por pantalla que introduzca los datos
+     * @return el <code>Trabajo</code> que se crea con el método
+     */
+    public static Labor nuevoLabor() throws LaborException {
         Labor lab = new Labor();
 
         Scanner in = new Scanner(System.in);
@@ -48,16 +54,29 @@ public class Labor {
 
             System.out.println("Introduzca la tarea");
             String tarea = in.nextLine();
-            lab.setTarea(tarea);
-            System.out.println("Introduzca la fecha de realizacion");
+            try {
+                if (!TrabajoException.comprobarRelieve(tarea)) {
+                    throw new LaborException("La Tarea introducida no es valida.");
+                }            lab.setTarea(tarea);
+                        } catch (LaborException ex) {
+                System.out.println("Error por tarea" + ex.getMessage());
+            }
+            System.out.println("Introduzca la fecha de inicio");
             Date fecha = ToolBox.introducirFecha();
             lab.setFechaini(fecha);
             System.out.println("Introduzca la fecha de realizacion");
             Date fechafin = ToolBox.introducirFecha();
             lab.setFechafin(fechafin);
-            System.out.println("Introduzca los datos de la Máquina asignada");
+            System.out.println("Introduzca los datos de la Máquina asignada");          
             Maquina maq = Maquina.nuevoMaquina();
-            lab.setMaquina(maq);
+                        try {
+                if (!LaborException.comprobarMaquina(maq)) {
+                    throw new LaborException("La maquina no puede estar vacía");
+
+                }             lab.setMaquina(maq);
+            } catch (LaborException ex) {
+                System.out.println("Error por maquina" + ex.getMessage());
+            }
             System.out.println("Quiere Introducir un nuevo Operario de Maquinas? s/n ");
             d = ToolBox.leerBoolean();
             char a = 0;
@@ -83,6 +102,7 @@ public class Labor {
 
     }
 
+    // getters y setters
     public long getIdMaquina() {
         return idMaquina;
     }
@@ -172,11 +192,21 @@ public class Labor {
     }
 
     //constructor por defecto
+    /**
+     * Crea una instancia de Labor con los valores por defecto para los atributos
+     */    
     public Labor() {
     }
 
     //constructor con argumentos
-    public Labor(Date fecha, String tarea, Maquina maquina) throws LaborException {
+    /**
+     * Crea una instancia de Labor  con  los siguientes  atributos propios de la clase :
+     * @param fechaini la fecha de inicio de la labor
+     * @param tarea la descripcion de la tarea que se va a realizar
+     * @param maquina la maquina sobre la que se realiza la labor
+     * @throws LaborException  si alguno de los atributos no es valido
+     */
+    public Labor(Date fechaini, String tarea, Maquina maquina) throws LaborException {
         if (!LaborException.comprobarFechaini(fechaini)) {
             throw new LaborException("La Fechaini no es valida");
         } else if (!LaborException.comprobarMaquina(maquina)) {
@@ -184,13 +214,23 @@ public class Labor {
         } else if (!LaborException.comprobarTarea(tarea)) {
             throw new LaborException("La Tarea no es valida");
         } else {
-            this.fechaini = fecha;
+            this.fechaini = fechaini;
             this.tarea = tarea;
             this.maquina = maquina;
         }
     }
 
     //constructor con argumentos ampliado 
+    /**
+     * Crea una instancia de Labor  con  los  siguientes atributos propios de la clase :
+     * @param fechaini la fecha de inicio de la labor
+     * @param fechafin la fecha de fin de la labor
+     * @param tarea la descripcion de la tarea que se va a realizar
+     * @param maquina la maquina sobre la que se realiza la labor
+     * @param operariosM los operarios que van a realizar la labor
+     * @param estado el estado de la labor
+     * @throws LaborException  si alguno de los atributos no es valido
+     */
     public Labor(Date fechaini, Date fechafin, String tarea, Maquina maquina, ArrayList<OMaquinas> operariosM, char estado) throws LaborException {
 
         if (!LaborException.comprobarFechaini(fechaini)) {
@@ -213,6 +253,17 @@ public class Labor {
         }
     }
 
+    /**
+     * Crea una instancia de Labor  con todos los atributos propios de la clase 
+     * @param fechaini la fecha de inicio de la labor
+     * @param fechafin la fecha de fin de la labor
+     * @param tarea la descripcion de la tarea que se va a realizar
+     * @param maquina la maquina sobre la que se realiza la labor
+     * @param operariosM los operarios que van a realizar la labor
+     * @param estado el estado de la labor
+     * @param idMaquina el id de la maquina sobre la que se realiza la labor
+     * @throws LaborException  si alguno de los atributos no es valido
+     */
     public Labor(Date fechaini, Date fechafin, String tarea, Maquina maquina, ArrayList<OMaquinas> operariosM, char estado, long idMaquina) throws LaborException {
         if (!LaborException.comprobarMaquina(maquina)) {
             throw new LaborException("La Maquina no es valida");
@@ -238,6 +289,11 @@ public class Labor {
     }
 
     //constructor de copia
+        /**
+     * Crea una instancia de Labor a partir de otra, copiando cada atributo
+     * @param l la Labor que se va a copiar
+     * @throws LaborException si alguno de los atributos no es valido
+     */
     public Labor(Labor l) throws LaborException {
 
         if (!LaborException.comprobarMaquina(maquina)) {
@@ -253,102 +309,36 @@ public class Labor {
         }
     }
 
-    // El orden de los campos es el siguiente: id- fechaini-tarea-maquina-operariosM-idMaquina-estado-maquina;
+    // El orden de los campos es el siguiente: id- fechaini-fechafin-tarea-maquina-operariosM-idMaquina-estado-maquina;
+    /**
+     * Devuelve un <code>String</code> con los atributos formateados para exportar a un fichero de texto
+     * @return un <code>String</code> con los atributos del objeto en este orden: <code>id</code>, <code>fechaini</code>, <code>fechafin</code>, <code>tarea</code>, <code>maquina</code>, <code>operariosM</code>, <code>idMaquina</code>,<code>estado</code>, <code>maquina</code>, separados por una barra vertical
+     */
     public String data() {
         return id + "|" + fechaini + "|" + fechafin + "|" + tarea + "|" + maquina + "|" + operariosM + "|" + idMaquina + "|" + estado + "|" + maquina ;
 
     }
-
+    
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de labor que llama al metodo
+     * @return un <code>String</code> con los atributos del objeto en este orden: <code>id</code>, <code>fechaini</code>, <code>fechafin</code>, <code>tarea</code>, <code>maquina</code>, <code>operariosM</code>, <code>idMaquina</code>,<code>estado</code>, <code>maquina</code>, separados por una barra vertical
+     */
     @Override
     public String toString() {
         return "Labor{" + "id=" + id + ", fecha ini=" + fechaini + ", fecha fin =" + fechafin + ", tarea=" + tarea + ", maquina=" + maquina + '}';
     }
 
-    public static void realizarLabor(Labor l) throws LaborException {
-        Scanner in = new Scanner(System.in);
-        System.out.println("El estado actual de la labor es el siguiente: ");
-        char estado;
-        boolean b = false;
-        estado = l.getEstado();
-        if (estado != 'p' && estado != 'P' && estado != '0' && estado != 'f' && estado != 'F') {
-            throw new LaborException(" El Estado no tiene un valor  válido");
-        } else {
-            switch (estado) {
-                case 0:
-                    System.out.println("La labor no se ha comenzado (0)");
-                    break;
-                case 'p':
-                case 'P':
-                    System.out.println("En pausa ('p'||'P') ");
-                    break;
-                case 'r':
-                case 'R':
-                    System.out.println(" En realización('p'||'P') ");
-                    break;
-                case 'f':
-                case 'F':
-                    System.out.println("Finalizado ('f'||'F') ");
-                    break;
-            }
-        }
-        System.out.println("¿Desea cambiar el estado de la labor (si/no)? ");
-        String ans = in.nextLine();
-        if (!"si".equals(ans) & !"Si".equals(ans) & !"SI".equals(ans) & !"sI".equals(ans) & !"NO".equals(ans)
-                & !"no".equals(ans) & !"nO".equals(ans) & !"nO".equals(ans)) {
-            if (!"NO".equals(ans) & !"no".equals(ans) & !"nO".equals(ans) & !"nO".equals(ans)) {
-                do {
-
-                    System.out.println("Introduzca el nuevo estado de la labor, las opciones validas son las siguientes: (0: sin comenzar,"
-                            + "p: en pausa, r: en realización, f: finalizado ");
-
-                    char nuevoestado = in.next().charAt(0);
-
-                    System.out.println("El estado actual de la labor es el siguiente: ");
-                    switch (estado) {
-                        case 0:
-                            System.out.println("La labor no se ha comenzado (0)");
-                            break;
-                        case 'p':
-                        case 'P':
-                            System.out.println("En pausa ('p'||'P') ");
-                            break;
-                        case 'r':
-                        case 'R':
-                            System.out.println(" En realización('p'||'P') ");
-                            break;
-                        case 'f':
-                        case 'F':
-                            System.out.println("Finalizado ('f'||'F') ");
-                            break;
-                    }
-                    System.out.println("¿Está de acuerdo con lo mostrado? (si/no");
-                    String verif = in.nextLine();
-                    if (!"si".equals(verif) & !"Si".equals(verif) & !"SI".equals(verif) & !"sI".equals(verif) & !"NO".equals(verif)
-                            & !"no".equals(verif) & !"nO".equals(verif) & !"nO".equals(verif)) {
-                        if (!"NO".equals(verif) & !"no".equals(verif) & !"nO".equals(verif) & !"nO".equals(verif)) {
-                            b = true;
-                            System.out.println("El cambio se ha realizado satisfactioriamente");
-                        }
-                    } else {
-                        throw new LaborException("no ha dado una respuesta válida");
-                    }
-
-                    if (estado != 'p' && estado != 'P' && estado != '0' && estado != 'f' && estado != 'F') {
-
-                    } else {
-                        throw new LaborException("El nuevo valor de estado no es válido");
-                    }
-                    l.estado = nuevoestado;
-                } while (b = false);
-            }
-
-        } else {
-            throw new LaborException("no ha dado una respuesta válida");
-        }
-
-    }
+   
 
     //lectura y escritura
+    /**
+     * Importa un grupo de labores desde un fichero de texto
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos las labores existentes en el fichero
+     * @throws LaborException si los datos leidos del fichero no permiten construir un <code>Labor</code>
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public static ArrayList<Labor> readLaborFromTextFile(String path) {
         ArrayList<Labor> lab = new ArrayList<>();
         File fichero = new File(path);
@@ -383,8 +373,8 @@ public class Labor {
                     lector.close();
             }
         }
-        catch(ClienteException e){
-            System.out.println("Se ha producido una ClienteException");
+        catch(LaborException l){
+            System.out.println("Se ha producido una LaborException");
         }
         catch(FileNotFoundException e){
             System.out.println("Se ha producido una FileNotFoundException");
@@ -397,7 +387,15 @@ public class Labor {
         }
         return lab;
     }
-    
+ 
+    /**
+     * Importa un grupo de labores desde un fichero binario
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos las labores existentes en el fichero
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
+     */
     public static ArrayList<Labor> readLaborFromBinaryFile (String path) {
         ArrayList<Labor> lab = new ArrayList<>();
         FileInputStream lector = null;
@@ -416,9 +414,7 @@ public class Labor {
                     lector.close();
             }
         }
-        catch(LaborException l){
-            System.out.println("Se ha producido una LaborException");
-        }
+
         catch(FileNotFoundException l){
             System.out.println("Se ha producido una FileNotFoundException");
         }
@@ -434,6 +430,13 @@ public class Labor {
         return lab;
     }
     
+        /**
+     * Exporta los datos de una <code>Labor</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
+     * @param path la ruta del fichero al que exportar los datos del objeto
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     * @see Labor.data() data
+     */
     public void writeLaborToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -461,6 +464,12 @@ public class Labor {
         }
     }
     
+    /**
+     * Exporta una <code>Labor</code> a un fichero binario
+     * @param path la ruta del fichero al que exportar
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */   
     public void writeLaborToBinaryFile (String path) {
         FileOutputStream escritor = null;
         ObjectOutputStream escritorObjeto = null;
@@ -486,6 +495,12 @@ public class Labor {
             System.out.println("Se ha producido una Exception");
         }
     }
+    
+    /**
+     * Recorre el <code>ArrayList</code> de Labores de {@link BDatos} y devuelve la labor  con el id que se pasa como parametro
+     * @param idLabor el id de la labor que se quiere buscar en la base de datos
+     * @return el <code>Labor</code> con el id coincidente con <code>idLabor</code>, o nulo si no existe dicha labor
+     */   
     public static Labor getLaborById(long idLabor) {
 
         Labor temp = null;
