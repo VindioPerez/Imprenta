@@ -117,6 +117,6 @@ public class TrabajoException extends Exception{
     }
     
     public static boolean comprobarFechaSol(Date fechaSol, Date fechaRec){
-        return fechaSol.before(fechaSol);
+        return fechaSol.before(fechaRec);
     }
 }

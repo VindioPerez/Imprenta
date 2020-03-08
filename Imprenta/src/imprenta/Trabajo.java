@@ -224,13 +224,8 @@ public class Trabajo implements Serializable {
      * Recorre el <code>ArrayList</code> de Trabajos de {@link BDatos} y devuelve el trabajo con el id que se pasa como parametro
      * @param idTrabajo el id del trabajo que se quiere buscar en la base de datos
      * @return el <code>Trabajo</code> con el id coincidente con <code>idTrabajo</code>, o nulo si no existe dicho trabajo
-     * @throws TrabajoException si el id introducido no es valido
      */
-    public static Trabajo getTrabajoById(long idTrabajo) throws TrabajoException {
-        if (!TrabajoException.comprobarId(idTrabajo)) {
-            throw new TrabajoException("El id no es valido");
-        }
-
+    public static Trabajo getTrabajoById(long idTrabajo) {
         for (Trabajo t : BDatos.trabajos) {
             if (t.getId() == idTrabajo) {
                 return t;

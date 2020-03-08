@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package imprenta;
 
 import java.io.BufferedReader;
@@ -25,9 +20,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * Modela la modificacion que crea sobre un {@link Trabajo} un {@link OImpresion], y que tiene que aprobar el {@link Cliente} que ha solicitado el trabajo
  * @author Alberto
- * @version1
+ * @author Ander
+ * @author Vindio
+ * @version 1.5
  */
 public class Modificacion implements Serializable {
 
@@ -42,10 +39,23 @@ public class Modificacion implements Serializable {
     private long idOImpresion;//variable con el id del operario de impresion que crea la modificacion
     private Trabajo trabajo;//trabajo sobre el que se crea la modificacion
     
-    
+    //constructor por defecto
+    /**
+     * Crea una instancia de Trabajo con los valores por defecto para los atributos
+     */
+    public Modificacion() {
+    }
     
     //constructores con argumentos
-    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,OImpresion operarioI) {
+    /**
+     * Crea una instancia de Trabajo con los atributos propios de la clase menos el id, y con el {@link OImpresion} que la crea
+     * @param fecha la fecha de realizacion de la modificacion
+     * @param desc la descripcion de la modificacion
+     * @param aprob si la modificacion esta o no aprobada por el cliente
+     * @param fechaAprob la fecha de aprobacion por el cliente
+     * @param operarioI el operario de impresion que crea la modificacion
+     */
+    public Modificacion(Date fecha, String desc, boolean aprob, Date fechaAprob,OImpresion operarioI) {
         this.operarioI = operarioI;
         this.fecha = fecha;
         this.desc = desc;
@@ -53,7 +63,16 @@ public class Modificacion implements Serializable {
         this.fechaAprob = fechaAprob;
     }    
     
-    public Modificacion(long id, Date fecha, String desc, boolean aprob, Date fechaAprob, Maquina maquina,Trabajo trabajo,OImpresion operarioI) {
+    /**
+     * Crea una instancia de Trabajo con los atributos propios de la clase menos el id, y con el {@link OImpresion} que la crea y el {@link Trabajo} sobre el que se aplica
+     * @param fecha la fecha de realizacion de la modificacion
+     * @param desc la descripcion de la modificacion
+     * @param aprob si la modificacion esta o no aprobada por el cliente
+     * @param fechaAprob la fecha de aprobacion por el cliente
+     * @param operarioI el operario de impresion que crea la modificacion
+     * @param trabajo el trabajo sobre el que se crea la modificacion
+     */
+    public Modificacion(Date fecha, String desc, boolean aprob, Date fechaAprob,Trabajo trabajo,OImpresion operarioI) {
         this.operarioI = operarioI;
         this.fecha = fecha;
         this.desc = desc;
@@ -62,6 +81,17 @@ public class Modificacion implements Serializable {
         this.trabajo = trabajo;
     }
     
+    /**
+     * Crea una instancia de Trabajo con los atributos propios de la clase y todos los atributos id de las relaciones
+     * @param id el id de la modificacion
+     * @param idTra el id del {@link Trabajo} sobre el que se crea
+     * @param idCli el id del {@link Cliente} que pidio el trabajo
+     * @param idOpe el id del {@link OImpresion} que crea la modificacion
+     * @param fecha la fecha de creacion de la modificacion
+     * @param desc la descripcion de la modificacion
+     * @param aprob si la modificacion esta aprobada o no
+     * @param fApro la fecha de aprobacion de la modificacion
+     */
     public Modificacion(long id, long idTra, long idCli, long idOpe, Date fecha, String desc, boolean aprob, Date fApro){
         this.id = id;
         this.idCliente = idCli;
@@ -72,12 +102,12 @@ public class Modificacion implements Serializable {
         this.aprob = aprob;
         this.fechaAprob = fApro;
     }
-    
-    //constructor por defecto
-    public Modificacion() {
-    }
 
     //constructor de copia
+    /**
+     * Crea una instancia de Modificacion a partir de otra, copiando cada atributo
+     * @param m el Modificacion que se va a copiar
+     */
     public Modificacion(Modificacion m) {
         this.operarioI = m.getOperarioI();
         this.fecha = m.getFecha();
@@ -167,28 +197,40 @@ public class Modificacion implements Serializable {
         this.trabajo = trabajo;
     }
 
-    //data y toString
+    //data, toString, getById y getAll
+    /**
+     * Devuelve un <code>String</code> con los atributos formateados para exportar a un fichero de texto
+     * @return un <code>String</code> con los atributos del objeto en este orden: <code>id</code>, <code>idTrabajo</code>, <code>idCliente</code>, <code>idOImpresion</code>, <code>fecha</code>, <code>desc</code>, <code>aprob</code>, <code>fechaAprob</code>, separados por una barra vertical
+     */
     public String data() {
         return this.getId() + "|" + this.getIdTrabajo() + "|" + this.getIdCliente() + "|" + this.getIdOImpresion() + "|" + this.getFecha() + "|" + this.getDesc() + "|" + this.isAprob() + "|" + this.getFechaAprob();
     }
 
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de Modificacion que llama al metodo
+     * @return un <code>String</code> con los atributos del objeto en este orden: <code>id</code>, <code>operarioI</code>, <code>fecha</code>, <code>desc</code>, <code>aprob</code>, <code>fechaAprob</code>, <code>trabajo</code>
+     */
     @Override
     public String toString() {
         return "Modificacion{" + "id=" + id + ", operario=" + operarioI + ", fecha=" + fecha + ", desc=" + desc + ", aprob=" + aprob + ", fechaAprob=" + fechaAprob + ", trabajo="+ trabajo.toString()+'}';
     }
     
+    /**
+     * Recorre el <code>ArrayList</code> de Modificaciones de {@link BDatos} y devuelve la modificacion con el id que se pasa como parametro
+     * @param idModificacion el id de la modificacion que se quiere buscar en la base de datos
+     * @return la <code>Modificacion</code> con el id coincidente con <code>idModificacion</code>, o nulo si no existe dicha modificacion
+     */
     public Modificacion getModificacionById(long idModificacion) {
-
-        Modificacion t = new Modificacion();
-        /*
-        Este método se encarga de recorrer un arraylist con las modificaciones, si el 
-        id de parametro coincide con el del modificacion se devuelve esa modificacion sino
-        se devuelve null
-         */
-
-        return t;
+        for (Modificacion m : BDatos.modificaciones){
+            if (m.getId()==idModificacion) return m;
+        }
+        return null;
         }
     
+    /**
+     * Devuelve todas las modificaciones registradas en el sistema
+     * @return un <code>ArrayList</code> con todas las modificaciones de la base de datos
+     */
     public ArrayList<Modificacion> getAllModificacion() {
         /*Este método devolverá un arrayList con todos los libros existentes*/
         ArrayList<Modificacion> o = new ArrayList<>();
@@ -196,6 +238,13 @@ public class Modificacion implements Serializable {
     }
     
     //lectura y escritura
+    /**
+     * Importa un grupo de modificaciones desde un fichero de texto
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todas las modificaciones existentes en el fichero
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public static ArrayList<Modificacion> readModificacionFromTextFile (String path) {
         ArrayList<Modificacion> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -239,6 +288,15 @@ public class Modificacion implements Serializable {
         return ret;
     }
     
+    /**
+     * Importa un grupo de modificaciones desde un fichero binario
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todas las modificaciones existentes en el fichero
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws EOFException al llegar al final del fichero
+     * @throws IOException si hay un problema de entrada/salida
+     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
+     */
     public static ArrayList<Modificacion> readModificacionFromBinaryFile (String path) {
         ArrayList<Modificacion> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -276,6 +334,13 @@ public class Modificacion implements Serializable {
         return ret;
     }
     
+    /**
+     * Exporta los datos de una <code>Modificacion</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
+     * @param path la ruta del fichero al que exportar los datos del objeto
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     * @see Modificacion.data() data
+     */
     public void writeModificacionToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -303,6 +368,12 @@ public class Modificacion implements Serializable {
         }
     }
     
+    /**
+     * Exporta una <code>Modificacion</code> a un fichero binario
+     * @param path la ruta del fichero al que exportar
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */    
     public void writeModificacionToBinaryFile (String path) {
         try{
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -323,6 +394,10 @@ public class Modificacion implements Serializable {
     }
 
     //metodos propios
+    /**
+     * Crea una nueva instancia de la clase <code>Modificacion</code> pidiendo al usuario por pantalla que introduzca los datos
+     * @return la <code>Modificacion</code> que se crea con el método
+     */
     public static Modificacion nuevaModificacion(){
         Modificacion m = new Modificacion();
         Scanner in = new Scanner(System.in);
@@ -338,9 +413,6 @@ public class Modificacion implements Serializable {
             System.out.println("introduzca la descripción del cambio:");
             String cambio = in.nextLine();
             m.setDesc(cambio);
-            
-          
-
             System.out.println("¿El cliente ha aprobado el cambio?");
             cliente = ToolBox.leerBoolean();
             if (!cliente) {
