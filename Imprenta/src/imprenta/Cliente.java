@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- *
+ * Modela al cliente que se registra en el sistema, solicita trabajos y acepta modificaciones
  * @author Alberto
  * @author Ander
  * @author Vindio
