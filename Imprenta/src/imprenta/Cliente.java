@@ -19,15 +19,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
+ * @author Alberto
  * @author Ander
- * @version 1.1
+ * @author Vindio
+ * @version 1.5
  */
 public class Cliente implements Serializable{
 
@@ -36,10 +33,19 @@ public class Cliente implements Serializable{
     protected long id;//variable identificador
 
     //constructor por defecto
+    /**
+     * Crea una instancia de Cliente con los valores por defecto para los atributos
+     */
     public Cliente() {
     }
 
     //constructores con argumentos
+    /**
+     * Crea una instancia de Cliente con los atributos propios de la clase, menos  el id
+     * @param nombre el nombre del Cliente
+     * @param telefono el telefono del cliente
+     * @throws ClienteException si el telefono no tiene el formato correcto o el nombre esta vacio
+     */
     public Cliente(String nombre, String telefono) throws ClienteException{
         if (!ClienteException.comprobarTelefono(telefono)){
             throw new ClienteException("El telefono no es valido");
@@ -50,6 +56,13 @@ public class Cliente implements Serializable{
         this.telefono = telefono;}
     }
     
+    /**
+     * Crea una instancia de Cliente con los atributos propios de la clase
+     * @param nombre el nombre del Cliente
+     * @param telefono el telefono del cliente
+     * @param id el id del cliente
+     * @throws ClienteException si el telefono no tiene el formato correcto o el nombre esta vacio
+     */
     public Cliente(String nombre, String telefono, long id) throws ClienteException{
         if (!ClienteException.comprobarTelefono(telefono)){
             throw new ClienteException("El telefono no es valido");
@@ -62,6 +75,11 @@ public class Cliente implements Serializable{
     }
     
     //constructor de copia
+    /**
+     * Crea una instancia de Cliente a partir de otra, copiando cada atributo
+     * @param c el Cliente que se va a copiar
+     * @throws ClienteException si el telefono no tiene el formato correcto o el nombre esta vacio
+     */
     public Cliente(Cliente c) throws ClienteException{
         if (!ClienteException.comprobarTelefono(telefono)){
             throw new ClienteException("El telefono no es valido");
@@ -104,15 +122,28 @@ public class Cliente implements Serializable{
     }
 
     //getAll, getById, data y toString
+    /**
+     * Devuelve un <code>String</code> con los datos de la instancia de cliente que llama al metodo
+     * @return un <code>String</code> con los atributos del objeto en este orden: <code>nombre</code>, <code>telefono</code>, <code>id</code>
+     */
     @Override
     public String toString() {
         return "Cliente{" + "nombre=" + nombre + ", telefono=" + telefono + ", id=" + id + '}';
     }
 
+    /**
+     * Devuelve un <code>String</code> con los atributos formateados para exportar a un fichero de texto
+     * @return un <code>String</code> con los atributos del objeto en este orden: <code>id</code>, <code>idMaquina</code>, <code>idOperario</code>, <code>idCliente</code>, <code>fechaSolicitud</code>, <code>fechaRecogida</code>, <code>relieve</code>, separados por una barra vertical
+     */
     public String data() {
         return this.getId() + "|" + this.getNombre() + "|" + this.getTelefono();
     }
     
+    /**
+     * Recorre el <code>ArrayList</code> de Clientes de {@link BDatos} y devuelve el cliente con el id que se pasa como parametro
+     * @param idCliente el id del cliente que se quiere buscar en la base de datos
+     * @return el <code>Cliente</code> con el id coincidente con <code>idCliente</code>, o nulo si no existe dicho cliente
+     */
     public static Cliente getClienteById(long idCliente) {
         Cliente temp = null;
         for (Cliente c : BDatos.clientes){
@@ -123,13 +154,24 @@ public class Cliente implements Serializable{
         return temp;
     }
     
+    /**
+     * Devuelve todos los clientes registrados en el sistema
+     * @return un <code>ArrayList</code> con todos los clientes de la base de datos
+     */
     public ArrayList<Cliente> getAllCliente() {
         /*Este método devolverá un arrayList con todos los libros existentes*/
-        ArrayList<Cliente> o = new ArrayList<>();
-        return o;
+        return BDatos.clientes;
     }
     
     //lectura y escritura
+    /**
+     * Importa un grupo de clientes desde un fichero de texto
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos los clientes existentes en el fichero
+     * @throws ClienteException si los datos leidos del fichero no permiten construir un <code>Cliente</code>
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public static ArrayList<Cliente> readClientefromTextFile (String path) {
         ArrayList<Cliente> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -170,6 +212,15 @@ public class Cliente implements Serializable{
         return ret;
     }
     
+    /**
+     * Importa un grupo de clientes desde un fichero binario
+     * @param path la ruta del fichero a importar
+     * @return un <code>ArrayList</code> con todos los clientes existentes en el fichero
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws EOFException al llegar al final del fichero
+     * @throws IOException si hay un problema de entrada/salida
+     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
+     */
     public static ArrayList<Cliente> readClientefromBinaryFile (String path) {
         ArrayList<Cliente> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -210,6 +261,13 @@ public class Cliente implements Serializable{
         return ret;
     }
     
+    /**
+     * Exporta los datos de un <code>Cliente</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
+     * @param path la ruta del fichero al que exportar los datos del objeto
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     * @see Cliente.data() data
+     */
     public void writeClienteToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -237,6 +295,12 @@ public class Cliente implements Serializable{
         }
     }
     
+    /**
+     * Exporta un <code>Cliente</code> a un fichero binario
+     * @param path la ruta del fichero al que exportar
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
+     * @throws IOException si hay un problema de entrada/salida
+     */
     public void writeClienteToBinaryFile (String path) {
         try{
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -258,6 +322,11 @@ public class Cliente implements Serializable{
 
 
     //metodos propios
+    /**
+     * Crea una nueva instancia de la clase <code>Cliente</code> pidiendo al usuario por pantalla que introduzca los datos
+     * @return el <code>Cliente</code> que se crea con el método
+     * @throws ClienteException si los datos introducidos no son validos
+     */
     public static Cliente nuevoCliente() {
         Cliente c = new Cliente();
         Scanner sc = new Scanner(System.in);
@@ -272,11 +341,18 @@ public class Cliente implements Serializable{
             System.out.println("Son correctos los siguiente datos?(s/n)");
             salir = ToolBox.leerBoolean();
         } while (salir);
-
         return c;
-
     }
-        
+    
+    /**
+     * Crea una instancia de la clase {@link Trabajo} pidiendole al cliente que lo llama datos por pantalla, a traves de los metodos <code>encargo</code> de Trabajo y sus subclases. Relacionado con el CU Solicitar trabajo
+     * @return el Trabajo instanciado
+     * @throws TrabajoException si los datos introducidos no son validos
+     * @see Trabajo.encargo(Cliente) Trabajo.encargo
+     * @see Libro.encargo(Cliente) Libro.encargo
+     * @see Rotulo.encargo(Cliente) Rotulo.encargo
+     * @see Poster.encargo(Cliente) Poster.encargo
+     */
     public Trabajo crearTrabajo() throws TrabajoException{
         Trabajo t;
         Scanner in = new Scanner(System.in);
@@ -306,6 +382,11 @@ public class Cliente implements Serializable{
         return t;
     }
 
+    /**
+     * Registra a un nuevo Cliente en el sistema
+     * @return el Cliente registrado
+     * @throws ClienteException si el telefono no tiene el formato correcto o el nombre esta vacio
+     */
     public static Cliente registrarCliente() throws ClienteException{
         Cliente c = new Cliente();
         Scanner sc = new Scanner(System.in);
@@ -329,6 +410,11 @@ public class Cliente implements Serializable{
         return c;}
     }
 
+    /**
+     * Muestra al cliente los datos de la {@link Modificacion} y le permite aceptarla o rechazarla, seteando los atributos <code>aprob</code> y <code>fechaA</code> de Modificacion
+     * @param m la Modificacion a aceptar
+     * @return true si el cliente acepta la modificacion. false si no la acepta
+     */
     public boolean aceptarModificacion(Modificacion m){
 
         System.out.println("Esta es su modificación"+ m.toString());

@@ -53,7 +53,7 @@ public class Trabajo implements Serializable {
 
     //constructor por argumentos
     /**
-     * Crea una instancia de Trabajo con los atributos propios de la clase, no de las relaciones
+     * Crea una instancia de Trabajo con los atributos propios de la clase, sin los de de las relaciones ni el id
      * @param fechaSolicitud la fecha de solicitud que se le va a setear al trabajo
      * @param fechaRecogida la fecha de recogida que se le va a setear al trabajo
      * @param relieve el relieve en el que se imprimira el trabajo
@@ -259,7 +259,7 @@ public class Trabajo implements Serializable {
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los trabajos existentes en el fichero
      * @throws TrabajoException si los datos leidos del fichero no permiten construir un <code>Trabajo</code>
-     * @throws FileNotFoundException si no se puede acceder al trabajo con la ruta especificada
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
      * @throws IOException si hay un problema de entrada/salida
      */
     public static ArrayList<Trabajo> readTrabajoFromTextFile (String path) {
@@ -311,7 +311,7 @@ public class Trabajo implements Serializable {
      * Importa un grupo de trabajos desde un fichero binario
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los trabajos existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al trabajo con la ruta especificada
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
      * @throws EOFException al llegar al final del fichero
      * @throws IOException si hay un problema de entrada/salida
      * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
@@ -356,7 +356,7 @@ public class Trabajo implements Serializable {
     /**
      * Exporta los datos de un <code>Trabajo</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
      * @param path la ruta del fichero al que exportar los datos del objeto
-     * @throws FileNotFoundException si no se puede acceder al trabajo con la ruta especificada
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
      * @throws IOException si hay un problema de entrada/salida
      * @see Trabajo.data() data
      */
@@ -390,7 +390,7 @@ public class Trabajo implements Serializable {
     /**
      * Exporta un <code>Trabajo</code> a un fichero binario
      * @param path la ruta del fichero al que exportar
-     * @throws FileNotFoundException si no se puede acceder al trabajo con la ruta especificada
+     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
      * @throws IOException si hay un problema de entrada/salida
      */
     public void writeTrabajoToBinaryFile (String path) {
