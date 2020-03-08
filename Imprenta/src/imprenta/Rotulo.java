@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package imprenta;
 
 import java.io.BufferedReader;
@@ -24,30 +19,51 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- *
+ * Modela el poster, una de las subclases de {@link Trabajo}
+ * @author Alberto
  * @author Ander
- * @version 1.1
+ * @author Vindio
+ * @version 1.5
  */
 public class Rotulo extends Trabajo implements Serializable {
 
     private String centroComercial; //variable de tipo String que recoge el lugar de destino del trabajo
+    
+    //constructor por defecto
+    /**
+     * Crea una instancia de Rotulo con los valores por defecto para los atributos
+     */
+    public Rotulo() {
+    }
 
     //constructor por argumentos
+    /**
+     * Crea una instancia de Rotulo con los atributos propios de la clase y los de la superclase {@link Trabajo}, sin los de de las relaciones ni el id
+     * @param centroComercial el centro comercial en el que se instalara el rotulo
+     * @param fechaSolicitud la fecha de solicitud del trabajo
+     * @param fechaRecogida la fecha de recogida del trabajo
+     * @param relieve el relieve del trabajo
+     */
     public Rotulo(String centroComercial, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
         this.centroComercial = centroComercial;
     }
     
+    /**
+     * Crea una instancia de Poster con los atributos propios de la clase
+     * @param id el id del poster
+     * @param centroComercial el centro comercial en el que se instalara el rotulo
+     */
     public Rotulo(long id, String centroComercial){
         this.id = id;
         this.centroComercial = centroComercial;
     }
-
-    //constructor por defecto
-    public Rotulo() {
-    }
-
+    
     //constructor de copia
+    /**
+     * Crea una instancia de Rotulo a partir de otra, copiando cada atributo
+     * @param r el Rotulo que se va a copiar
+     */
     public Rotulo(Rotulo r) {
         this.centroComercial = r.getCentroComercial();
     }
