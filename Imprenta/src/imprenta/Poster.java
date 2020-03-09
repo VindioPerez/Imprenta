@@ -47,6 +47,7 @@ public class Poster extends Trabajo implements Serializable {
      * @param fechaSolicitud la fecha de solicitud del trabajo
      * @param fechaRecogida la fecha de recogida del trabajo
      * @param relieve el relieve del trabajo
+     * @throws TrabajoException si los datos introducidos no son validos
      */
     public Poster(double alto, double ancho, int numCopias, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
@@ -136,9 +137,8 @@ public class Poster extends Trabajo implements Serializable {
     
     /**
      * Recorre el <code>ArrayList</code> de posters de {@link BDatos} y devuelve el poster con el id que se pasa como parametro
-     * @param idPoster el id del poster que se quiere buscar en la base de datos
+     * @param id el id del poster que se quiere buscar en la base de datos
      * @return el <code>Poster</code> con el id coincidente con <code>idPoster</code>, o nulo si no existe dicho poster
-     * @throws PosterException si el id introducido no es valido
      */
     public Poster getPosterById(long id) {
         /*Este método recorrerá un ArrayList con todos los posters buscando aquel con el id que le introduzcamos, y devolverá ese poster si es que existe o 
@@ -162,8 +162,6 @@ public class Poster extends Trabajo implements Serializable {
      * Importa un grupo de posters desde un fichero de texto
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los posters existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public static ArrayList<Poster> readPosterFromTextFile (String path) {
         ArrayList<Poster> ret = new ArrayList<>();
@@ -207,10 +205,6 @@ public class Poster extends Trabajo implements Serializable {
      * Importa un grupo de posters desde un fichero binario
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los posters existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws EOFException al llegar al final del fichero
-     * @throws IOException si hay un problema de entrada/salida
-     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
      */
     public static ArrayList<Poster> readPosterFromBinaryFile (String path) {
         ArrayList<Poster> ret = new ArrayList<>();
@@ -252,9 +246,7 @@ public class Poster extends Trabajo implements Serializable {
     /**
      * Exporta los datos de un <code>Poster</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
      * @param path la ruta del fichero al que exportar los datos del objeto
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
-     * @see Poster.data() data
+     * @see Poster#data() data
      */
     public void writePosterToTextFile (String path){
         File fichero = new File(path);
@@ -286,8 +278,6 @@ public class Poster extends Trabajo implements Serializable {
     /**
      * Exporta un <code>Poster</code> a un fichero binario
      * @param path la ruta del fichero al que exportar
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public void writePosterToBinaryFile (String path) {
         try{
@@ -312,7 +302,8 @@ public class Poster extends Trabajo implements Serializable {
     /**
      * Crea una nueva instancia de la clase <code>Poster</code> pidiendo al usuario por pantalla que introduzca los datos, y llamando al metodo nuevoTrabajo de {@link Trabajo} para completar los datos de la superclase
      * @return el <code>Poster</code> que se crea con el método
-     * @see Trabajo.nuevoTrabajo() Trabajo.nuevoTrabajo
+     * @see Trabajo#nuevoTrabajo() Trabajo.nuevoTrabajo
+     * @throws TrabajoException si los datos introducidos no son validos
      */
     public static Poster nuevoPoster() throws TrabajoException{
         Poster p = new Poster(Trabajo.nuevoTrabajo());
@@ -341,8 +332,9 @@ public class Poster extends Trabajo implements Serializable {
      * Crea un <code>Poster</code> nuevo pidiendo datos por pantalla, y llamando al metodo encargo de {@link Trabajo} para completar los datos de la superclase. Relacionado con el caso de uso Solicitar trabajo
      * @param c el <code>Cliente</code> que solicita el trabajo
      * @return el <code>Poster</code> que se crea con el método
-     * @see Trabajo.encargo(Cliente) Trabajo.encargo
-     * @see Cliente.crearTrabajo() Cliente.crearTrabajo
+     * @throws TrabajoException si los datos introducidos no son validos
+     * @see Trabajo#encargo(Cliente) Trabajo.encargo
+     * @see Cliente#crearTrabajo() Cliente.crearTrabajo
      */
     public static Poster encargo (Cliente c) throws TrabajoException {
         Poster r;

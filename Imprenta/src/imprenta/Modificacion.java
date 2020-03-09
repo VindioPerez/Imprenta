@@ -242,8 +242,6 @@ public class Modificacion implements Serializable {
      * Importa un grupo de modificaciones desde un fichero de texto
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todas las modificaciones existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public static ArrayList<Modificacion> readModificacionFromTextFile (String path) {
         ArrayList<Modificacion> ret = new ArrayList<>();
@@ -292,10 +290,6 @@ public class Modificacion implements Serializable {
      * Importa un grupo de modificaciones desde un fichero binario
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todas las modificaciones existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws EOFException al llegar al final del fichero
-     * @throws IOException si hay un problema de entrada/salida
-     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
      */
     public static ArrayList<Modificacion> readModificacionFromBinaryFile (String path) {
         ArrayList<Modificacion> ret = new ArrayList<>();
@@ -337,9 +331,7 @@ public class Modificacion implements Serializable {
     /**
      * Exporta los datos de una <code>Modificacion</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
      * @param path la ruta del fichero al que exportar los datos del objeto
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
-     * @see Modificacion.data() data
+     * @see Modificacion#data() data
      */
     public void writeModificacionToTextFile (String path){
         File fichero = new File(path);
@@ -371,8 +363,6 @@ public class Modificacion implements Serializable {
     /**
      * Exporta una <code>Modificacion</code> a un fichero binario
      * @param path la ruta del fichero al que exportar
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */    
     public void writeModificacionToBinaryFile (String path) {
         try{

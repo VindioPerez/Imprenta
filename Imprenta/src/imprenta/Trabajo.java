@@ -248,9 +248,6 @@ public class Trabajo implements Serializable {
      * Importa un grupo de trabajos desde un fichero de texto
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los trabajos existentes en el fichero
-     * @throws TrabajoException si los datos leidos del fichero no permiten construir un <code>Trabajo</code>
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public static ArrayList<Trabajo> readTrabajoFromTextFile (String path) {
         ArrayList<Trabajo> ret = new ArrayList<>();
@@ -301,10 +298,6 @@ public class Trabajo implements Serializable {
      * Importa un grupo de trabajos desde un fichero binario
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los trabajos existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws EOFException al llegar al final del fichero
-     * @throws IOException si hay un problema de entrada/salida
-     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
      */
     public static ArrayList<Trabajo> readTrabajoFromBinaryFile (String path) {
         ArrayList<Trabajo> ret = new ArrayList<>();
@@ -346,9 +339,7 @@ public class Trabajo implements Serializable {
     /**
      * Exporta los datos de un <code>Trabajo</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
      * @param path la ruta del fichero al que exportar los datos del objeto
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
-     * @see Trabajo.data() data
+     * @see Trabajo#data() data
      */
     public void writeTrabajoToTextFile (String path){
         File fichero = new File(path);
@@ -380,8 +371,6 @@ public class Trabajo implements Serializable {
     /**
      * Exporta un <code>Trabajo</code> a un fichero binario
      * @param path la ruta del fichero al que exportar
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public void writeTrabajoToBinaryFile (String path) {
         try{
@@ -486,10 +475,10 @@ public class Trabajo implements Serializable {
      * @param c el <code>Cliente</code> que solicita el trabajo
      * @return el <code>Trabajo</code> que se crea con el método
      * @throws TrabajoException si los datos introducidos no son validos
-     * @see Libro.encargo(Cliente) Libro.encargo
-     * @see Rotulo.encargo(Cliente) Rotulo.encargo
-     * @see Poster.encargo(Cliente) Poster.encargo
-     * @see Cliente.crearTrabajo() Cliente.crearTrabajo
+     * @see Libro#encargo(Cliente) Libro.encargo
+     * @see Rotulo#encargo(Cliente) Rotulo.encargo
+     * @see Poster#encargo(Cliente) Poster.encargo
+     * @see Cliente#crearTrabajo() Cliente.crearTrabajo
      */
     public static Trabajo encargo(Cliente c) throws TrabajoException {
         Trabajo t = new Trabajo();
@@ -534,8 +523,8 @@ public class Trabajo implements Serializable {
      * @param o el <code>Operario</code> que registra el trabajo
      * @return el <code>Trabajo</code> que se crea con el método
      * @throws TrabajoException si los datos introducidos no son validos
-     * @see Cliente.crearTrabajo() Cliente.crearTrabajo
-     * @see Operario.confirmar(Trabajo) Operario.confirmar
+     * @see Cliente#crearTrabajo() Cliente.crearTrabajo
+     * @see Operario#confirmar(Trabajo) Operario.confirmar
      */
     public static Trabajo solicitarTrabajo(Cliente c, Operario o) throws TrabajoException {
         Trabajo t = c.crearTrabajo();

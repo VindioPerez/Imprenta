@@ -122,9 +122,8 @@ public class Libro extends Trabajo implements Serializable {
     
     /**
      * Recorre el <code>ArrayList</code> de Libros de {@link BDatos} y devuelve el libro con el id que se pasa como parametro
-     * @param idLibro el id del libro que se quiere buscar en la base de datos
+     * @param id el id del libro que se quiere buscar en la base de datos
      * @return el <code>Libro</code> con el id coincidente con <code>idLibro</code>, o nulo si no existe dicho libro
-     * @throws LibroException si el id introducido no es valido
      */
     public Libro getLibroById(long id) {
         /*Este método recorrerá un ArrayList con todos los libros buscando aquel con el id que le introduzcamos, y devolverá ese libro si es que existe o 
@@ -148,8 +147,6 @@ public class Libro extends Trabajo implements Serializable {
      * Importa un grupo de libros desde un fichero de texto
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los libros existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public static ArrayList<Libro> readLibroFromTextFile (String path) {
         ArrayList<Libro> ret = new ArrayList<>();
@@ -192,10 +189,6 @@ public class Libro extends Trabajo implements Serializable {
      * Importa un grupo de libros desde un fichero binario
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los libros existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws EOFException al llegar al final del fichero
-     * @throws IOException si hay un problema de entrada/salida
-     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
      */
     public static ArrayList<Libro> readLibroFromBinaryFile (String path) {
         ArrayList<Libro> ret = new ArrayList<>();
@@ -237,9 +230,7 @@ public class Libro extends Trabajo implements Serializable {
     /**
      * Exporta los datos de un <code>Libro</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
      * @param path la ruta del fichero al que exportar los datos del objeto
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
-     * @see Libro.data() data
+     * @see Libro#data() data
      */
     public void writeLibroToTextFile (String path){
         File fichero = new File(path);
@@ -271,8 +262,6 @@ public class Libro extends Trabajo implements Serializable {
     /**
      * Exporta un <code>Libro</code> a un fichero binario
      * @param path la ruta del fichero al que exportar
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public void writeLibroToBinaryFile (String path) {
         try{
@@ -297,7 +286,8 @@ public class Libro extends Trabajo implements Serializable {
     /**
      * Crea una nueva instancia de la clase <code>Libro</code> pidiendo al usuario por pantalla que introduzca los datos, y llamando al metodo nuevoTrabajo de {@link Trabajo} para completar los datos de la superclase
      * @return el <code>Libro</code> que se crea con el método
-     * @see Trabajo.nuevoTrabajo() Trabajo.nuevoTrabajo
+     * @see Trabajo#nuevoTrabajo() Trabajo.nuevoTrabajo
+     * @throws TrabajoException si los datos introducidos no son validos
      */
     public static Libro nuevoLibro() throws TrabajoException{
         Libro l = new Libro(Trabajo.nuevoTrabajo());
@@ -322,8 +312,9 @@ public class Libro extends Trabajo implements Serializable {
      * Crea un <code>Libro</code> nuevo pidiendo datos por pantalla, y llamando al metodo encargo de {@link Trabajo} para completar los datos de la superclase. Relacionado con el caso de uso Solicitar trabajo
      * @param c el <code>Cliente</code> que solicita el trabajo
      * @return el <code>Libro</code> que se crea con el método
-     * @see Trabajo.encargo(Cliente) Trabajo.encargo
-     * @see Cliente.crearTrabajo() Cliente.crearTrabajo
+     * @throws TrabajoException si los datos introducidos no son validos
+     * @see Trabajo#encargo(Cliente) Trabajo.encargo
+     * @see Cliente#crearTrabajo() Cliente.crearTrabajo
      */
     public static Libro encargo (Cliente c) throws TrabajoException{
         Libro r;

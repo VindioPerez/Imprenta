@@ -108,9 +108,8 @@ public class Rotulo extends Trabajo implements Serializable {
     
     /**
      * Recorre el <code>ArrayList</code> de rotulos de {@link BDatos} y devuelve el rotulo con el id que se pasa como parametro
-     * @param idRotulo el id del rotulo que se quiere buscar en la base de datos
+     * @param id el id del rotulo que se quiere buscar en la base de datos
      * @return el <code>Rotulo</code> con el id coincidente con <code>idRotulo</code>, o nulo si no existe dicho rotulo
-     * @throws RotuloException si el id introducido no es valido
      */
     public Rotulo getRotuloById(long id) {
         /*Este método recorrerá un ArrayList con todos los rotulos buscando aquel con el id que le introduzcamos, y devolverá ese rotulo si es que existe o 
@@ -134,8 +133,6 @@ public class Rotulo extends Trabajo implements Serializable {
      * Importa un grupo de rotulos desde un fichero de texto
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los rotulos existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public static ArrayList<Rotulo> readRotuloFromTextFile (String path) {
         ArrayList<Rotulo> ret = new ArrayList<>();
@@ -177,10 +174,6 @@ public class Rotulo extends Trabajo implements Serializable {
      * Importa un grupo de rotulos desde un fichero binario
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los rotulos existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws EOFException al llegar al final del fichero
-     * @throws IOException si hay un problema de entrada/salida
-     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
      */
     public static ArrayList<Rotulo> readRotuloFromBinaryFile (String path) {
         ArrayList<Rotulo> ret = new ArrayList<>();
@@ -222,9 +215,7 @@ public class Rotulo extends Trabajo implements Serializable {
     /**
      * Exporta los datos de un <code>Rotulo</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
      * @param path la ruta del fichero al que exportar los datos del objeto
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
-     * @see Rotulo.data() data
+     * @see Rotulo#data() data
      */
     public void writeRotuloToTextFile (String path){
         File fichero = new File(path);
@@ -256,8 +247,6 @@ public class Rotulo extends Trabajo implements Serializable {
     /**
      * Exporta un <code>Rotulo</code> a un fichero binario
      * @param path la ruta del fichero al que exportar
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public void writeRotuloToBinaryFile (String path) {
         try{
@@ -282,7 +271,8 @@ public class Rotulo extends Trabajo implements Serializable {
     /**
      * Crea una nueva instancia de la clase <code>Rotulo</code> pidiendo al usuario por pantalla que introduzca los datos, y llamando al metodo nuevoTrabajo de {@link Trabajo} para completar los datos de la superclase
      * @return el <code>Rotulo</code> que se crea con el método
-     * @see Trabajo.nuevoTrabajo() Trabajo.nuevoTrabajo
+     * @see Trabajo#nuevoTrabajo() Trabajo.nuevoTrabajo
+     * @throws TrabajoException si los datos introducidos no son validos
      */
     public static Rotulo nuevoRotulo() throws ParseException, TrabajoException{
         Rotulo r = new Rotulo(Trabajo.nuevoTrabajo());
@@ -303,8 +293,9 @@ public class Rotulo extends Trabajo implements Serializable {
      * Crea un <code>Rotulo</code> nuevo pidiendo datos por pantalla, y llamando al metodo encargo de {@link Trabajo} para completar los datos de la superclase. Relacionado con el caso de uso Solicitar trabajo
      * @param c el <code>Cliente</code> que solicita el trabajo
      * @return el <code>Rotulo</code> que se crea con el método
-     * @see Trabajo.encargo(Cliente) Trabajo.encargo
-     * @see Cliente.crearTrabajo() Cliente.crearTrabajo
+     * @throws TrabajoException si los datos introducidos no son validos
+     * @see Trabajo#encargo(Cliente) Trabajo.encargo
+     * @see Cliente#crearTrabajo() Cliente.crearTrabajo
      */
     public static Rotulo encargo (Cliente c) throws TrabajoException{
         Rotulo r;

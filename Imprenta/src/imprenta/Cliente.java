@@ -169,8 +169,6 @@ public class Cliente implements Serializable{
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los clientes existentes en el fichero
      * @throws ClienteException si los datos leidos del fichero no permiten construir un <code>Cliente</code>
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public static ArrayList<Cliente> readClientefromTextFile (String path) {
         ArrayList<Cliente> ret = new ArrayList<>();
@@ -216,10 +214,6 @@ public class Cliente implements Serializable{
      * Importa un grupo de clientes desde un fichero binario
      * @param path la ruta del fichero a importar
      * @return un <code>ArrayList</code> con todos los clientes existentes en el fichero
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws EOFException al llegar al final del fichero
-     * @throws IOException si hay un problema de entrada/salida
-     * @throws ClassNotFoundException si no se encuentra la clase al leer el objeto
      */
     public static ArrayList<Cliente> readClientefromBinaryFile (String path) {
         ArrayList<Cliente> ret = new ArrayList<>();
@@ -264,9 +258,7 @@ public class Cliente implements Serializable{
     /**
      * Exporta los datos de un <code>Cliente</code> a un fichero de texto, a traves del metodo <code>Data</code> introduciendo al final un retorno de carro
      * @param path la ruta del fichero al que exportar los datos del objeto
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
-     * @see Cliente.data() data
+     * @see Cliente#data() data
      */
     public void writeClienteToTextFile (String path){
         File fichero = new File(path);
@@ -298,8 +290,6 @@ public class Cliente implements Serializable{
     /**
      * Exporta un <code>Cliente</code> a un fichero binario
      * @param path la ruta del fichero al que exportar
-     * @throws FileNotFoundException si no se puede acceder al fichero con la ruta especificada
-     * @throws IOException si hay un problema de entrada/salida
      */
     public void writeClienteToBinaryFile (String path) {
         try{
@@ -348,10 +338,10 @@ public class Cliente implements Serializable{
      * Crea una instancia de la clase {@link Trabajo} pidiendole al cliente que lo llama datos por pantalla, a traves de los metodos <code>encargo</code> de Trabajo y sus subclases. Relacionado con el CU Solicitar trabajo
      * @return el Trabajo instanciado
      * @throws TrabajoException si los datos introducidos no son validos
-     * @see Trabajo.encargo(Cliente) Trabajo.encargo
-     * @see Libro.encargo(Cliente) Libro.encargo
-     * @see Rotulo.encargo(Cliente) Rotulo.encargo
-     * @see Poster.encargo(Cliente) Poster.encargo
+     * @see Trabajo#encargo(Cliente) Trabajo.encargo
+     * @see Libro#encargo(Cliente) Libro.encargo
+     * @see Rotulo#encargo(Cliente) Rotulo.encargo
+     * @see Poster#encargo(Cliente) Poster.encargo
      */
     public Trabajo crearTrabajo() throws TrabajoException{
         Trabajo t;
