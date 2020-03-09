@@ -43,6 +43,7 @@ public class Rotulo extends Trabajo implements Serializable {
      * @param fechaSolicitud la fecha de solicitud del trabajo
      * @param fechaRecogida la fecha de recogida del trabajo
      * @param relieve el relieve del trabajo
+     * @throws TrabajoException si los datos introducidos no son validos
      */
     public Rotulo(String centroComercial, Date fechaSolicitud, Date fechaRecogida, String relieve) throws TrabajoException {
         super(fechaSolicitud, fechaRecogida, relieve);
@@ -274,7 +275,7 @@ public class Rotulo extends Trabajo implements Serializable {
      * @see Trabajo#nuevoTrabajo() Trabajo.nuevoTrabajo
      * @throws TrabajoException si los datos introducidos no son validos
      */
-    public static Rotulo nuevoRotulo() throws ParseException, TrabajoException{
+    public static Rotulo nuevoRotulo() throws TrabajoException{
         Rotulo r = new Rotulo(Trabajo.nuevoTrabajo());
         Scanner in = new Scanner(System.in);
         boolean c;
